@@ -1,0 +1,26 @@
+{
+  "short_name": "TypeTrue",
+  "name": "TypeTrue",
+  "icons": [
+    {
+      "src": "/icons/launcher-icon.png",
+      "type": "image/png",
+      "sizes": "48x48"
+    },
+    {
+      "src": "/icons/launcher-icon2x.png",
+      "type": "image/png",
+      "sizes": "96x96"
+    },
+    {
+      "src": "/icons/launcher-icon4x.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#FF6D80",
+  "background_color": "#538CCF",
+}
