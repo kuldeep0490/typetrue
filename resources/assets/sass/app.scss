@@ -125,6 +125,14 @@
 				top: 0;
 				left: 0;
 				width: 100%;
+				padding: 20px;
+
+				@include media-breakpoint-down(sm) { 
+			        height: auto;
+			        min-height: calc(100vh - 114px);
+			        position: relative;
+			        padding: 0px;
+			    }
 			}
 
 			h1 {
@@ -171,9 +179,13 @@
 				bottom: 0;
 				right: 0;
 
+				@include media-breakpoint-down(sm) { 
+					bottom: 10px;
+			    }
+
 				&.customBackBtn {
 					right: unset;
-					left: 0;
+					left: 0;	
 				}
 			}
 		}
