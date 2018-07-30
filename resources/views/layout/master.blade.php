@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        @include('assets.logo')
+                        @include('assets.logoWithCloud')
                     </div>
                 </div>
             </div>

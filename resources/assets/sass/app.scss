@@ -13,13 +13,21 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+html {
+  font-size: 16px;
+}
+
 * {
 	color: $text-color;
 }
 
 .logo {
-	width: 245px;
+	width: 10rem;
 	height: auto;
+
+	@include media-breakpoint-down(sm) { 
+		width: 4rem;
+	}
 
 	.heart {
 		-webkit-animation-duration: 2s;
@@ -28,11 +36,13 @@
 }
 
 .header {
-	background: #FFFFFF;
-	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
-	padding: 15px 0px 9px;
-	position: relative;
+	background: transparent;
+	// box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
+	// padding: 15px 0px 9px;
+	position: absolute;
+	top: 0;
 	z-index: 3;
+	width: 100%;
 }
 
 /* Enter and leave animations can use different */
@@ -63,17 +73,25 @@
 }
 
 .main {
-	padding-top: 40px;
-	padding-bottom: 20px;
-	background: linear-gradient(to bottom, #DBEBFB 0%, #DBEBFB 80%, #FFECCA 80%, #FFECCA 100%);
+	// padding-top: 40px;
+	// padding-bottom: 20px;
+	background: linear-gradient(to bottom, $bgBlue 0%, $bgBlue 90%, $bgYellow 90%, $bgYellow 100%);
 	width: 100%;
 	overflow: hidden;
 	position: relative;
+	min-height: 100vh;
 	// min-height: calc(100vh - 170px);
 
 	.container {
 		position: relative;
 		z-index: 2;
+
+		.headline {
+			min-height: 70vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
 	}
 
 	.cloud {
@@ -83,15 +101,15 @@
 	}
 
 	.tagline {
-		margin-bottom: 20px;
+		// margin-bottom: 20px;
 
 		h1 {
 			font-family: $qsFont;
-			font-size: 40px;
+			font-size: 2.5rem;
 			color: $blue;
 			font-weight: 700;
 			margin-bottom: $marginBottom;
-			line-height: 53px;
+			line-height: 3.3rem;
 
 			span {
 				color: $lightBlue;
@@ -113,18 +131,21 @@
 		}
 
 		.customBtn {
-			padding: 20px 40px;
+			padding: 1.25rem 2.5rem;
 		}
 
 		&.formInput {
-			min-height: calc(100vh - 170px);
+			// min-height: calc(100vh - 170px);
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
 
 			> div {
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
+				// height: 100%;
+				// position: absolute;
+				// top: 0;
+				// left: 0;
+				// width: 100%;
 				padding: 20px;
 
 				@include media-breakpoint-down(sm) { 
@@ -137,7 +158,7 @@
 
 			h1 {
 				svg {
-					height: 50px;
+					height: 3.125rem;
 					width: auto;
 					vertical-align: middle;
 				}
@@ -185,7 +206,7 @@
 
 			.customBtn {
 				position: absolute;
-				bottom: 0;
+				bottom: 5vh;
 				right: 0;
 
 				@include media-breakpoint-down(sm) { 
@@ -202,7 +223,7 @@
 }
 
 .banner {
-	width: 400px;
+	height: 30vh;
 
 	.umbrella {
 		-webkit-animation-duration: 50s;
@@ -215,7 +236,7 @@
 	padding-bottom: $marginBottom;
 
 	.caption {
-		font-size: 35px;
+		font-size: 2.1875rem;
 		color: $blue;
 		font-weight: 700;
 		margin-bottom: $marginBottom;
@@ -229,7 +250,7 @@
 		text-align: center;
 
 		h3 {
-			font-size: 20px;
+			font-size: 1.25rem;
 			color: $blue;
 			font-weight: 700;
 		}
@@ -240,15 +261,15 @@
 		}
 
 		p {
-			font-size: 18px;
+			font-size: 1rem;
 		}
 	}
 }
 
 .footer {
 	background: $lightBlue;
-	padding-top: 30px;
-	padding-bottom: 30px;
+	padding-top: 1.1875rem;
+	padding-bottom: 1.1875rem;
 
 	.footer-social {
 		text-align: center;
@@ -267,7 +288,7 @@
 		text-align: left;
 
 		a {
-			font-size: 20px;
+			font-size: 1.25rem;
 			color: #FFFFFF;
 		}
 	}

@@ -43,20 +43,20 @@
                 <div class="row justify-content-md-center" v-if="showForm">
                     <div class="col col-md-8">
                         <div class="tagline formInput">
-                            <transition name="slide-fade" appear mode="out-in">
+                            <transition name="slide-fade" appear>
                                 <div v-if="page == 1">
                                     <h1>@include('assets.clock') Let's get started!</h1>
 
                                     <h2>
-                                        I am <input v-model="fields.age" type="text" maxlength="2" pattern="\d*" class="input-text"> years old.
+                                        I am <input v-model="fields.age" type="text" maxlength="2" pattern="\d*" placeholder="37" class="input-text"> years old.
                                     </h2>
 
                                     <h2>
-                                        My last bloodwork showed an A1c of <input v-model="fields.a1c" type="text" maxlength="2" pattern="\d*" class="input-text">.
+                                        My last bloodwork showed an A1c of <input v-model="fields.a1c" type="text" maxlength="2" pattern="\d*" placeholder="92" class="input-text">.
                                     </h2>
 
                                     <h2>
-                                        I'm <input v-model="fields.feet" type="text" maxlength="2" pattern="\d*" class="input-text"> feet and <input v-model="fields.inches" type="text" maxlength="2" pattern="\d*" placeholder="11" class="input-text"> inches tall and I weight <input v-model="fields.pounds" type="text" maxlength="3" pattern="\d*" placeholder="120" class="input-text"> pounds.
+                                        I'm <input v-model="fields.feet" type="text" maxlength="2" pattern="\d*" placeholder="5" class="input-text"> feet and <input v-model="fields.inches" type="text" maxlength="2" pattern="\d*" placeholder="11" class="input-text"> inches tall and I weight <input v-model="fields.pounds" type="text" maxlength="3" pattern="\d*" placeholder="120" class="input-text"> pounds.
                                     </h2>
 
                                     <transition name="slide-fade" appear>
@@ -65,7 +65,7 @@
                                 </div>
                             </transition>
 
-                            <transition name="slide-fade" appear mode="out-in">
+                            <transition name="slide-fade" appear>
                                 <div v-if="page == 2">
                                     <h1>@include('assets.blood') One last thing...</h1>
 
@@ -201,7 +201,7 @@
                 for(let i = 1; i < 6; i ++) {
                     let cloud = $('.cloud' + i);
                     
-                    TweenLite.set(cloud, { left: Math.random(), top: i * 150, opacity: 0 });
+                    TweenLite.set(cloud, { left: Math.random(), top: i * 200, opacity: 0 });
 
                     let cloudTl = new TimelineMax({ repeat: -1 });
 
