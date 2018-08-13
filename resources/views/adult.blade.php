@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="col col-md-12 text-center">
-                    @include('assets.banner')
+                    <img src="/banner.png" alt="" class="banner">
                 </div>
             </div>
         </div>

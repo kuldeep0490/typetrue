@@ -24,6 +24,11 @@ $qsFont: 'Quicksand', sans-serif;
 $roboto: 'Quicksand', sans-serif;
 $blue: #20336F;
 $lightBlue: #538CCF;
-$marginBottom: 40px;
+$marginBottom: 2rem;
 $bgBlue: #DBEBFB;
 $bgYellow: #FFECCA;
+$burntOrange: #D35400;
+
+$theme-colors: (
+   primary: $burntOrange,
+);

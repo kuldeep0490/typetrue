@@ -15,8 +15,28 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-// Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('tt-clouds', require('./components/Clouds.vue'));
 
-// const app = new Vue({
-//     el: '#app'
-// });
+Vue.component('tt-forms', require('./components/Forms.vue'));
+
+Vue.component('tt-decline-one', require('./components/DeclineOne.vue'));
+
+Vue.component('tt-decline-two', require('./components/DeclineTwo.vue'));
+
+Vue.component('tt-decline-three', require('./components/DeclineThree.vue'));
+
+Vue.component('tt-lead-form', require('./components/LeadForm.vue'));
+
+const app = new Vue({
+    el: '#app',
+
+    mounted() {
+        setTimeout(function () {
+            let animations = $('.animated');
+
+            $.each(animations, function () {
+                $(this).attr('class', 'animated');
+            });
+        }, 10000);
+    }
+});

@@ -15,6 +15,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/get-quote', function () {
+Route::get('/type-two', function () {
+    return view('adult');
+});
+
+
+Route::get('/get-started', function () {
     return view('quote');
+});
+
+Route::get('/thank-you', function () {
+    return view('thank-you');
 });

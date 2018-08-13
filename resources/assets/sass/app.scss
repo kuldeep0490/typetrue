@@ -21,12 +21,22 @@ html {
 	color: $text-color;
 }
 
+.btn-custom {
+	padding: 1.25rem 2.5rem;
+
+	@include media-breakpoint-down(sm) { 
+		padding: 0.5rem 1rem;
+	}
+}
+
 .logo {
 	width: 10rem;
 	height: auto;
+	margin: 2rem 0;
 
 	@include media-breakpoint-down(sm) { 
-		width: 4rem;
+		width: 5rem;
+		margin: 1rem 0;
 	}
 
 	.heart {
@@ -35,10 +45,12 @@ html {
 	}
 }
 
+.mb-40 {
+	margin-bottom: $marginBottom;
+}
+
 .header {
 	background: transparent;
-	// box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);
-	// padding: 15px 0px 9px;
 	position: absolute;
 	top: 0;
 	z-index: 3;
@@ -73,14 +85,11 @@ html {
 }
 
 .main {
-	// padding-top: 40px;
-	// padding-bottom: 20px;
 	background: linear-gradient(to bottom, $bgBlue 0%, $bgBlue 90%, $bgYellow 90%, $bgYellow 100%);
 	width: 100%;
 	overflow: hidden;
 	position: relative;
 	min-height: 100vh;
-	// min-height: calc(100vh - 170px);
 
 	.container {
 		position: relative;
@@ -92,12 +101,6 @@ html {
 			align-items: center;
 			justify-content: center;
 		}
-	}
-
-	.cloud {
-		display: inline-block;
-		position: absolute;
-		z-index: 1;
 	}
 
 	.tagline {
@@ -124,28 +127,26 @@ html {
 					color: $lightBlue;
 				}
 			}
+
+			@include media-breakpoint-down(sm) { 
+				font-size: 2rem;
+				line-height: 2.5rem;
+			}
 		}
 
 		p {
-			 margin-bottom: $marginBottom;
-		}
+			margin-bottom: $marginBottom;
 
-		.customBtn {
-			padding: 1.25rem 2.5rem;
+			@include media-breakpoint-down(sm) { 
+				font-size: 1rem;
+			}
 		}
 
 		&.formInput {
-			// min-height: calc(100vh - 170px);
-			min-height: 100vh;
-			display: flex;
-			align-items: center;
+			padding-top: 5rem;
+			padding-bottom: 5rem;
 
 			> div {
-				// height: 100%;
-				// position: absolute;
-				// top: 0;
-				// left: 0;
-				// width: 100%;
 				padding: 20px;
 
 				@include media-breakpoint-down(sm) { 
@@ -181,16 +182,21 @@ html {
 			    }
 
 				span {
-					color: $lightBlue;
 					cursor: pointer;
-					border-bottom: 3px solid $lightBlue;
+					padding: 1rem;
+					border-radius: 0.25rem;
+
+					@include media-breakpoint-down(sm) { 
+			        	padding: 0 0.5rem;
+			    	}
 
 					&.not-selected {
-						color: $text-color;
+						background: #efefef;
 					}
 
 					&.active {
-						color: $lightBlue;
+						background: $lightBlue;
+						color: #FFF;
 					}
 				}
 			}
@@ -205,17 +211,11 @@ html {
 			}
 
 			.customBtn {
-				position: absolute;
-				bottom: 5vh;
-				right: 0;
+				padding: 1rem 2.5rem;
+				margin-top: 2rem;
 
 				@include media-breakpoint-down(sm) { 
-					bottom: 10px;
-			    }
-
-				&.customBackBtn {
-					right: unset;
-					left: 0;	
+					padding: 0.5rem 1rem;
 				}
 			}
 		}
@@ -223,7 +223,7 @@ html {
 }
 
 .banner {
-	height: 30vh;
+	height: 29vh;
 
 	.umbrella {
 		-webkit-animation-duration: 50s;
@@ -345,10 +345,10 @@ html {
 	background: none;
 	outline: none;
 	display: inline-block;
-    width: 80px;
+    width: 3rem;
     font-family: $qsFont;
     color: $lightBlue;
     font-weight: 700;
-    border-bottom: 3px solid $lightBlue;
+    border-bottom: 1px solid #CCC;
     text-align: center;
 }

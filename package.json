@@ -12,14 +12,18 @@
     "devDependencies": {
         "axios": "^0.17",
         "bootstrap": "^4.0.0",
-        "popper.js": "^1.12",
         "cross-env": "^5.1",
         "jquery": "^3.2",
-        "laravel-mix": "^2.0",
+        "laravel-mix": "^2.1.11",
         "lodash": "^4.17.4",
+        "node-sass": "^4.9.3",
+        "popper.js": "^1.12",
+        "sass-loader": "^7.1.0",
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "animate.css": "^3.6.1"
+        "animate.css": "^3.6.1",
+        "gsap": "^2.0.1",
+        "scss-loader": "^0.0.1"
     }
 }

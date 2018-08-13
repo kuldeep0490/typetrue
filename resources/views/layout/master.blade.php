@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        @include('assets.logoWithCloud')
+                        @include('assets.logo')
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script> -->
     <script src="{{ mix('js/app.js') }}"></script>
 
     @yield('footer')
