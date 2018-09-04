@@ -37,7 +37,7 @@
                 </h2>
 
                 <h2>
-                    I am a <span class="not-selected" :class="{ 'active': fields[form].smoker === 'yes' }" @click="isSmoker('yes')">smoker</span> <span class="not-selected" :class="{ 'active': fields[form].smoker === 'no' }" @click="isSmoker('no')">non-smoker</span>.
+                    I am a <span class="not-selected" :class="{ 'active': fields[form].smoker === 'smoker' }" @click="isSmoker('smoker')">smoker</span> <span class="not-selected" :class="{ 'active': fields[form].smoker === 'nonSmoker' }" @click="isSmoker('nonSmoker')">non-smoker</span>.
                 </h2>
 
                 <h2>
@@ -98,8 +98,8 @@
                 <tt-decline-three v-if="reason === 'decline-three'"></tt-decline-three>
             </div>
             
-            <div v-if="form == 'lead'" key="lead">
-                <tt-lead-form></tt-lead-form>
+            <div v-if="form == 'product'" key="product">
+                <tt-product-form :basic="fields.basic" :rating="rating"></tt-product-form>
             </div>
         </transition>
     </div>
@@ -110,12 +110,12 @@
         data() {
             return {
                 fields: {
-                    'basic': {
-                        age: null,
-                        gender: null,
-                        yearsAgo: 0,
+                    basic: {
+                        age: 29,
+                        gender: 'male',
+                        yearsAgo: null,
                         monthsAgo: null,
-                        smoker: null,
+                        smoker: 'smoker',
                         a1c: null,
                         feet: null,
                         inches: null,
@@ -125,34 +125,39 @@
                         hasComplications: null,
                     }
                 },
-                rating: 0,
+                rating: 50,
                 reason: null,
 
-                form: 'basic',
+                // form: 'basic',
+                form: 'product',
                 showNextBtn: true,
             }
         },
 
-        // watch: {
-        //     fields: {
-        //         handler(val, oldVal) {
-        //             this.showNextBtn = true;
+        watch: {
+            fields: {
+                handler(val, oldVal) {
+                    this.showNextBtn = true;
 
-        //             Object.keys(this.fields[this.form]).forEach((key) => {
-        //                 if (! this.fields[this.form][key]) {
-        //                     this.showNextBtn = false;
+                    Object.keys(this.fields[this.form]).forEach((key) => {
+                        if (! this.fields[this.form][key]) {
+                            if (key === 'yearsAgo' || key === 'monthsAgo') {
+                                return;
+                            }
 
-        //                     if (key === 'hasComplications') {
-        //                         if (this.fields[this.form][key] !== null) {
-        //                             this.showNextBtn = true;
-        //                         }
-        //                     }
-        //                 }
-        //             });
-        //         },
-        //         deep: true
-        //     }
-        // },
+                            this.showNextBtn = false;
+
+                            if (key === 'hasComplications') {
+                                if (this.fields[this.form][key] !== null) {
+                                    this.showNextBtn = true;
+                                }
+                            }
+                        }
+                    });
+                },
+                deep: true
+            }
+        },
 
         methods: {
             haveComplications(status) {
@@ -174,11 +179,183 @@
             },
 
             calculateMonthsDiagnosed() {
-                return (parseInt(this.fields.basic.yearsAgo) * 12) + parseInt(this.fields.basic.monthsAgo);
+                return ((parseInt(this.fields.basic.yearsAgo) || 0) * 12) + (parseInt(this.fields.basic.monthsAgo) || 0);
             },
 
             calculateRating() {
+                let a1c = parseFloat(this.fields.basic.a1c);
+                let age = parseInt(this.fields.basic.age);
+                let yearsElapseSinceDiagnosis = this.calculateMonthsDiagnosed() / 12;
 
+                // < 30
+                if (age < 30) {
+                    if (yearsElapseSinceDiagnosis < 7) {
+                        this.rating += 100;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 7 && yearsElapseSinceDiagnosis < 15) {
+                        this.rating += 150;
+                    }
+
+                    if (a1c < 7.1) {
+                        this.rating -= 25;
+                    }
+
+                    if (a1c >= 8.1 && a1c < 9.1) {
+                        this.rating += 25;
+                    }
+
+                    if (a1c >= 9.1 && a1c < 10.1) {
+                        this.rating += 75;
+                    }
+                }
+
+                // 30 - 39
+                if (this.fields.basic.age >= 30 && this.fields.basic.age < 40) {
+                    if (yearsElapseSinceDiagnosis < 7) {
+                        this.rating += 75;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 7 && yearsElapseSinceDiagnosis < 15) {
+                        this.rating += 100;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 15 && yearsElapseSinceDiagnosis < 25) {
+                        this.rating += 125;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 25) {
+                        this.rating += 150;
+                    }
+
+                    if (a1c < 7.1) {
+                        this.rating -= 25;
+                    }
+
+                    if (a1c >= 8.1 && a1c < 9.1) {
+                        this.rating += 25;
+                    }
+
+                    if (a1c >= 9.1 && a1c < 10.1) {
+                        this.rating += 75;
+                    }
+                }
+
+                // 40 - 49
+                if (this.fields.basic.age >= 40 && this.fields.basic.age < 50) {
+                    if (yearsElapseSinceDiagnosis < 7) {
+                        this.rating += 50;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 7 && yearsElapseSinceDiagnosis < 15) {
+                        this.rating += 75;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 15 && yearsElapseSinceDiagnosis < 25) {
+                        this.rating += 100;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 25) {
+                        this.rating += 125;
+                    }
+
+                    if (a1c < 7.1) {
+                        this.rating -= 25;
+                    }
+
+                    if (a1c >= 8.1 && a1c < 9.1) {
+                        this.rating += 25;
+                    }
+
+                    if (a1c >= 9.1 && a1c < 10.1) {
+                        this.rating += 75;
+                    }
+                }
+
+                // 50 - 59
+                if (this.fields.basic.age >= 50 && this.fields.basic.age < 60) {
+                    if (yearsElapseSinceDiagnosis < 7) {
+                        this.rating += 25;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 7 && yearsElapseSinceDiagnosis < 15) {
+                        this.rating += 50;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 15 && yearsElapseSinceDiagnosis < 25) {
+                        this.rating += 75;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 25) {
+                        this.rating += 100;
+                    }
+
+                    if (a1c < 7.1) {
+                        this.rating -= 25;
+                    }
+
+                    if (a1c >= 8.1 && a1c < 9.1) {
+                        this.rating += 25;
+                    }
+
+                    if (a1c >= 9.1 && a1c < 10.1) {
+                        this.rating += 75;
+                    }
+                }
+
+                // 60 - 69
+                if (this.fields.basic.age >= 60 && this.fields.basic.age < 70) {
+                    if (yearsElapseSinceDiagnosis < 7) {
+                        this.rating += 25;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 7 && yearsElapseSinceDiagnosis < 15) {
+                        this.rating += 25;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 15 && yearsElapseSinceDiagnosis < 25) {
+                        this.rating += 50;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 25) {
+                        this.rating += 100;
+                    }
+
+                    if (a1c < 7.1) {
+                        this.rating -= 25;
+                    }
+
+                    if (a1c >= 8.1 && a1c < 9.1) {
+                        this.rating += 25;
+                    }
+
+                    if (a1c >= 9.1 && a1c < 10.1) {
+                        this.rating += 50;
+                    }
+                }
+
+                // 70 above
+                if (this.fields.basic.age >= 70) {
+                    if (yearsElapseSinceDiagnosis >= 7 && yearsElapseSinceDiagnosis < 15) {
+                        this.rating += 25;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 15 && yearsElapseSinceDiagnosis < 25) {
+                        this.rating += 25;
+                    }
+
+                    if (yearsElapseSinceDiagnosis >= 25) {
+                        this.rating += 75;
+                    }
+
+                    if (a1c < 7.1) {
+                        this.rating -= 25;
+                    }
+
+                    if (a1c >= 9.1 && a1c < 10.1) {
+                        this.rating += 25;
+                    }
+                }
             },
 
             calculateHeight() {
@@ -215,12 +392,17 @@
                 }
 
                 // check if diagnosed more than 15 years ago
-                if ((this.calculateMonthsDiagnosed() * 12) > 15) {
+                if ((this.calculateMonthsDiagnosed() / 12) >= 15) {
                     return this.decline('decline-three');
                 }
 
-                // show lead form
-                this.form = 'lead';
+                // calculate rating
+                this.calculateRating();
+
+                // show lead form here
+
+                // show product form
+                this.form = 'product';
             },
 
             submit() {

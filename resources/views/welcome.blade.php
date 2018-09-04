@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col col-md-12 headline">
                     <div class="tagline text-center">
-                        <div v-show="! submitted">
+                        <div>
                             <h1>Get <span>the best</span> price on life insurance for T2 diabetics</h1>
 
                             <p>Imagine getting the same low price as a non-diabetic!</p>

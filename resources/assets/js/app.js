@@ -25,7 +25,7 @@ Vue.component('tt-decline-two', require('./components/DeclineTwo.vue'));
 
 Vue.component('tt-decline-three', require('./components/DeclineThree.vue'));
 
-Vue.component('tt-lead-form', require('./components/LeadForm.vue'));
+Vue.component('tt-product-form', require('./components/ProductForm.vue'));
 
 const app = new Vue({
     el: '#app',
