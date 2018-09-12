@@ -111,11 +111,11 @@
             return {
                 fields: {
                     basic: {
-                        age: 29,
-                        gender: 'male',
+                        age: null,
+                        gender: null,
                         yearsAgo: null,
                         monthsAgo: null,
-                        smoker: 'smoker',
+                        smoker: null,
                         a1c: null,
                         feet: null,
                         inches: null,
@@ -125,11 +125,12 @@
                         hasComplications: null,
                     }
                 },
-                rating: 50,
+                bmi: null,
+                rating: null,
                 reason: null,
 
-                // form: 'basic',
-                form: 'product',
+                form: 'basic',
+                // form: 'product',
                 showNextBtn: true,
             }
         },
@@ -356,6 +357,33 @@
                         this.rating += 25;
                     }
                 }
+
+                // calculate BMI
+                if (this.bmi >= 32 && this.bmi < 34) {
+                    this.rating += 25;
+                }
+
+                if (this.bmi >= 34 && this.bmi < 36) {
+                    this.rating += 50;
+                }
+
+                if (this.bmi >= 36) {
+                    if (this.bmi >= 36 && this.bmi < 41) {
+                        this.rating += 75;
+                    }
+
+                    if (this.bmi >= 41 && this.bmi < 43) {
+                        this.rating += 100;
+                    }
+
+                    if (this.a1c > 8) {
+                        this.rating += 25;
+                    }
+                }
+
+                if (this.fields.basic.smoker == 'smoker') {
+                    this.rating += 25;
+                }
             },
 
             calculateHeight() {
@@ -363,10 +391,11 @@
             },
 
             calculateBMI() {
-                return (703 * parseInt(this.fields.basic.pounds)) / (Math.pow(this.calculateHeight(), 2));
+                this.bmi = (703 * parseInt(this.fields.basic.pounds)) / (Math.pow(this.calculateHeight(), 2));
             },
 
             validate() {
+                this.calculateBMI();
                 // QUESTIONS: which decline recommendation should we prioritize?
 
                 // check if has complications
@@ -382,7 +411,7 @@
                 // check if rating passed
 
                 // check if BMI is above 43
-                if (this.calculateBMI() >= 43) {
+                if (this.bmi >= 43) {
                     return this.decline('decline-two');
                 }
 

@@ -15,6 +15,14 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faHeart, faStar);
+
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.component('tt-clouds', require('./components/Clouds.vue'));
 
 Vue.component('tt-forms', require('./components/Forms.vue'));
