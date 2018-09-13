@@ -16,10 +16,10 @@ window.Vue = require('vue');
  */
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHeart, faStar } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faStar, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-library.add(faHeart, faStar);
+library.add(faHeart, faStar, faPlusCircle, faMinusCircle);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -33,7 +33,11 @@ Vue.component('tt-decline-two', require('./components/DeclineTwo.vue'));
 
 Vue.component('tt-decline-three', require('./components/DeclineThree.vue'));
 
+Vue.component('tt-lead-form', require('./components/LeadForm.vue'));
+
 Vue.component('tt-product-form', require('./components/ProductForm.vue'));
+
+Vue.component('tt-thank-you', require('./components/ThankYou.vue'));
 
 const app = new Vue({
     el: '#app',

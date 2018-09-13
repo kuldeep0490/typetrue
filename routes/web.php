@@ -27,3 +27,9 @@ Route::get('/get-started', function () {
 Route::get('/thank-you', function () {
     return view('thank-you');
 });
+
+Route::prefix('lead')->group(function () {
+    Route::post('store', 'LeadController@store');
+
+    Route::patch('update', 'LeadController@update');
+});

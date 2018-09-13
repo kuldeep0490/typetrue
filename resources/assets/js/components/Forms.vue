@@ -97,18 +97,62 @@
 
                 <tt-decline-three v-if="reason === 'decline-three'"></tt-decline-three>
             </div>
+
+            <div v-if="form == 'lead'" key="lead">
+                <tt-lead-form></tt-lead-form>
+
+                <div class="basicDetails">
+                    <input class="form-control text-input" type="text" v-model="first_name" placeholder="First Name">
+
+                    <input class="form-control text-input" type="text" v-model="last_name" placeholder="Last Name">
+                    
+                    <input class="form-control text-input" type="email" v-model="email" placeholder="Email Address">
+                </div>
+
+                <button class="btn btn-primary customBtn" @click.prevent="nextForm('product')">Get Quote</button>
+
+                <hr>
+        
+                <p>
+                    <small>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem dolorum quas impedit molestias voluptatem reiciendis asperiores corrupti illum, sint nobis odit itaque sit inventore minus illo a sunt non aliquid?</small>
+                </p>
+            </div>
             
-            <div v-if="form == 'product'" key="product">
-                <tt-product-form :basic="fields.basic" :rating="rating"></tt-product-form>
+            <div class="text-center" v-if="form == 'product'" key="product">
+                <tt-product-form :basic="fields.basic" :rating="rating" :lead="lead"></tt-product-form>
+
+                <button class="btn btn-primary customBtn" @click.prevent="nextForm('thanks')">Email Quote</button>
+
+                <hr>
+            
+                <p><small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed ut eum nemo! Pariatur velit nemo quidem autem tenetur magnam quaerat quam molestiae repellendus illo, inventore minus quo doloremque debitis iste!</small></p>
+            </div>
+
+            <div v-if="form == 'thanks'" key="thanks">
+                <tt-thank-you></tt-thank-you>
             </div>
         </transition>
     </div>
 </template>
 
+<style>
+    small {
+        font-size: 0.7rem;
+    }
+
+    .text-input {
+        margin-bottom: 1rem;
+    }
+</style>
+
+
 <script>
     export default {
         data() {
             return {
+                first_name: null,
+                last_name: null,
+                email: null,
                 fields: {
                     basic: {
                         age: null,
@@ -122,7 +166,7 @@
                         pounds: null
                     }, 
                     advanced: {
-                        hasComplications: null,
+                        hasComplications: false,
                     }
                 },
                 bmi: null,
@@ -130,8 +174,8 @@
                 reason: null,
 
                 form: 'basic',
-                // form: 'product',
                 showNextBtn: true,
+                lead: null,
             }
         },
 
@@ -161,6 +205,28 @@
         },
 
         methods: {
+            createLead(form) {
+                axios.post('lead/store', {
+                    first_name: this.first_name,
+                    last_name: this.last_name,
+                    email: this.email,
+                    age: this.fields.basic.age,
+                    gender: this.fields.basic.gender,
+                    diagnosedMonthsAgo: this.calculateMonthsDiagnosed(),
+                    smoker: this.fields.basic.smoker,
+                    heightInInches: this.calculateHeight(),
+                    weightInPounds: this.fields.basic.pounds,
+                    a1c: this.fields.basic.a1c,
+                    hasComplications: this.fields.advanced.hasComplications,
+                    bmi: this.bmi,
+                    rating: this.rating
+                }).then((response) => {
+                    this.lead = response.data.id;
+
+                    this.form = form;
+                });
+            },
+
             haveComplications(status) {
                 this.fields[this.form].hasComplications = status;
             },
@@ -174,9 +240,11 @@
             },
 
             nextForm(form) {
-                // this.showNextBtn = false;
-
-                this.form = form;
+                if (this.form === 'lead') {
+                    this.createLead(form);
+                } else {
+                    this.form = form;
+                }
             },
 
             calculateMonthsDiagnosed() {
@@ -431,7 +499,7 @@
                 // show lead form here
 
                 // show product form
-                this.form = 'product';
+                this.form = 'lead';
             },
 
             submit() {
@@ -446,10 +514,6 @@
                 return;
             }
         },
-
-        mounted() {
-
-        }
     }
 </script>
 

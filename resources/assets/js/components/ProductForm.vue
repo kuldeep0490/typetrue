@@ -36,20 +36,26 @@
         <section class="slidecontainer text-center premium">
             <div class="faceAmount mb-20">
                 <h5>
-                    <span>{{ faceAmount | formatNum }}</span>
+                    <span>{{ faceAmount | formatNum }}</span><br>
+                    <small>Face Amount</small>
                 </h5>
-
-                <small>Face Amount</small>
             </div>
 
-            <input type="range" :min="minFaceAmount" :step="stepFaceAmount" :max="maxFaceAmount" class="slider" ref="slider" :value="faceAmount" @input="validateSlider">
+            <div id="progressContainer">
 
-            <button @click="decrementSlider">-</button>
-            <button @click="incrementSlider">+</button>
+                <button @click="decrementSlider" class="buttonController">
+                    <font-awesome-icon icon="minus-circle" />
+                </button>
 
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed ut eum nemo! Pariatur velit nemo quidem autem tenetur magnam quaerat quam molestiae repellendus illo, inventore minus quo doloremque debitis iste!</p>
+                <progress id="faceAmount" name="faceAmount" :max="maxFaceAmount" :value="faceAmount" :min="minFaceAmount">
+                    {{ faceAmount | formatNum }}
+                </progress>
 
-            <button class="btn btn-primary customBtn">Continue</button>
+                <button @click="incrementSlider" class="buttonController">
+                    <font-awesome-icon icon="plus-circle" />
+                </button>
+
+            </div>
         </section>
     </div>
 </template>
@@ -73,9 +79,10 @@
                 },
 
                 selectedProduct: 't10',
-                faceAmount: 150000,
+                faceAmount: 500000,
+                oldFaceAmount: 450000,
                 minFaceAmount: 25000,
-                maxFaceAmount: 5250000,
+                maxFaceAmount: 5000000,
                 stepFaceAmount: 50000,
 
                 monthlyPremium: 0,
@@ -93,7 +100,7 @@
             }
         },
 
-        props: ['basic', 'rating'],
+        props: ['basic', 'rating', 'lead'],
 
         filters: {
             formatNum(num) {
@@ -124,38 +131,63 @@
         },
 
         methods: {
+            updateLead() {
+                axios.patch('lead/update', {
+                    lead_id: this.lead,
+                    product: this.selectedProduct,
+                    faceAmount: this.faceAmount,
+                    monthlyPremium: this.monthlyPremium,
+                }).then((response) => {
+                    console.log(response);
+                });
+            },
+
             incrementSlider() {
-                console.log(this.$refs.slider.value);
-                this.$refs.slider.value += this.stepFaceAmount;
-                console.log(this.$refs.slider.value);
+                this.calculateFaceAmount();
             },
 
             decrementSlider() {
-                this.$refs.slider.value -= this.stepFaceAmount;
-                console.log(this.$refs.slider.value);
+                this.calculateFaceAmount('subtract');
             },
 
-            validateSlider(e) {
-                let value = e.target.value;
-                let oldVal = this.faceAmount;
-
-                if (oldVal < 100000) {
-                    this.stepFaceAmount = 25000;
+            calculateFaceAmount(action = 'add') {
+                if (this.faceAmount === this.minFaceAmount && action === 'subtract') {
+                    return;
                 }
 
-                if (oldVal >= 100000 && oldVal < 950000) {
+                if (action === 'add' && this.faceAmount === this.maxFaceAmount) {
+                    return;
+                }
+
+                let tempFaceAmount = 0;
+
+                if (action === 'add') {
+                    tempFaceAmount = this.faceAmount + this.stepFaceAmount;
+                } else {
+                    tempFaceAmount = this.faceAmount - this.stepFaceAmount;
+                }
+
+                if (this.faceAmount <= 100000) {
+                    if (this.faceAmount == 100000 && action == 'add') {
+                        this.stepFaceAmount = 50000;
+                    } else {
+                        this.stepFaceAmount = 25000;
+                    }
+                }
+
+                if (this.faceAmount > 100001 && this.faceAmount < 950000) {
                     this.stepFaceAmount = 50000;
                 }
 
-                if (oldVal >= 1000000 && oldVal < 1900000) {
+                if (this.faceAmount >= 1000000 && this.faceAmount < 1900000) {
                     this.stepFaceAmount = 100000;
                 }
 
-                if (oldVal >= 2000000 && oldVal < 4750000) {
+                if (this.faceAmount >= 2000000 && this.faceAmount < 4750000) {
                     this.stepFaceAmount = 250000;
                 }
 
-                if (value > oldVal) {
+                if (tempFaceAmount > this.faceAmount) {
                     this.faceAmount += this.stepFaceAmount;
                 } else {
                     this.faceAmount -= this.stepFaceAmount;
@@ -168,6 +200,8 @@
                 this.setBandBracket();
 
                 this.calculatePremium(this.selectedProduct);
+
+                this.updateLead();
             },
 
             selectProduct(code) {
@@ -312,6 +346,46 @@
 
         h5 {
             font-size: 1.5rem;
+            line-height: 80%;
+        }
+
+        small {
+            font-size: 0.7rem;
+            color: indianred;
+        }
+
+        #progressContainer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem 0;
+
+            .buttonController {
+                background: none;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                font-size: 3rem;
+                
+                path {
+                    color: #20336F;
+                }
+            }
+
+            #faceAmount {
+                appearance: none;
+                width: 75%;
+
+                &::-webkit-progress-value {
+                    background-color: #D35400;
+                    border-radius: 0.25rem;
+                }
+
+                &::-webkit-progress-bar {
+                    background-color: rgba(0, 0, 0, 0.1);
+                    border-radius: 0.25rem;
+                }
+            }
         }
     }
     
@@ -340,8 +414,8 @@
 
         svg {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 5px;
+            right: 5px;
             font-size: 1rem;
 
             path {
