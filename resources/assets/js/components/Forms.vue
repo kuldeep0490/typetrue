@@ -29,11 +29,19 @@
                 </h1>
 
                 <h2>
-                    I am <input v-model="fields[form].age" type="text" maxlength="2" pattern="\d*" class="input-text"> years old <span class="not-selected" :class="{ 'active': fields[form].gender === 'male' }" @click="selectGender('male')">male</span> <span class="not-selected" :class="{ 'active': fields[form].gender === 'female' }" @click="selectGender('female')">female</span>.
+                    I am a <span class="not-selected" :class="{ 'active': fields[form].gender === 'male' }" @click="selectGender('male')">male</span> <span class="not-selected" :class="{ 'active': fields[form].gender === 'female' }" @click="selectGender('female')">female</span> and I am <input v-model="fields[form].age" type="text" maxlength="2" pattern="\d*" class="input-text" @input="validateAge()"> years old.
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="errors.age">{{ errors.age }}</p>
+                    </transition>
                 </h2>
 
                 <h2>
-                    I was diagnosed with Type 2 about <input v-model="fields[form].yearsAgo" type="text" maxlength="2" pattern="\d*" class="input-text"> years and <input v-model="fields[form].monthsAgo" type="text" maxlength="2" pattern="\d*" class="input-text"> months ago.
+                    I was diagnosed with Type 2 about <input v-model="fields[form].yearsAgo" type="text" maxlength="2" pattern="\d*" class="input-text"> years and <input v-model="fields[form].monthsAgo" type="text" maxlength="2" pattern="\d*" class="input-text" @input="validateMonths()"> months ago.
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="errors.monthsAgo">{{ errors.monthsAgo }}</p>
+                    </transition>
                 </h2>
 
                 <h2>
@@ -41,11 +49,27 @@
                 </h2>
 
                 <h2>
-                    My last bloodwork showed an A1c of <input v-model="fields[form].a1c" type="text" maxlength="4" pattern="(?<=^| )\d+(\.\d+)?(?=$| )" class="input-text">.
+                    My last bloodwork showed an A1c of <input v-model="fields[form].a1cA" type="text" maxlength="2" pattern="\d*" class="input-text" @input="validateA1c()">.<input v-model="fields[form].a1cB" type="text" maxlength="1" pattern="\d*" class="input-text" @input="validateA1c()">.
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="errors.a1c">{{ errors.a1c }}</p>
+                    </transition>
                 </h2>
 
                 <h2>
-                    I'm <input v-model="fields[form].feet" type="text" maxlength="2" pattern="\d*" class="input-text"> feet and <input v-model="fields[form].inches" type="text" maxlength="2" pattern="\d*" class="input-text"> inches tall and I weight <input v-model="fields[form].pounds" type="text" maxlength="3" pattern="\d*" class="input-text"> pounds.
+                    I'm <input v-model="fields[form].feet" type="text" maxlength="1" pattern="\d*" class="input-text" @input="validateFeet()"> feet and <input v-model="fields[form].inches" type="text" maxlength="2" pattern="\d*" class="input-text" @input="validateInches()"> inches tall and I weigh <input v-model="fields[form].pounds" type="text" maxlength="3" pattern="\d*" class="input-text input-bigger" @input="validatePounds()"> pounds.
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="errors.feet">{{ errors.feet }}</p>
+                    </transition>
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="errors.inches">{{ errors.inches }}</p>
+                    </transition>
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="errors.pounds">{{ errors.pounds }}</p>
+                    </transition>
                 </h2>
 
                 <button class="btn btn-primary customBtn" @click.prevent="nextForm('advanced')" :disabled="! showNextBtn">Next</button>
@@ -102,11 +126,20 @@
                 <tt-lead-form></tt-lead-form>
 
                 <div class="basicDetails">
-                    <input class="form-control text-input" type="text" v-model="first_name" placeholder="First Name">
+                    <div class="mat-div" :class="{ 'is-active is-completed' : FName }">
+                        <label for="first-name" class="mat-label">First Name</label>
+                        <input id="first-name" class="mat-input" type="text" v-model="first_name" @focus="FName = true" @blur="FName = false">
+                    </div>
 
-                    <input class="form-control text-input" type="text" v-model="last_name" placeholder="Last Name">
+                    <div class="mat-div" :class="{ 'is-active is-completed' : LName }">
+                        <label for="last-name" class="mat-label">Last Name</label>
+                        <input id="last-name" class="mat-input" type="text" v-model="last_name" @focus="LName = true" @blur="LName = false">
+                    </div>
                     
-                    <input class="form-control text-input" type="email" v-model="email" placeholder="Email Address">
+                    <div class="mat-div" :class="{ 'is-active is-completed' : EMail }">
+                        <label for="email" class="mat-label">Email Address</label>
+                        <input id="email" class="mat-input" type="email" v-model="email" @focus="EMail = true" @blur="FName = false">
+                    </div>
                 </div>
 
                 <button class="btn btn-primary customBtn" @click.prevent="nextForm('product')">Get Quote</button>
@@ -143,6 +176,14 @@
     .text-input {
         margin-bottom: 1rem;
     }
+
+    .error {
+        color: indianred;
+        font-size: 0.8rem !important;
+        display: block;
+        padding: 0px;
+        margin: 0px !important;
+    }
 </style>
 
 
@@ -161,6 +202,8 @@
                         monthsAgo: null,
                         smoker: null,
                         a1c: null,
+                        a1cA: null,
+                        a1cB: null,
                         feet: null,
                         inches: null,
                         pounds: null
@@ -174,19 +217,62 @@
                 reason: null,
 
                 form: 'basic',
-                showNextBtn: true,
+                showNextBtn: false,
                 lead: null,
+                doNotValidate: [
+                    'yearsAgo',
+                    'monthsAgo',
+                    'a1c',
+                    'a1cB'
+                ],
+
+                errors: {
+                    age: null,
+                    monthsAgo: null,
+                    a1c: null,
+                    feet: null,
+                    inches: null,
+                    pounds: null,
+                },
+
+                hasErrors: false,
+
+                FName: false,
+                LName: false,
+                EMail: false,
             }
         },
 
         watch: {
+            errors: {
+                handler(val, oldVal) {
+                    this.hasErrors = false;
+
+                    Object.keys(this.errors).forEach((key) => {
+                        if (this.errors[key]) {
+                            this.hasErrors = true;
+
+                            this.showNextBtn = false;
+                        }
+                    });
+                },
+                deep: true
+            },
+
             fields: {
                 handler(val, oldVal) {
+                    if (this.hasErrors) {
+                        console.log('has errors, exiting');
+                        this.showNextBtn = false;
+
+                        return;
+                    }
+
                     this.showNextBtn = true;
 
                     Object.keys(this.fields[this.form]).forEach((key) => {
                         if (! this.fields[this.form][key]) {
-                            if (key === 'yearsAgo' || key === 'monthsAgo') {
+                            if (this.doNotValidate.indexOf(key) >= 0) {
                                 return;
                             }
 
@@ -205,6 +291,138 @@
         },
 
         methods: {
+            validateAge() {
+                let age = this.fields.basic.age;
+
+                if (! this.validateNumber('age', age)) {
+                    return;
+                }
+
+                if (age == '' || parseInt(age) < 25) {
+                    this.errors.age = 'Age must be at least 25 to continue.';
+
+                    return;
+                }
+
+                if (parseInt(age) > 80) {
+                    this.errors.age = 'Age must be less than 81 to continue.';
+
+                    return;
+                }
+
+                this.errors.age = null;
+            },
+
+            validateMonths() {
+                let monthsAgo = this.fields.basic.monthsAgo;
+
+                if (! this.validateNumber('monthsAgo', monthsAgo)) {
+                    return;
+                }
+
+                if (parseInt(monthsAgo) > 11) {
+                    this.errors.monthsAgo = 'Months must be below 12 to continue.';
+
+                    return;
+                }
+
+                this.errors.monthsAgo = null;
+            },
+
+            validateA1c() {
+                this.calculateA1c();
+
+                let a1c = this.fields.basic.a1c;
+
+                if (! this.validateNumber('a1c', a1c)) {
+                    return;
+                }
+
+                if (parseFloat(a1c) < 4) {
+                    this.errors.a1c = 'A1c can not be lower than 4.';
+
+                    return;
+                }
+
+                if (parseFloat(a1c) > 12) {
+                    this.errors.a1c = 'Go see a doctor right now.';
+
+                    return;
+                }
+
+                this.errors.a1c = null;
+            },
+
+            validateFeet() {
+                let feet = this.fields.basic.feet;
+
+                if (! this.validateNumber('feet', feet)) {
+                    return;
+                }
+
+                if (parseInt(feet) < 4) {
+                    this.errors.feet = 'Feet must be over 3 to continue.';
+
+                    return;
+                }
+
+                if (parseInt(feet) > 6) {
+                    this.errors.feet = 'Feet must be less than 7 to continue.';
+
+                    return;
+                }
+
+                this.errors.feet = null;
+            },
+
+            validateInches() {
+                let inches = this.fields.basic.inches;
+
+                if (! this.validateNumber('inches', inches)) {
+                    return;
+                }
+
+                if (parseInt(inches) > 11) {
+                    this.errors.inches = 'Inches must be lower than 12.';
+
+                    return;
+                }
+
+                this.errors.inches = null;
+            },
+
+            validatePounds() {
+                let pounds = this.fields.basic.pounds;
+
+                if (! this.validateNumber('pounds', pounds)) {
+                    return;
+                }
+
+                if (parseInt(pounds) < 80) {
+                    this.errors.pounds = 'Pounds must be over 80 to continue.';
+
+                    return;
+                }
+
+                if (parseInt(pounds) > 450) {
+                    this.errors.pounds = 'Pounds must be less than 450 to continue.';
+
+                    return;
+                }
+
+                this.errors.pounds = null;
+            },
+
+            validateNumber(key, value) {
+                if (isNaN(value)) {
+                    this.errors[key] = key.toUpperCase() + ' is not a number.';
+
+                    return false;
+                }
+
+                return true;
+            },
+
             createLead(form) {
                 axios.post('lead/store', {
                     first_name: this.first_name,
@@ -245,10 +463,20 @@
                 } else {
                     this.form = form;
                 }
+
+                console.log('current form: ' + form);
             },
 
             calculateMonthsDiagnosed() {
                 return ((parseInt(this.fields.basic.yearsAgo) || 0) * 12) + (parseInt(this.fields.basic.monthsAgo) || 0);
+            },
+
+            calculateA1c() {
+                let a1cDecimal = this.fields.basic.a1cB ? this.fields.basic.a1cB : 0;
+
+                this.fields.basic.a1c = `${this.fields.basic.a1cA}.${a1cDecimal}`;
+
+                console.log('a1c: ' + this.fields.basic.a1c);
             },
 
             calculateRating() {
@@ -496,9 +724,7 @@
                 // calculate rating
                 this.calculateRating();
 
-                // show lead form here
-
-                // show product form
+                // show lead form
                 this.form = 'lead';
             },
 
