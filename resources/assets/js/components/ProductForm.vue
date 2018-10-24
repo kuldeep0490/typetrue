@@ -4,42 +4,29 @@
             {{ monthlyPremium | formatNum }}/mo
         </h1>
 
-        <section>
-            <div class="row mb-40 justify-content-center">
-                <div class="col-4" v-if="showT10">
-                    <div class="product" @click="selectProduct('t10')" :class="{ 'selected' : selectedProduct == 't10' }">
-                        <h1><span>T</span>10</h1>
-                        <font-awesome-icon icon="star" v-if="selectedProduct == 't10'" />
-                    </div>
-                </div>
-                <div class="col-4" v-if="showT20">
-                    <div class="product" @click="selectProduct('t20')" :class="{ 'selected' : selectedProduct == 't20' }">
-                        <h1><span>T</span>20</h1>
-                        <font-awesome-icon icon="star" v-if="selectedProduct == 't20'" />
-                    </div>
-                </div> 
-                <div class="col-4" v-if="showT30">
-                    <div class="product" @click="selectProduct('t30')" :class="{ 'selected' : selectedProduct == 't30' }">
-                        <h1><span>T</span>30</h1>
-                        <font-awesome-icon icon="star" v-if="selectedProduct == 't30'" />
-                    </div>
-                </div> 
-                <div class="col-4" v-if="showT100">
-                    <div class="product" @click="selectProduct('t100')" :class="{ 'selected' : selectedProduct == 't100' }">
-                        <h1><span>T</span>100</h1>
-                        <font-awesome-icon icon="star" v-if="selectedProduct == 't100'" />
-                    </div>
-                </div> 
-            </div>
-        </section>
-
         <section class="slidecontainer text-center premium">
             <div class="faceAmount mb-20">
                 <h5>
-                    <span>{{ faceAmount | formatNum }}</span><br>
-                    <small>Face Amount</small>
+                    <p class="product-desc">
+                        per month for <b>{{ faceAmount | formatNum }}</b> in 
+                        <select class="custom-select" @change="selectProduct" v-model="selectedProduct">
+                            <option v-if="showT10" value="t10">10-year term</option>
+                            <option v-if="showT20" value="t20">20-year term</option>
+                            <option v-if="showT30" value="t30">30-year term</option>
+                            <option v-if="showT100" value="t100">100-year term</option>
+                        </select>
+                        life coverage
+                    </p>
                 </h5>
             </div>
+            
+            <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                <div v-if="showMaxFaceAmountMessage">
+                    <p class="increase-faceamount">
+                        <a @click.prevent="increaseFaceAmount">Need more than $1M in coverage?</a>
+                    </p>
+                </div>
+            </transition>
 
             <div id="progressContainer">
 
@@ -82,7 +69,7 @@
                 faceAmount: 500000,
                 oldFaceAmount: 450000,
                 minFaceAmount: 25000,
-                maxFaceAmount: 5000000,
+                maxFaceAmount: 1000000,
                 stepFaceAmount: 50000,
 
                 monthlyPremium: 0,
@@ -96,7 +83,9 @@
                     t30,
                     t100,
                     RatedAge
-                }
+                },
+
+                showMaxFaceAmountMessage: false
             }
         },
 
@@ -131,6 +120,12 @@
         },
 
         methods: {
+            increaseFaceAmount() {
+                this.maxFaceAmount = 5000000;
+
+                this.showMaxFaceAmountMessage = false;
+            },
+
             updateLead() {
                 axios.patch('lead/update', {
                     lead_id: this.lead,
@@ -194,6 +189,12 @@
                 }
 
                 this.setAndCalculate();
+
+                if (this.maxFaceAmount == 1000000) {
+                    if (this.faceAmount >= 1000000) {
+                        this.showMaxFaceAmountMessage = true;
+                    }
+                }
             },
 
             setAndCalculate() {
@@ -204,9 +205,7 @@
                 this.updateLead();
             },
 
-            selectProduct(code) {
-                this.selectedProduct = code;
-
+            selectProduct() {
                 this.setAndCalculate();
             },
 
@@ -333,6 +332,7 @@
             h1.monthlyPremium {
                 font-size: 3rem;
                 margin-bottom: 2rem;
+                color: #FB5975;
             }
         }
     }
@@ -347,6 +347,25 @@
         h5 {
             font-size: 1.5rem;
             line-height: 80%;
+        }
+
+        p.product-desc {
+            line-height: 150%;
+
+            .custom-select {
+                width: auto;
+            }
+        }
+
+        p.increase-faceamount {
+            margin: 0;
+
+            a {
+                font-weight: bold;
+                color: #20336F;
+                cursor: pointer;
+                text-decoration: underline;
+            }
         }
 
         small {
@@ -366,6 +385,7 @@
                 outline: none;
                 cursor: pointer;
                 font-size: 3rem;
+                padding: 0 0.5rem;
                 
                 path {
                     color: #20336F;
@@ -377,7 +397,7 @@
                 width: 75%;
 
                 &::-webkit-progress-value {
-                    background-color: #D35400;
+                    background-color: #FB5975;
                     border-radius: 0.25rem;
                 }
 

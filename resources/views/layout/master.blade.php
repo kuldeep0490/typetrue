@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        @include('assets.logo')
+                        @include('assets.logo_v2')
                     </div>
                 </div>
             </div>
@@ -38,13 +38,13 @@
                         @include('assets.logoWhite')
                     </div>
 
-                    <div class="col-6 col-sm-2 footer-social">
+                    <div class="col-6 col-sm-2 footer-social d-none">
                         <a href="">@include('assets.facebook')</a>
                         <a href="">@include('assets.twitter')</a>
                         <a href="">@include('assets.linkedin')</a>
                     </div>
 
-                    <div class="col-6 col-sm-5 footer-contact text-left">
+                    <div class="col-6 col-sm-5 footer-contact text-left d-none">
                         <a href="">Contact Us</a>
                     </div>
                 </div>

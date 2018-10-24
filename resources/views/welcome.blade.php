@@ -6,7 +6,7 @@
 
         <div class="container">
             <div class="row">
-                <div class="col col-md-12 headline">
+                <div class="col col-12 headline">
                     <div class="tagline text-center">
                         <div>
                             <h1>Get <span>the best</span> price on life insurance for T2 diabetics</h1>
@@ -17,7 +17,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col col-md-12 text-center">
+                <div class="col col-12 text-center">
                     <img src="/banner.png" alt="" class="banner">
                 </div>
             </div>
