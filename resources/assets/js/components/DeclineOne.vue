@@ -33,9 +33,9 @@
                 </g>
             </svg>
 
-            Sorry. You were declined because you have complications!
+            Sorry. Your diabetic complications would very likely lead to a decline if you applied for medical exam life insurance.
         </h1>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem dolorum quas impedit molestias voluptatem reiciendis asperiores corrupti illum, sint nobis odit itaque sit inventore minus illo a sunt non aliquid?</p>
+        <p>You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. Over time it may well be possible to lower your cost by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future.</p>
     </section>
 </template>

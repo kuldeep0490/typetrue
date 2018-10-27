@@ -15,21 +15,26 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/type-two', function () {
-    return view('adult');
-});
-
 
 Route::get('/get-started', function () {
     return view('quote');
 });
 
-Route::get('/thank-you', function () {
-    return view('thank-you');
+Route::post('/email-quote', function () {
+    $lead = \App\Lead::findOrFail(request()->input('lead_id'));
+    \Mail::to($lead->email)->send(new \App\Mail\EmailQuote($lead));
 });
 
 Route::prefix('lead')->group(function () {
     Route::post('store', 'LeadController@store');
 
     Route::patch('update', 'LeadController@update');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/mailable', function () {
+    return new App\Mail\EmailQuote(\App\Lead::find(14));
 });

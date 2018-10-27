@@ -44,7 +44,7 @@
         <div class="footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-12 col-sm-5 footer-logo">
+                    <div class="col-12 text-center footer-logo">
                         @include('assets.logoWhite')
                     </div>
 

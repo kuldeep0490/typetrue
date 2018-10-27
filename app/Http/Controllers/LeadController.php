@@ -10,9 +10,6 @@ class LeadController extends Controller
     public function store(Request $request)
     {
         return Lead::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
             'age' => $request->age,
             'gender' => $request->gender,
             'diagnosedMonthsAgo' => $request->diagnosedMonthsAgo,
@@ -20,7 +17,6 @@ class LeadController extends Controller
             'heightInInches' => $request->heightInInches,
             'weightInPounds' => $request->weightInPounds,
             'a1c' => $request->a1c,
-            'hasComplications' => $request->hasComplications,
             'bmi' => $request->bmi,
             'rating' => $request->rating,
         ]);
@@ -28,9 +24,47 @@ class LeadController extends Controller
 
     public function update(Request $request) {
         $lead = Lead::findOrFail($request->lead_id);
-        $lead->product = $request->product;
-        $lead->faceAmount = $request->faceAmount;
-        $lead->monthlyPremium = $request->monthlyPremium;
+
+        if ($request->filled('first_name')) {
+            $lead->first_name = $request->first_name;
+        }
+
+        if ($request->filled('last_name')) {
+            $lead->last_name = $request->last_name;
+        }
+
+        if ($request->filled('email')) {
+            $lead->email = $request->email;
+        }
+
+        if ($request->filled('phone')) {
+            $lead->phone = $request->phone;
+        }
+
+        if ($request->filled('hasComplications')) {
+            $lead->hasComplications = $request->hasComplications;
+        }
+
+        if ($request->filled('declined')) {
+            $lead->declined = $request->declined;
+        }
+
+        if ($request->filled('declineReason')) {
+            $lead->declineReason = $request->declineReason;
+        }
+
+        if ($request->filled('product')) {
+            $lead->product = $request->product;
+        }
+
+        if ($request->filled('faceAmount')) {
+            $lead->faceAmount = $request->faceAmount;
+        }
+
+        if ($request->filled('monthlyPremium')) {
+            $lead->monthlyPremium = $request->monthlyPremium;
+        }
+
         $lead->save();
 
         return $lead;

@@ -111,7 +111,7 @@
 
                 <button class="btn btn-primary customBtn" @click.prevent="nextForm('basic')">Back</button>
 
-                <button class="btn btn-primary customBtn" @click.prevent="submit" :disabled="! showNextBtn">Submit</button>
+                <button class="btn btn-primary customBtn" @click.prevent="nextForm('lead')" :disabled="! showNextBtn">Submit</button>
             </div>
 
             <div v-if="form == 'declined'" key="declined">
@@ -126,28 +126,39 @@
                 <tt-lead-form></tt-lead-form>
 
                 <div class="basicDetails">
-                    <div class="mat-div" :class="{ 'is-active is-completed' : FName }">
-                        <label for="first-name" class="mat-label">First Name</label>
-                        <input id="first-name" class="mat-input" type="text" v-model="first_name" @focus="FName = true" @blur="FName = false">
-                    </div>
+                    <form autocomplete="on">
+                        <div class="mat-div" :class="{ 'is-active is-completed' : FName }">
+                            <label for="first-name" class="mat-label">First Name</label>
+                            <input id="first-name" class="mat-input" type="text" v-model="info.first_name" @focus="FName = true" @blur="FName = false">
+                        </div>
 
-                    <div class="mat-div" :class="{ 'is-active is-completed' : LName }">
-                        <label for="last-name" class="mat-label">Last Name</label>
-                        <input id="last-name" class="mat-input" type="text" v-model="last_name" @focus="LName = true" @blur="LName = false">
-                    </div>
-                    
-                    <div class="mat-div" :class="{ 'is-active is-completed' : EMail }">
-                        <label for="email" class="mat-label">Email Address</label>
-                        <input id="email" class="mat-input" type="email" v-model="email" @focus="EMail = true" @blur="FName = false">
-                    </div>
+                        <div class="mat-div" :class="{ 'is-active is-completed' : LName }">
+                            <label for="last-name" class="mat-label">Last Name</label>
+                            <input id="last-name" class="mat-input" type="text" v-model="info.last_name" @focus="LName = true" @blur="LName = false">
+                        </div>
+                        
+                        <div class="mat-div" :class="{ 'is-active is-completed' : EMail }">
+                            <label for="email" class="mat-label">Email Address</label>
+                            <input id="email" class="mat-input" type="email" v-model="info.email" @focus="EMail = true" @blur="EMail = false">
+                        </div>
+
+                        <div class="mat-div" :class="{ 'is-active is-completed' : Phone }">
+                            <label for="phone" class="mat-label">Phone Number</label>
+                            <input id="phone" class="mat-input" type="text" v-model="info.phone" @focus="Phone = true" @blur="Phone = false">
+                        </div>
+                    </form>
+
+                    <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                        <p class="error" v-if="hasLeadError">All fields are required and email must be in valid format.</p>
+                    </transition>
                 </div>
 
-                <button class="btn btn-primary customBtn" @click.prevent="nextForm('product')">Get Quote</button>
+                <button class="btn btn-primary customBtn" @click.prevent="nextForm('product')" :disabled="! showNextBtn">Get Quote</button>
 
                 <hr>
         
                 <p>
-                    <small>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem dolorum quas impedit molestias voluptatem reiciendis asperiores corrupti illum, sint nobis odit itaque sit inventore minus illo a sunt non aliquid?</small>
+                    <small>Your information will be kept secure and confidential and will not be shared with anyone.</small>
                 </p>
             </div>
             
@@ -158,7 +169,7 @@
 
                 <hr>
             
-                <p><small>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sed ut eum nemo! Pariatur velit nemo quidem autem tenetur magnam quaerat quam molestiae repellendus illo, inventore minus quo doloremque debitis iste!</small></p>
+                <p><small>These quotes are based on information you entered. Your actual price will be based on the information in your application.</small></p>
             </div>
 
             <div v-if="form == 'thanks'" key="thanks">
@@ -178,7 +189,7 @@
     }
 
     .error {
-        color: indianred;
+        color: indianred !important;
         font-size: 0.8rem !important;
         display: block;
         padding: 0px;
@@ -191,9 +202,13 @@
     export default {
         data() {
             return {
-                first_name: null,
-                last_name: null,
-                email: null,
+                info: {
+                    first_name: null,
+                    last_name: null,
+                    email: null,
+                    phone: null,
+                },
+                
                 fields: {
                     basic: {
                         age: null,
@@ -215,6 +230,7 @@
                 bmi: null,
                 rating: null,
                 reason: null,
+                declined: null,
 
                 form: 'basic',
                 // form: 'product',
@@ -236,15 +252,44 @@
                     pounds: null,
                 },
 
+                hasLeadError: false,
+
                 hasErrors: false,
 
                 FName: false,
                 LName: false,
                 EMail: false,
+                Phone: false,
+
+                reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
             }
         },
 
         watch: {
+            info: {
+                handler(val, oldVal) {
+                    this.showNextBtn = true;
+                    this.hasLeadError = false;
+
+                    Object.keys(this.info).forEach((key) => {
+                        if (! this.info[key]) {
+                            this.showNextBtn = false;
+
+                            this.hasLeadError = true;
+                        }
+
+                        if (key === 'email') {
+                            if (! this.reg.test(val.email)) {
+                                this.showNextBtn = false;
+
+                                this.hasLeadError = true;
+                            }
+                        }
+                    });
+                },
+                deep: true
+            },
+
             errors: {
                 handler(val, oldVal) {
                     this.hasErrors = false;
@@ -263,7 +308,6 @@
             fields: {
                 handler(val, oldVal) {
                     if (this.hasErrors) {
-                        console.log('has errors, exiting');
                         this.showNextBtn = false;
 
                         return;
@@ -292,6 +336,10 @@
         },
 
         methods: {
+            isEmailValid: function() {
+                return this.reg.test(this.info.email);
+            },
+
             validateAge() {
                 let age = this.fields.basic.age;
 
@@ -341,12 +389,6 @@
 
                 if (parseFloat(a1c) < 4) {
                     this.errors.a1c = 'A1c can not be lower than 4.';
-
-                    return;
-                }
-
-                if (parseFloat(a1c) > 12) {
-                    this.errors.a1c = 'Go see a doctor right now.';
 
                     return;
                 }
@@ -424,11 +466,23 @@
                 return true;
             },
 
-            createLead(form) {
+            updateLead() {
+                axios.patch('lead/update', {
+                    lead_id: this.lead,
+                    hasComplications: this.fields.advanced.hasComplications,
+                    first_name: this.info.first_name,
+                    last_name: this.info.last_name,
+                    email: this.info.email,
+                    phone: this.info.phone,
+                    declined: this.declined,
+                    declineReason: this.reason,
+                }).then((response) => {
+
+                });
+            },
+
+            createLead() {
                 axios.post('lead/store', {
-                    first_name: this.first_name,
-                    last_name: this.last_name,
-                    email: this.email,
                     age: this.fields.basic.age,
                     gender: this.fields.basic.gender,
                     diagnosedMonthsAgo: this.calculateMonthsDiagnosed(),
@@ -436,13 +490,10 @@
                     heightInInches: this.calculateHeight(),
                     weightInPounds: this.fields.basic.pounds,
                     a1c: this.fields.basic.a1c,
-                    hasComplications: this.fields.advanced.hasComplications,
                     bmi: this.bmi,
                     rating: this.rating
                 }).then((response) => {
                     this.lead = response.data.id;
-
-                    this.form = form;
                 });
             },
 
@@ -459,11 +510,43 @@
             },
 
             nextForm(form) {
+                let proceed = true;
+
+                if (this.form === 'basic') {
+                    this.calculateBMI();
+
+                    this.calculateRating();
+
+                    this.createLead();
+                }
+
+                if (this.form === 'advanced') {
+                    this.showNextBtn = false;
+
+                    this.updateLead();
+                }
+
                 if (this.form === 'lead') {
-                    this.createLead(form);
-                } else {
+                    if(! this.validate()) {
+                        this.declined = true;
+                        
+                        proceed = false;
+                    }
+
+                    this.updateLead();
+                }
+
+                if (this.form === 'product') {
+                    axios.post('email-quote', {
+                        lead_id: this.lead
+                    });
+                }
+
+                if (proceed) {
                     this.form = form;
                 }
+
+                window.scrollTo(0, 0);
 
                 console.log('current form: ' + form);
             },
@@ -476,8 +559,6 @@
                 let a1cDecimal = this.fields.basic.a1cB ? this.fields.basic.a1cB : 0;
 
                 this.fields.basic.a1c = `${this.fields.basic.a1cA}.${a1cDecimal}`;
-
-                console.log('a1c: ' + this.fields.basic.a1c);
             },
 
             calculateRating() {
@@ -692,53 +773,50 @@
             },
 
             validate() {
-                this.calculateBMI();
-                // QUESTIONS: which decline recommendation should we prioritize?
-
                 // check if has complications
                 if (this.fields.advanced.hasComplications) {
-                    return this.decline('decline-one');
+                    this.decline('decline-one');
+
+                    return false;
                 }
 
                 // check if newly diagnosed
                 if (this.calculateMonthsDiagnosed() < 7) {
-                    return this.decline('decline-two');
+                    this.decline('decline-two');
+
+                    return false;
                 }
 
                 // check if rating passed
 
                 // check if BMI is above 43
                 if (this.bmi >= 43) {
-                    return this.decline('decline-two');
+                    this.decline('decline-three');
+
+                    return false;
                 }
 
                 // check if a1c is more than 10
                 if (parseFloat(this.fields.basic.a1c) > 10) {
-                    return this.decline('decline-three');
+                    this.decline('decline-three');
+
+                    return false;
                 }
 
                 // check if diagnosed more than 15 years ago
                 if ((this.calculateMonthsDiagnosed() / 12) >= 15) {
-                    return this.decline('decline-three');
+                    this.decline('decline-three');
+
+                    return false;
                 }
 
-                // calculate rating
-                this.calculateRating();
-
-                // show lead form
-                this.form = 'lead';
-            },
-
-            submit() {
-                this.validate();
+                return true;
             },
 
             decline(reason) {
                 this.form = 'declined';
 
                 this.reason = reason;
-
-                return;
             }
         },
     }

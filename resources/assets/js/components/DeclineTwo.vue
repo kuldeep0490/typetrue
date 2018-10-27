@@ -33,9 +33,9 @@
                 </g>
             </svg>
 
-            Sorry. You were declined because you were recently just diagnosed!
+            Sorry. Your diabetes diagnosis is too recent for you to apply for a medical exam life insurance.
         </h1>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem dolorum quas impedit molestias voluptatem reiciendis asperiores corrupti illum, sint nobis odit itaque sit inventore minus illo a sunt non aliquid?</p>
+        <p>You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. Once you diagnosis is definite an you can should improvement in your T2 control and lifestyle, changing to a medical exam policy may be a good option to lower your cost. After that, over time it may well be possible to lower your cost even more by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future.</p>
     </section>
 </template>

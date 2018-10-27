@@ -1,14 +1,14 @@
 <template>
     <div>
         <h1 class="text-center monthlyPremium">
-            {{ monthlyPremium | formatNum }}/mo
+            {{ monthlyPremium | formatNum }}
         </h1>
 
         <section class="slidecontainer text-center premium">
             <div class="faceAmount mb-20">
                 <h5>
                     <p class="product-desc">
-                        per month for <b>{{ faceAmount | formatNum }}</b> in 
+                        per month for <b>{{ faceAmount | formatNum }}</b> in <br>
                         <select class="custom-select" @change="selectProduct" v-model="selectedProduct">
                             <option v-if="showT10" value="t10">10-year term</option>
                             <option v-if="showT20" value="t20">20-year term</option>

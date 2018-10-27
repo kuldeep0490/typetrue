@@ -33,9 +33,11 @@
                 </g>
             </svg>
 
-            You are awesome!
+            Thank you for taking the time to use our tool.
         </h1>
 
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem dolorum quas impedit molestias voluptatem reiciendis asperiores corrupti illum, sint nobis odit itaque sit inventore minus illo a sunt non aliquid?</p>
+        <p>Our first-of-its-kind technology was build to help T2 diabetics buy insurance faster, easier and at a lower cost than any other alternative. You already experienced how easy it is to get a quote. We optimized all next steps in a similar fashion. This is made possible by focusing only on T2 needs and issues, and using new technology to solve these.</p>
+
+        <p>We are here to help. We will be in touch to check if we can be of anymore help.</p>
     </section>
 </template>
