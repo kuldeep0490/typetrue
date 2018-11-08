@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col">
-                        @include('assets.logo_v2')
+                        <a href="{{ url('/') }}">@include('assets.logo_v2')</a>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 text-center footer-logo">
-                        @include('assets.logoWhite')
+                        <a href="{{ url('/') }}">@include('assets.logoWhite')</a>
                     </div>
 
                     <div class="col-6 col-sm-2 footer-social d-none">
