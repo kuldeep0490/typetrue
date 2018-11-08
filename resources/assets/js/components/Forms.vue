@@ -29,7 +29,7 @@
                 </h1>
 
                 <h2>
-                    I am a <span class="not-selected" :class="{ 'active': fields[form].gender === 'male' }" @click="selectGender('male')">male</span> <span class="not-selected" :class="{ 'active': fields[form].gender === 'female' }" @click="selectGender('female')">female</span> and I am <input v-model="fields[form].age" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateAge()"> years old.
+                    I am a <span class="not-selected" :class="{ 'active': fields[form].gender === 'male' }" @click="selectGender('male')">male</span> <span class="not-selected" :class="{ 'active': fields[form].gender === 'female' }" @click="selectGender('female')">female</span> and I am <input v-model="fields[form].age" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateAge()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> years old.
 
                     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
                         <p class="error" v-if="errors.age">{{ errors.age }}</p>
@@ -37,7 +37,7 @@
                 </h2>
 
                 <h2>
-                    I was diagnosed with Type 2 about <input v-model="fields[form].yearsAgo" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger"> years and <input v-model="fields[form].monthsAgo" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateMonths()"> months ago.
+                    I was diagnosed with Type 2 about <input v-model="fields[form].yearsAgo" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> years and <input v-model="fields[form].monthsAgo" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateMonths()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> months ago.
 
                     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
                         <p class="error" v-if="errors.monthsAgo">{{ errors.monthsAgo }}</p>
@@ -49,7 +49,7 @@
                 </h2>
 
                 <h2>
-                    My last bloodwork showed an A1c of <input v-model="fields[form].a1cA" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateA1c()">.<input v-model="fields[form].a1cB" type="text" maxlength="1" pattern="\d*" class="input-text" @input="validateA1c()">.
+                    My last bloodwork showed an A1c of <input v-model="fields[form].a1cA" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateA1c()" onkeypress="return event.charCode >= 48 && event.charCode <= 57">.<input v-model="fields[form].a1cB" type="text" maxlength="1" pattern="\d*" class="input-text" @input="validateA1c()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"><span class="customDot">.</span>
 
                     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
                         <p class="error" v-if="errors.a1c">{{ errors.a1c }}</p>
@@ -57,7 +57,7 @@
                 </h2>
 
                 <h2>
-                    I'm <input v-model="fields[form].feet" type="text" maxlength="1" pattern="\d*" class="input-text" @input="validateFeet()"> feet and <input v-model="fields[form].inches" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateInches()"> inches tall and I weigh <input v-model="fields[form].pounds" type="text" maxlength="3" pattern="\d*" class="input-text input-bigger" @input="validatePounds()"> pounds.
+                    I'm <input v-model="fields[form].feet" type="text" maxlength="1" pattern="\d*" class="input-text" @input="validateFeet()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> feet and <input v-model="fields[form].inches" type="text" maxlength="2" pattern="\d*" class="input-text input-bigger" @input="validateInches()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> inches tall and I weigh <input v-model="fields[form].pounds" type="text" maxlength="3" pattern="\d*" class="input-text input-bigger" @input="validatePounds()" onkeypress="return event.charCode >= 48 && event.charCode <= 57"> pounds.
 
                     <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
                         <p class="error" v-if="errors.feet">{{ errors.feet }}</p>
@@ -194,6 +194,14 @@
         display: block;
         padding: 0px;
         margin: 0px !important;
+    }
+
+    span.customDot {
+        cursor: none !important;
+        padding: 0 !important;
+        position: relative;
+        top: 11px;
+        left: 10px;
     }
 </style>
 
