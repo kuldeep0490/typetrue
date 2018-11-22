@@ -24,6 +24,19 @@
         </div>
     </div>
 
+    <div class="sponsors">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <p>As heard on</p>
+                    <a href="https://www.thetonic.ca/2018/10/27/51-the-challenges-of-getting-life-insurance-if-youre-type-2-diabetic-the-connection-between-mindfulness-and-grace-the-signs-you-shouldnt-eat-at-that-restaurant-and-health-literacy-month/?fbclid=IwAR2mlGmRUEPi040ifXKwYZkuzcsWcrGWaaHJtnxX-NtTtRyh02cT4O3zmco" target="_blank">
+                        <img src="/zoomer.png" alt="" class="grayscale">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="content">
         <div class="container">
             <div class="row">

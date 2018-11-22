@@ -423,3 +423,25 @@ html {
 	font-size: 12px;
 	transform: translateY(0);
   }
+
+  .grayscale {
+	filter: grayscale(1);
+	transition: filter 1s;
+	
+	&:hover {
+		filter: none;
+	}
+
+  }
+
+  .sponsors {
+	  padding: 2rem 0;
+
+	  background: #20336F;
+
+	  p {
+		  color: #fff;
+		  font-size: 1.5rem;
+		  font-weight: 700;
+	  }
+  }
