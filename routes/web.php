@@ -15,7 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::get('/get-started', function () {
     return view('quote');
 });
@@ -34,7 +33,3 @@ Route::prefix('lead')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/mailable', function () {
-    return new App\Mail\EmailQuote(\App\Lead::find(14));
-});

@@ -18,8 +18,13 @@ window.Vue = require('vue');
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faHeart, faStar, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import VueRouter from 'vue-router';
+
+Vue.use(VueRouter);
 
 library.add(faHeart, faStar, faPlusCircle, faMinusCircle);
+
+import router from './router';
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
@@ -41,7 +46,7 @@ Vue.component('tt-thank-you', require('./components/ThankYou.vue'));
 
 const app = new Vue({
     el: '#app',
-
+    router,
     mounted() {
         setTimeout(function () {
             let animations = $('.animated');
