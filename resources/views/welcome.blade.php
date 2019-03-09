@@ -1,5 +1,7 @@
 @extends('layout.master')
 
 @section('content')
-    <router-view></router-view>
+    <div class="main">
+        <router-view></router-view>
+    </div>
 @endsection

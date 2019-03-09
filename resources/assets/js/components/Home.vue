@@ -12,7 +12,7 @@
 
                                 <p>Imagine getting the same low price as a non-diabetic!</p>
 
-                                <a href="/get-started" class="btn btn-primary btn-custom"> Get your FREE quote</a>
+                                <router-link to="/get-started" class="btn btn-primary btn-custom">Get your FREE quote</router-link>
                             </div>
                         </div>
                     </div>

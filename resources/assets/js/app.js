@@ -30,7 +30,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.component('tt-clouds', require('./components/Clouds.vue'));
 
-Vue.component('tt-forms', require('./components/Forms.vue'));
+// Vue.component('tt-forms', require('./components/Forms.vue'));
 
 Vue.component('tt-decline-one', require('./components/DeclineOne.vue'));
 
