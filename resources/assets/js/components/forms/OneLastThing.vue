@@ -35,11 +35,12 @@
     import ImgBlood from '../assets/Blood';
     import {mapGetters, mapMutations} from 'vuex';
     import calculateMixin from '../mixins/calculate.js';
+    import redirectMixin from '../mixins/redirect.js';
 
     export default {
         name: 'OneLastThing',
 
-        mixins: [calculateMixin],
+        mixins: [calculateMixin, redirectMixin],
 
         data() {
             return {

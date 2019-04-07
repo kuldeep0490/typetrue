@@ -1,61 +1,81 @@
 <template>
-    <div>
-        <h1 class="text-center monthlyPremium">
-            {{ monthlyPremium | formatNum }}
-        </h1>
+    <div class="main">
+        <div class="container">
+            <div class="row justify-content-md-center">
+                <div class="col col-md-8">
+                    <div class="tagline formInput text-center">
+                        <h1 class="monthlyPremium">
+                            {{ monthlyPremium | formatNum }}
+                        </h1>
 
-        <section class="slidecontainer text-center premium">
-            <div class="faceAmount mb-20">
-                <h5>
-                    <p class="product-desc">
-                        per month for <b>{{ faceAmount | formatNum }}</b> in <br>
-                        <select class="custom-select" @change="selectProduct" v-model="selectedProduct">
-                            <option v-if="showT10" value="t10">10-year term</option>
-                            <option v-if="showT20" value="t20">20-year term</option>
-                            <option v-if="showT30" value="t30">30-year term</option>
-                            <option v-if="showT100" value="t100">100-year term</option>
-                        </select>
-                        life coverage
-                    </p>
-                </h5>
-            </div>
-            
-            <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
-                <div v-if="showMaxFaceAmountMessage">
-                    <p class="increase-faceamount">
-                        <a @click.prevent="increaseFaceAmount">Need more than $1M in coverage?</a>
-                    </p>
+                        <section class="slidecontainer premium">
+                            <div class="faceAmount mb-20">
+                                <h5>
+                                    <p class="product-desc">
+                                        per month for <b>{{ faceAmount | formatNum }}</b> in <br>
+                                        <select class="custom-select" @change="selectProduct" v-model="selectedProduct">
+                                            <option v-if="showT10" value="t10">10-year term</option>
+                                            <option v-if="showT20" value="t20">20-year term</option>
+                                            <option v-if="showT30" value="t30">30-year term</option>
+                                            <option v-if="showT100" value="t100">100-year term</option>
+                                        </select>
+                                        life coverage
+                                    </p>
+                                </h5>
+                            </div>
+                            
+                            <transition enter-active-class="animated fadeInDown" leave-active-class="animated fadeOutUp">
+                                <div v-if="showMaxFaceAmountMessage">
+                                    <p class="increase-faceamount">
+                                        <a @click.prevent="increaseFaceAmount">Need more than $1M in coverage?</a>
+                                    </p>
+                                </div>
+                            </transition>
+
+                            <div id="progressContainer">
+
+                                <button @click="decrementSlider" class="buttonController">
+                                    <font-awesome-icon icon="minus-circle" />
+                                </button>
+
+                                <progress id="faceAmount" name="faceAmount" :max="maxFaceAmount" :value="faceAmount" :min="minFaceAmount">
+                                    {{ faceAmount | formatNum }}
+                                </progress>
+
+                                <button @click="incrementSlider" class="buttonController">
+                                    <font-awesome-icon icon="plus-circle" />
+                                </button>
+
+                            </div>
+                        </section>
+
+                        <button class="btn btn-primary customBtn" @click.prevent="nextPage">Email Quote</button>
+
+                        <hr>
+                    
+                        <p><small>These quotes are based on information you entered. Your actual price will be based on the information in your application.</small></p>
+                    </div>
                 </div>
-            </transition>
-
-            <div id="progressContainer">
-
-                <button @click="decrementSlider" class="buttonController">
-                    <font-awesome-icon icon="minus-circle" />
-                </button>
-
-                <progress id="faceAmount" name="faceAmount" :max="maxFaceAmount" :value="faceAmount" :min="minFaceAmount">
-                    {{ faceAmount | formatNum }}
-                </progress>
-
-                <button @click="incrementSlider" class="buttonController">
-                    <font-awesome-icon icon="plus-circle" />
-                </button>
-
             </div>
-        </section>
+        </div>
     </div>
 </template>
 
 <script>
-    import t10 from './Products/Term10';
-    import t20 from './Products/Term20';
-    import t30 from './Products/Term30';
-    import t100 from './Products/Term100';
-    import RatedAge from './Products/RatedAge';
+    import t10 from '../Products/Term10';
+    import t20 from '../Products/Term20';
+    import t30 from '../Products/Term30';
+    import t100 from '../Products/Term100';
+    import RatedAge from '../Products/RatedAge';
     import Dinero from 'dinero.js';
+    import {mapGetters} from 'vuex';
+    import redirectMixin from '../mixins/redirect.js';
 
     export default {
+        name: 'SelectProduct',
+
+        mixins: [redirectMixin],
+
         data() {
             return {
                 allProducts: {
@@ -89,8 +109,6 @@
             }
         },
 
-        props: ['basic', 'rating', 'lead'],
-
         filters: {
             formatNum(num) {
                 if (typeof num === 'string') {
@@ -102,24 +120,38 @@
         },
 
         computed: {
+            ...mapGetters({
+                fields: 'typetrue/fields',
+                rating: 'typetrue/rating',
+                leadID: 'typetrue/leadID',
+            }),
+
             showT10() {
-                return this.basic.age >= 25 && this.basic.age <=75;
+                return this.fields.basic.age >= 25 && this.fields.basic.age <=75;
             },
 
             showT20() {
-                return this.basic.age >= 25 && this.basic.age <=65;
+                return this.fields.basic.age >= 25 && this.fields.basic.age <=65;
             },
 
             showT30() {
-                return this.basic.age >= 25 && this.basic.age <=55;
+                return this.fields.basic.age >= 25 && this.fields.basic.age <=55;
             },
 
             showT100() {
-                return this.basic.age >= 56 && this.basic.age <=80;
+                return this.fields.basic.age >= 56 && this.fields.basic.age <=80;
             }
         },
 
         methods: {
+            nextPage() {
+                axios.post('email-quote', {
+                    lead_id: this.leadID
+                });
+
+                this.$router.push('/thank-you');
+            },
+
             increaseFaceAmount() {
                 this.maxFaceAmount = 5000000;
 
@@ -128,12 +160,10 @@
 
             updateLead() {
                 axios.patch('lead/update', {
-                    lead_id: this.lead,
+                    lead_id: this.leadID,
                     product: this.selectedProduct,
                     faceAmount: this.faceAmount,
                     monthlyPremium: this.monthlyPremium,
-                }).then((response) => {
-                    console.log(response);
                 });
             },
 
@@ -253,16 +283,16 @@
 
             getRate(row, column, product) {
                 if (this.products[product].hasOwnProperty([column])) {
-                    if (this.products[product][column][this.basic.gender][this.basic.smoker].hasOwnProperty([row])) {
+                    if (this.products[product][column][this.fields.basic.gender][this.fields.basic.smoker].hasOwnProperty([row])) {
                         let key = product !== 'RatedAge' ? 'rate' : 'age';
 
-                        return this.products[product][column][this.basic.gender][this.basic.smoker][row][key];
+                        return this.products[product][column][this.fields.basic.gender][this.fields.basic.smoker][row][key];
                     }
                 }
             },
 
             calculatedRate(product) {
-                let number = this.basic.age;
+                let number = this.fields.basic.age;
 
                 if (this.selectedProduct === 't100') {
                     let result = this.calculateInterpolationT100();
@@ -276,7 +306,7 @@
             },
 
             calculateInterpolationT100() {
-                let number = this.basic.age;
+                let number = this.fields.basic.age;
                 let min = Math.floor(number / 5) * 5;
                 let max = min + 5;
                 
@@ -308,15 +338,15 @@
         },
 
         mounted() {
-            if (this.basic.age > 75) {
+            if (this.fields.basic.age > 75) {
                 this.selected = 't100';
             }
 
-            if (this.basic.age > 35 && this.basic.age < 56) {
+            if (this.fields.basic.age > 35 && this.fields.basic.age < 56) {
                 this.selectedProduct = 't20';
             }
 
-            if (this.basic.age > 55) {
+            if (this.fields.basic.age > 55) {
                 this.selectedProduct = 't100';
             }
 

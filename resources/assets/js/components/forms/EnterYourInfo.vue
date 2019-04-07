@@ -55,10 +55,13 @@
 <script>
     import ImgCouple from '../assets/Couple';
     import {mapGetters, mapMutations} from 'vuex';
+    import redirectMixin from '../mixins/redirect.js';
     import _ from 'lodash';
 
     export default {
         name: 'EnterYourInfo',
+
+        mixins: [redirectMixin],
 
         components: {
             ImgCouple
@@ -108,10 +111,6 @@
             ...mapGetters({
                 stateInfo: 'typetrue/info',
                 leadID: 'typetrue/leadID',
-                fields: 'typetrue/fields',
-                declined: 'typetrue/declined',
-                reason: 'typetrue/reason',
-                bmi: 'typetrue/bmi'
             })
         },
 
@@ -121,25 +120,18 @@
             }),
 
             nextPage() {
-                this.validate();
-
                 this.updateLead();
             },
 
             updateLead() {
                 axios.patch('lead/update', {
                     lead_id: this.leadID,
-                    hasComplications: this.fields.advanced.hasComplications,
                     first_name: this.info.first_name,
                     last_name: this.info.last_name,
                     email: this.info.email,
                     phone: this.info.phone,
-                    declined: this.declined,
-                    declineReason: this.reason,
                 }).then((response) => {
-                    if (this.reason == 'decline-one') {
-
-                    }
+                    this.$router.push('/select-product');
                 });
             },
         },
