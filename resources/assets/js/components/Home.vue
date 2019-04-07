@@ -1,8 +1,6 @@
 <template>
     <div>
         <div class="main">
-            <tt-clouds></tt-clouds>
-
             <div class="container">
                 <div class="row">
                     <div class="col col-12 headline">
@@ -36,7 +34,7 @@
             </div>
         </div>
 
-        <div class="content">
+        <div class="content three-blocks">
             <div class="container">
                 <div class="row">
                     <div class="col">
@@ -77,6 +75,13 @@
         </div>
     </div>
 </template>
+
+<style scoped lang="scss">
+    .three-blocks {
+        background: #FFF;
+    }
+</style>
+
 
 <script>
     import ImgPhone from './assets/Phone';

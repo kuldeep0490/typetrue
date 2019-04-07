@@ -811,11 +811,13 @@
                     return false;
                 }
 
-                // check if diagnosed more than 15 years ago
-                if ((this.calculateMonthsDiagnosed() / 12) >= 15) {
-                    this.decline('decline-three');
+                // check if diagnosed more than 15 years ago fo age below 30
+                if (this.age < 30) {
+                    if ((this.calculateMonthsDiagnosed() / 12) >= 15) {
+                        this.decline('decline-three');
 
-                    return false;
+                        return false;
+                    }
                 }
 
                 return true;

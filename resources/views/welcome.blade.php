@@ -2,6 +2,10 @@
 
 @section('content')
     <div class="main">
-        <router-view></router-view>
+        <tt-clouds></tt-clouds>
+        
+        <transition name="slide-fade" appear mode="out-in">
+            <router-view></router-view>
+        </transition>
     </div>
 @endsection
