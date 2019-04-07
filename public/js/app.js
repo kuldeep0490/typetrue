@@ -35486,13 +35486,16 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_forms_OneLastThing___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_forms_OneLastThing__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_forms_EnterYourInfo__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_forms_EnterYourInfo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_forms_EnterYourInfo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Sorry__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__components_Sorry___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__components_Sorry__);
 
 
 
 
 
 
-var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_1__components_Home___default.a }, { path: '/get-started', component: __WEBPACK_IMPORTED_MODULE_2__components_forms_GetStarted___default.a }, { path: '/one-last-thing', component: __WEBPACK_IMPORTED_MODULE_3__components_forms_OneLastThing___default.a }, { path: '/enter-your-info', component: __WEBPACK_IMPORTED_MODULE_4__components_forms_EnterYourInfo___default.a }];
+
+var routes = [{ path: '/', component: __WEBPACK_IMPORTED_MODULE_1__components_Home___default.a }, { path: '/sorry', component: __WEBPACK_IMPORTED_MODULE_5__components_Sorry___default.a }, { path: '/get-started', component: __WEBPACK_IMPORTED_MODULE_2__components_forms_GetStarted___default.a }, { path: '/one-last-thing', component: __WEBPACK_IMPORTED_MODULE_3__components_forms_OneLastThing___default.a }, { path: '/enter-your-info', component: __WEBPACK_IMPORTED_MODULE_4__components_forms_EnterYourInfo___default.a }];
 
 var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["a" /* default */]({
     routes: routes
@@ -36913,8 +36916,6 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.calculateRating();
 
             this.createLead();
-
-            this.$router.push('/one-last-thing');
         },
         selectGender: function selectGender(gender) {
             this.fields.basic.gender = gender;
@@ -36925,7 +36926,7 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
         createLead: function createLead() {
             var _this3 = this;
 
-            axios.post('lead/store', {
+            axios.post('/lead/store', {
                 age: this.fields.basic.age,
                 gender: this.fields.basic.gender,
                 diagnosedMonthsAgo: this.calculateMonthsDiagnosed(),
@@ -36936,7 +36937,11 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
                 bmi: this.bmi,
                 rating: this.rating
             }).then(function (response) {
+                window.scrollTo(0, 0);
+
                 _this3.setLeadID(response.data.id);
+
+                _this3.$router.push('/one-last-thing');
             });
         }
     }),
@@ -37551,7 +37556,7 @@ var createStore = function createStore() {
 
     reason: null,
 
-    declined: null
+    declined: false
 });
 
 /***/ }),
@@ -37561,11 +37566,17 @@ var createStore = function createStore() {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setFields", function() { return setFields; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setInfo", function() { return setInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setBMI", function() { return setBMI; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRating", function() { return setRating; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setLeadID", function() { return setLeadID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setDeclineReason", function() { return setDeclineReason; });
 var setFields = function setFields(state, payload) {
     state.fields = payload;
+};
+
+var setInfo = function setInfo(state, payload) {
+    state.info = payload;
 };
 
 var setBMI = function setBMI(state, payload) {
@@ -37578,6 +37589,12 @@ var setRating = function setRating(state, payload) {
 
 var setLeadID = function setLeadID(state, payload) {
     state.leadID = payload;
+};
+
+var setDeclineReason = function setDeclineReason(state, payload) {
+    state.reason = payload.reason;
+
+    state.declined = payload.status;
 };
 
 /***/ }),
@@ -37593,11 +37610,19 @@ var setLeadID = function setLeadID(state, payload) {
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fields", function() { return fields; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "info", function() { return info; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "doNotValidateFields", function() { return doNotValidateFields; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "bmi", function() { return bmi; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rating", function() { return rating; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "leadID", function() { return leadID; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "declined", function() { return declined; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reason", function() { return reason; });
 var fields = function fields(state) {
     return state.fields;
+};
+
+var info = function info(state) {
+    return state.info;
 };
 
 var doNotValidateFields = function doNotValidateFields(state) {
@@ -37610,6 +37635,18 @@ var bmi = function bmi(state) {
 
 var rating = function rating(state) {
     return state.rating;
+};
+
+var leadID = function leadID(state) {
+    return state.leadID;
+};
+
+var declined = function declined(state) {
+    return state.declined;
+};
+
+var reason = function reason(state) {
+    return state.reason;
 };
 
 /***/ }),
@@ -66755,6 +66792,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_Blood__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_Blood___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__assets_Blood__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mixins_calculate_js__ = __webpack_require__(104);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 //
@@ -66794,12 +66832,16 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'OneLastThing',
 
+    mixins: [__WEBPACK_IMPORTED_MODULE_2__mixins_calculate_js__["a" /* default */]],
+
     data: function data() {
         return {
-            fields: null
+            fields: null,
+            info: null
         };
     },
 
@@ -66809,29 +66851,116 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     },
 
     computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
-        stateFields: 'typetrue/fields'
+        stateFields: 'typetrue/fields',
+        leadID: 'typetrue/leadID',
+        bmi: 'typetrue/bmi',
+        declined: 'typetrue/declined',
+        reason: 'typetrue/reason'
     })),
 
     methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapMutations */])({
-        setFields: 'typetrue/setFields'
+        setFields: 'typetrue/setFields',
+        setDeclineReason: 'typetrue/setDeclineReason'
     }), {
         setComplications: function setComplications(status) {
             this.fields.advanced.hasComplications = status;
         },
         prevPage: function prevPage() {
-            this.setFields(this.fields);
-
             this.$router.push('/get-started');
         },
         nextPage: function nextPage() {
             this.setFields(this.fields);
 
-            this.$router.push('/');
+            this.validate();
+
+            this.updateLead();
+        },
+        updateLead: function updateLead() {
+            var _this = this;
+
+            axios.patch('/lead/update', {
+                lead_id: this.leadID,
+                hasComplications: this.fields.advanced.hasComplications,
+                declined: this.declined,
+                declineReason: this.reason
+            }).then(function (response) {
+                window.scrollTo(0, 0);
+
+                if (_this.declined) {
+                    _this.$router.push('/sorry');
+
+                    return;
+                }
+
+                _this.$router.push('/enter-your-info');
+            });
+        },
+        validate: function validate() {
+            // check if has complications
+            if (this.fields.advanced.hasComplications) {
+                this.setDeclineReason({
+                    status: true,
+                    reason: 'decline-one'
+                });
+
+                return false;
+            }
+
+            // check if newly diagnosed
+            if (this.calculateMonthsDiagnosed() < 7) {
+                this.setDeclineReason({
+                    status: true,
+                    reason: 'decline-two'
+                });
+
+                return false;
+            }
+
+            // check if rating passed
+
+            // check if BMI is above 43
+            if (this.bmi >= 43) {
+                this.setDeclineReason({
+                    status: true,
+                    reason: 'decline-three'
+                });
+
+                return false;
+            }
+
+            // check if a1c is more than 10
+            if (parseFloat(this.fields.basic.a1c) > 10) {
+                this.setDeclineReason({
+                    status: true,
+                    reason: 'decline-three'
+                });
+
+                return false;
+            }
+
+            // check if diagnosed more than 15 years ago fo age below 30
+            if (parseInt(this.fields.basic.age) < 30) {
+                if (this.calculateMonthsDiagnosed() / 12 >= 15) {
+                    this.setDeclineReason({
+                        status: true,
+                        reason: 'decline-three'
+                    });
+
+                    return false;
+                }
+            }
+
+            return true;
         }
     }),
 
     created: function created() {
         this.fields = _.cloneDeep(this.stateFields);
+
+        this.setDeclineReason({
+            status: false,
+            reason: null
+        });
     }
 });
 
@@ -67006,20 +67135,266 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "main" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-md-center" }, [
+        _c("div", { staticClass: "col col-md-8" }, [
+          _c("div", { staticClass: "tagline formInput" }, [
+            _c(
+              "h1",
+              [
+                _c("img-couple"),
+                _vm._v(
+                  "\n\n                        We need your email so we can send your quote later.\n                    "
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "basicDetails" },
+              [
+                _c("form", { attrs: { autocomplete: "on" } }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mat-div",
+                      class: { "is-active is-completed": _vm.FName }
+                    },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "mat-label",
+                          attrs: { for: "first-name" }
+                        },
+                        [_vm._v("First Name")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.info.first_name,
+                            expression: "info.first_name"
+                          }
+                        ],
+                        staticClass: "mat-input",
+                        attrs: { id: "first-name", type: "text" },
+                        domProps: { value: _vm.info.first_name },
+                        on: {
+                          focus: function($event) {
+                            _vm.FName = true
+                          },
+                          blur: function($event) {
+                            _vm.FName = false
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.info,
+                              "first_name",
+                              $event.target.value
+                            )
+                          }
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mat-div",
+                      class: { "is-active is-completed": _vm.LName }
+                    },
+                    [
+                      _c(
+                        "label",
+                        {
+                          staticClass: "mat-label",
+                          attrs: { for: "last-name" }
+                        },
+                        [_vm._v("Last Name")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.info.last_name,
+                            expression: "info.last_name"
+                          }
+                        ],
+                        staticClass: "mat-input",
+                        attrs: { id: "last-name", type: "text" },
+                        domProps: { value: _vm.info.last_name },
+                        on: {
+                          focus: function($event) {
+                            _vm.LName = true
+                          },
+                          blur: function($event) {
+                            _vm.LName = false
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.info, "last_name", $event.target.value)
+                          }
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mat-div",
+                      class: { "is-active is-completed": _vm.EMail }
+                    },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "mat-label", attrs: { for: "email" } },
+                        [_vm._v("Email Address")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.info.email,
+                            expression: "info.email"
+                          }
+                        ],
+                        staticClass: "mat-input",
+                        attrs: { id: "email", type: "email" },
+                        domProps: { value: _vm.info.email },
+                        on: {
+                          focus: function($event) {
+                            _vm.EMail = true
+                          },
+                          blur: function($event) {
+                            _vm.EMail = false
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.info, "email", $event.target.value)
+                          }
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass: "mat-div",
+                      class: { "is-active is-completed": _vm.Phone }
+                    },
+                    [
+                      _c(
+                        "label",
+                        { staticClass: "mat-label", attrs: { for: "phone" } },
+                        [_vm._v("Phone Number")]
+                      ),
+                      _vm._v(" "),
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.info.phone,
+                            expression: "info.phone"
+                          }
+                        ],
+                        staticClass: "mat-input",
+                        attrs: { id: "phone", type: "text" },
+                        domProps: { value: _vm.info.phone },
+                        on: {
+                          focus: function($event) {
+                            _vm.Phone = true
+                          },
+                          blur: function($event) {
+                            _vm.Phone = false
+                          },
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.info, "phone", $event.target.value)
+                          }
+                        }
+                      })
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "transition",
+                  {
+                    attrs: {
+                      "enter-active-class": "animated fadeInDown",
+                      "leave-active-class": "animated fadeOutUp"
+                    }
+                  },
+                  [
+                    _vm.hasLeadError
+                      ? _c("p", { staticClass: "error" }, [
+                          _vm._v(
+                            "All fields are required and email must be in valid format."
+                          )
+                        ])
+                      : _vm._e()
+                  ]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-primary customBtn",
+                attrs: { disabled: _vm.disableNextBtn },
+                on: {
+                  click: function($event) {
+                    $event.preventDefault()
+                    _vm.nextPage($event)
+                  }
+                }
+              },
+              [_vm._v("Get Quote")]
+            ),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._m(0)
+          ])
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "main" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row justify-content-md-center" }, [
-          _c("div", { staticClass: "col col-md-8" }, [
-            _c("div", { staticClass: "tagline formInput" })
-          ])
-        ])
+    return _c("p", [
+      _c("small", [
+        _vm._v(
+          "Your information will be kept secure and confidential and will not be shared with anyone."
+        )
       ])
     ])
   }
@@ -67039,6 +67414,54 @@ if (false) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_Couple__ = __webpack_require__(105);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__assets_Couple___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__assets_Couple__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vuex__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash__ = __webpack_require__(95);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_lodash___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_lodash__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -67053,8 +67476,99 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
+
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-    name: 'EnterYourInfo'
+    name: 'EnterYourInfo',
+
+    components: {
+        ImgCouple: __WEBPACK_IMPORTED_MODULE_0__assets_Couple___default.a
+    },
+
+    watch: {
+        info: {
+            handler: function handler(val, oldVal) {
+                var _this = this;
+
+                this.disableNextBtn = false;
+
+                this.hasLeadError = false;
+
+                Object.keys(this.info).forEach(function (key) {
+                    if (!_this.info[key]) {
+                        _this.disableNextBtn = true;
+
+                        _this.hasLeadError = true;
+                    }
+
+                    if (key === 'email') {
+                        if (!_this.reg.test(val.email)) {
+                            _this.disableNextBtn = true;
+
+                            _this.hasLeadError = true;
+                        }
+                    }
+                });
+            },
+
+            deep: true
+        }
+    },
+
+    data: function data() {
+        return {
+            info: null,
+            FName: false,
+            LName: false,
+            EMail: false,
+            Phone: false,
+            disableNextBtn: true,
+            hasLeadError: false,
+            reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/
+        };
+    },
+
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["b" /* mapGetters */])({
+        stateInfo: 'typetrue/info',
+        leadID: 'typetrue/leadID',
+        fields: 'typetrue/fields',
+        declined: 'typetrue/declined',
+        reason: 'typetrue/reason',
+        bmi: 'typetrue/bmi'
+    })),
+
+    methods: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_1_vuex__["c" /* mapMutations */])({
+        setDeclineReason: 'typetrue/setDeclineReason'
+    }), {
+        nextPage: function nextPage() {
+            this.validate();
+
+            this.updateLead();
+        },
+        updateLead: function updateLead() {
+            var _this2 = this;
+
+            axios.patch('lead/update', {
+                lead_id: this.leadID,
+                hasComplications: this.fields.advanced.hasComplications,
+                first_name: this.info.first_name,
+                last_name: this.info.last_name,
+                email: this.info.email,
+                phone: this.info.phone,
+                declined: this.declined,
+                declineReason: this.reason
+            }).then(function (response) {
+                if (_this2.reason == 'decline-one') {}
+            });
+        }
+    }),
+
+    created: function created() {
+        this.info = __WEBPACK_IMPORTED_MODULE_2_lodash___default.a.clone(this.stateInfo);
+    }
 });
 
 /***/ }),
@@ -67283,6 +67797,1464 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     }
 });
+
+/***/ }),
+/* 105 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(106)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/assets/Couple.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-bb882d36", Component.options)
+  } else {
+    hotAPI.reload("data-v-bb882d36", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 106 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "svg",
+    {
+      attrs: {
+        width: "334px",
+        height: "209px",
+        viewBox: "0 0 334 209",
+        version: "1.1",
+        xmlns: "http://www.w3.org/2000/svg",
+        "xmlns:xlink": "http://www.w3.org/1999/xlink"
+      }
+    },
+    [
+      _c("desc", [_vm._v("Created with Sketch.")]),
+      _vm._v(" "),
+      _c("defs"),
+      _vm._v(" "),
+      _c(
+        "g",
+        {
+          attrs: {
+            id: "Page-1",
+            stroke: "none",
+            "stroke-width": "1",
+            fill: "none",
+            "fill-rule": "evenodd"
+          }
+        },
+        [
+          _c(
+            "g",
+            {
+              attrs: {
+                id: "Homepage-TypeTrue-couple",
+                transform: "translate(-348.000000, -278.000000)"
+              }
+            },
+            [
+              _c(
+                "g",
+                {
+                  attrs: {
+                    id: "couple",
+                    transform: "translate(348.000000, 278.000000)"
+                  }
+                },
+                [
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M174.194331,191.88376 C174.194331,201.339514 138.57531,209.005952 94.6363914,209.005952 C50.697473,209.005952 15.0784515,201.339514 15.0784515,191.88376 C15.0784515,182.428007 50.697473,174.761568 94.6363914,174.761568 C138.57531,174.761568 174.194331,182.428007 174.194331,191.88376",
+                      id: "Fill-1",
+                      fill: "#FCD592"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M333.825976,191.88376 C333.825976,201.339514 298.206955,209.005952 254.268036,209.005952 C210.329118,209.005952 174.710096,201.339514 174.710096,191.88376 C174.710096,182.428007 210.329118,174.761568 254.268036,174.761568 C298.206955,174.761568 333.825976,182.428007 333.825976,191.88376",
+                      id: "Fill-3",
+                      fill: "#FCD592"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M325.405736,113.522836 C329.916886,155.754411 299.454079,193.659411 257.367212,198.185918 C215.278912,202.712425 177.502508,172.147356 172.991358,129.914342 C168.557615,88.4048219 212.217006,29.4207123 229.063221,4.78886301 C232.537967,-0.291410959 239.711083,-1.06236986 244.179229,3.16352055 C265.846225,23.6543425 320.971993,72.0133151 325.405736,113.522836",
+                      id: "Fill-5",
+                      fill: "#FF6D80"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M325.405736,113.522836 C325.129075,110.923726 324.651727,108.298726 323.998062,105.653589 C320.898886,141.559274 292.868688,171.419548 255.813324,175.403795 C216.970414,179.582219 181.821573,153.860096 173.084534,116.672836 C172.611487,121.229548 172.536946,125.666877 172.991358,129.914342 C177.502508,172.147356 215.278912,202.712425 257.367212,198.185918 C299.454079,193.659411 329.916886,155.754411 325.405736,113.522836",
+                      id: "Fill-7",
+                      fill: "#FC5975"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M266.500177,113.62539 C266.296623,117.659979 264.69973,121.398267 262.149576,124.305185 C262.037765,124.437514 261.92022,124.568404 261.801241,124.693541 C261.546082,124.966829 261.283756,125.232925 261.005662,125.48176 C258.343696,128.016144 254.863215,129.717719 250.956992,130.136281 C247.050769,130.556281 243.290761,129.628541 240.147147,127.732788 C239.681267,127.45087 239.225421,127.141623 238.786778,126.817993 C235.680434,124.5195 233.330967,121.205527 232.280228,117.306144 C231.982065,116.184226 232.753276,115.06087 233.904357,114.937171 L264.413035,111.656281 C265.562683,111.532582 266.554649,112.466075 266.500177,113.62539",
+                      id: "Fill-9",
+                      fill: "#FFFFFF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M261.006379,125.481904 C258.342979,128.016288 254.863932,129.716425 250.957709,130.136425 C247.050052,130.556425 243.290044,129.628685 240.147864,127.731493 C242.101692,124.193137 245.681082,121.62711 249.998713,121.162521 C254.31061,120.69937 258.348713,122.439781 261.006379,125.481904",
+                      id: "Fill-11",
+                      fill: "#FCD4D4"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M197.288066,111.122219 C190.801585,165.58989 141.535869,204.468658 87.2529845,197.960096 C32.968667,191.451534 -5.7782,142.01811 0.709714163,87.5504384 C7.19619485,33.0813288 56.4604781,-5.796 110.743362,0.711123288 C165.02768,7.22112329 203.774547,56.6531096 197.288066,111.122219",
+                      id: "Fill-13",
+                      fill: "#538CCF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M168.49956,107.669589 C163.912435,146.184452 129.077525,173.677192 90.6933279,169.073014 C52.3091305,164.470274 24.9110961,129.516781 29.4967871,91.0019178 C34.0839116,52.4870548 68.9188215,24.9957534 107.304452,29.5984932 C145.68865,34.2012329 173.086684,69.154726 168.49956,107.669589",
+                      id: "Fill-15",
+                      fill: "#FFFFFF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M108.303299,107.14574 C107.705539,109.261562 106.403942,111.050877 104.696672,112.28211 C104.622131,112.336767 104.54329,112.392863 104.464449,112.446082 C104.296732,112.559712 104.124715,112.669027 103.946964,112.766836 C102.225359,113.78663 100.172621,114.262726 98.0482086,114.008137 C95.9237966,113.753548 94.0402086,112.801356 92.6024318,111.410466 C92.3888438,111.203342 92.1852901,110.984712 91.9917708,110.75889 C90.6228009,109.158 89.7770498,107.112658 89.6939082,104.913411",
+                      id: "Stroke-17",
+                      stroke: "#000000",
+                      "stroke-width": "4.29975",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M89.8151803,79.8773836 C98.5249828,76.9330685 106.304459,77.8133425 113.22385,82.6836164",
+                      id: "Stroke-19",
+                      stroke: "#20336F",
+                      "stroke-width": "8.565102",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261",
+                      id: "Fill-21",
+                      fill: "#FFFFFF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261 Z",
+                      id: "Stroke-23",
+                      stroke: "#20336F",
+                      "stroke-width": "4.941846"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541",
+                      id: "Fill-25",
+                      fill: "#FFFFFF"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541 Z",
+                      id: "Stroke-27",
+                      stroke: "#20336F",
+                      "stroke-width": "4.941846"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M69.889285,87.2811781 C69.5237485,90.3520685 66.7456712,92.5441233 63.6837657,92.1773425 C60.6232936,91.8091233 58.4386755,89.0230274 58.804212,85.9506986 C59.1697485,82.8798082 61.9478258,80.6877534 65.0082979,81.0545342 C68.0702034,81.4213151 70.2548215,84.2088493 69.889285,87.2811781",
+                      id: "Fill-29",
+                      fill: "#000000"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M141.573569,95.8762192 C141.208033,98.9485479 138.429955,101.139164 135.36805,100.772384 C132.307578,100.405603 130.12296,97.6180685 130.488496,94.5471781 C130.854033,91.4748493 133.63211,89.2827945 136.694015,89.6495753 C139.754488,90.0177945 141.939106,92.8038904 141.573569,95.8762192",
+                      id: "Fill-31",
+                      fill: "#000000"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M228.473202,100.998925 C227.905545,99.3131712 226.783133,97.9194041 225.353957,96.9945411 C225.15327,96.8636507 224.945416,96.7399521 224.731828,96.6291986 C223.298352,95.8798151 221.619751,95.5748836 219.913914,95.8668699 C218.206644,96.1574178 216.722996,97.0002945 215.620652,98.1869384 C215.505974,98.3048836 215.39703,98.4285822 215.292386,98.5551575 C215.243648,98.6141301 215.19491,98.6759795 215.150472,98.7363904 C214.106901,100.082692 213.506275,101.771322 213.526343,103.54913 L209.925451,101.090979",
+                      id: "Stroke-33",
+                      stroke: "#000000",
+                      "stroke-width": "3.47849775",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M264.864437,96.3074384 C265.207038,94.561274 266.137364,93.0337397 267.431793,91.9262055 C267.613845,91.770863 267.804497,91.6198356 268.000883,91.4831918 C269.323982,90.551137 270.948111,90.0275753 272.678317,90.090863 C274.407089,90.1541507 275.989647,90.7942192 277.236772,91.8255205 C277.367218,91.9262055 277.490497,92.0340822 277.610909,92.146274 C277.666815,92.1994932 277.72272,92.2527123 277.775759,92.3073699 C278.987046,93.5055205 279.802694,95.0992192 280.016282,96.8655205 L283.26454,93.9528493",
+                      id: "Stroke-35",
+                      stroke: "#000000",
+                      "stroke-width": "3.47849775",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M204.112561,109.821514 C206.487831,112.656514 210.65638,113.823021 214.151196,112.632062",
+                      id: "Stroke-37",
+                      stroke: "#FC5975",
+                      "stroke-width": "4.29975",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("path", {
+                    attrs: {
+                      d:
+                        "M283.260956,101.883945 C286.896252,102.521137 290.836879,100.726068 292.75057,97.5588082",
+                      id: "Stroke-39",
+                      stroke: "#FC5975",
+                      "stroke-width": "4.29975",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  })
+                ]
+              )
+            ]
+          )
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-bb882d36", module.exports)
+  }
+}
+
+/***/ }),
+/* 107 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = __webpack_require__(108)
+/* template */
+var __vue_template__ = __webpack_require__(109)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/Sorry.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-44a4d036", Component.options)
+  } else {
+    hotAPI.reload("data-v-44a4d036", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 108 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeclineOne__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__DeclineOne___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__DeclineOne__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DeclineTwo__ = __webpack_require__(112);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__DeclineTwo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__DeclineTwo__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__DeclineThree__ = __webpack_require__(114);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__DeclineThree___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__DeclineThree__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'Sorry',
+
+    components: {
+        DeclineOne: __WEBPACK_IMPORTED_MODULE_1__DeclineOne___default.a,
+        DeclineTwo: __WEBPACK_IMPORTED_MODULE_2__DeclineTwo___default.a,
+        DeclineThree: __WEBPACK_IMPORTED_MODULE_3__DeclineThree___default.a
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["b" /* mapGetters */])({
+        reason: 'typetrue/reason'
+    }))
+});
+
+/***/ }),
+/* 109 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "main" }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row justify-content-md-center" }, [
+        _c("div", { staticClass: "col col-md-8" }, [
+          _c(
+            "div",
+            { staticClass: "tagline formInput" },
+            [
+              _vm.reason === "decline-one" ? _c("decline-one") : _vm._e(),
+              _vm._v(" "),
+              _vm.reason === "decline-two" ? _c("decline-two") : _vm._e(),
+              _vm._v(" "),
+              _vm.reason === "decline-three" ? _c("decline-three") : _vm._e()
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-44a4d036", module.exports)
+  }
+}
+
+/***/ }),
+/* 110 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(111)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DeclineOne.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-1cf325f2", Component.options)
+  } else {
+    hotAPI.reload("data-v-1cf325f2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 111 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c("h1", [
+      _c(
+        "svg",
+        {
+          attrs: {
+            width: "334px",
+            height: "209px",
+            viewBox: "0 0 334 209",
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            "xmlns:xlink": "http://www.w3.org/1999/xlink"
+          }
+        },
+        [
+          _c("desc", [_vm._v("Created with Sketch.")]),
+          _vm._v(" "),
+          _c("defs"),
+          _vm._v(" "),
+          _c(
+            "g",
+            {
+              attrs: {
+                id: "Page-1",
+                stroke: "none",
+                "stroke-width": "1",
+                fill: "none",
+                "fill-rule": "evenodd"
+              }
+            },
+            [
+              _c(
+                "g",
+                {
+                  attrs: {
+                    id: "Homepage-TypeTrue-couple",
+                    transform: "translate(-348.000000, -278.000000)"
+                  }
+                },
+                [
+                  _c(
+                    "g",
+                    {
+                      attrs: {
+                        id: "couple",
+                        transform: "translate(348.000000, 278.000000)"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M174.194331,191.88376 C174.194331,201.339514 138.57531,209.005952 94.6363914,209.005952 C50.697473,209.005952 15.0784515,201.339514 15.0784515,191.88376 C15.0784515,182.428007 50.697473,174.761568 94.6363914,174.761568 C138.57531,174.761568 174.194331,182.428007 174.194331,191.88376",
+                          id: "Fill-1",
+                          fill: "#FCD592"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M333.825976,191.88376 C333.825976,201.339514 298.206955,209.005952 254.268036,209.005952 C210.329118,209.005952 174.710096,201.339514 174.710096,191.88376 C174.710096,182.428007 210.329118,174.761568 254.268036,174.761568 C298.206955,174.761568 333.825976,182.428007 333.825976,191.88376",
+                          id: "Fill-3",
+                          fill: "#FCD592"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M325.405736,113.522836 C329.916886,155.754411 299.454079,193.659411 257.367212,198.185918 C215.278912,202.712425 177.502508,172.147356 172.991358,129.914342 C168.557615,88.4048219 212.217006,29.4207123 229.063221,4.78886301 C232.537967,-0.291410959 239.711083,-1.06236986 244.179229,3.16352055 C265.846225,23.6543425 320.971993,72.0133151 325.405736,113.522836",
+                          id: "Fill-5",
+                          fill: "#FF6D80"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M325.405736,113.522836 C325.129075,110.923726 324.651727,108.298726 323.998062,105.653589 C320.898886,141.559274 292.868688,171.419548 255.813324,175.403795 C216.970414,179.582219 181.821573,153.860096 173.084534,116.672836 C172.611487,121.229548 172.536946,125.666877 172.991358,129.914342 C177.502508,172.147356 215.278912,202.712425 257.367212,198.185918 C299.454079,193.659411 329.916886,155.754411 325.405736,113.522836",
+                          id: "Fill-7",
+                          fill: "#FC5975"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M266.500177,113.62539 C266.296623,117.659979 264.69973,121.398267 262.149576,124.305185 C262.037765,124.437514 261.92022,124.568404 261.801241,124.693541 C261.546082,124.966829 261.283756,125.232925 261.005662,125.48176 C258.343696,128.016144 254.863215,129.717719 250.956992,130.136281 C247.050769,130.556281 243.290761,129.628541 240.147147,127.732788 C239.681267,127.45087 239.225421,127.141623 238.786778,126.817993 C235.680434,124.5195 233.330967,121.205527 232.280228,117.306144 C231.982065,116.184226 232.753276,115.06087 233.904357,114.937171 L264.413035,111.656281 C265.562683,111.532582 266.554649,112.466075 266.500177,113.62539",
+                          id: "Fill-9",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M261.006379,125.481904 C258.342979,128.016288 254.863932,129.716425 250.957709,130.136425 C247.050052,130.556425 243.290044,129.628685 240.147864,127.731493 C242.101692,124.193137 245.681082,121.62711 249.998713,121.162521 C254.31061,120.69937 258.348713,122.439781 261.006379,125.481904",
+                          id: "Fill-11",
+                          fill: "#FCD4D4"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M197.288066,111.122219 C190.801585,165.58989 141.535869,204.468658 87.2529845,197.960096 C32.968667,191.451534 -5.7782,142.01811 0.709714163,87.5504384 C7.19619485,33.0813288 56.4604781,-5.796 110.743362,0.711123288 C165.02768,7.22112329 203.774547,56.6531096 197.288066,111.122219",
+                          id: "Fill-13",
+                          fill: "#538CCF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M168.49956,107.669589 C163.912435,146.184452 129.077525,173.677192 90.6933279,169.073014 C52.3091305,164.470274 24.9110961,129.516781 29.4967871,91.0019178 C34.0839116,52.4870548 68.9188215,24.9957534 107.304452,29.5984932 C145.68865,34.2012329 173.086684,69.154726 168.49956,107.669589",
+                          id: "Fill-15",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M108.303299,107.14574 C107.705539,109.261562 106.403942,111.050877 104.696672,112.28211 C104.622131,112.336767 104.54329,112.392863 104.464449,112.446082 C104.296732,112.559712 104.124715,112.669027 103.946964,112.766836 C102.225359,113.78663 100.172621,114.262726 98.0482086,114.008137 C95.9237966,113.753548 94.0402086,112.801356 92.6024318,111.410466 C92.3888438,111.203342 92.1852901,110.984712 91.9917708,110.75889 C90.6228009,109.158 89.7770498,107.112658 89.6939082,104.913411",
+                          id: "Stroke-17",
+                          stroke: "#000000",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M89.8151803,79.8773836 C98.5249828,76.9330685 106.304459,77.8133425 113.22385,82.6836164",
+                          id: "Stroke-19",
+                          stroke: "#20336F",
+                          "stroke-width": "8.565102",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261",
+                          id: "Fill-21",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261 Z",
+                          id: "Stroke-23",
+                          stroke: "#20336F",
+                          "stroke-width": "4.941846"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541",
+                          id: "Fill-25",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541 Z",
+                          id: "Stroke-27",
+                          stroke: "#20336F",
+                          "stroke-width": "4.941846"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M69.889285,87.2811781 C69.5237485,90.3520685 66.7456712,92.5441233 63.6837657,92.1773425 C60.6232936,91.8091233 58.4386755,89.0230274 58.804212,85.9506986 C59.1697485,82.8798082 61.9478258,80.6877534 65.0082979,81.0545342 C68.0702034,81.4213151 70.2548215,84.2088493 69.889285,87.2811781",
+                          id: "Fill-29",
+                          fill: "#000000"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M141.573569,95.8762192 C141.208033,98.9485479 138.429955,101.139164 135.36805,100.772384 C132.307578,100.405603 130.12296,97.6180685 130.488496,94.5471781 C130.854033,91.4748493 133.63211,89.2827945 136.694015,89.6495753 C139.754488,90.0177945 141.939106,92.8038904 141.573569,95.8762192",
+                          id: "Fill-31",
+                          fill: "#000000"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M228.473202,100.998925 C227.905545,99.3131712 226.783133,97.9194041 225.353957,96.9945411 C225.15327,96.8636507 224.945416,96.7399521 224.731828,96.6291986 C223.298352,95.8798151 221.619751,95.5748836 219.913914,95.8668699 C218.206644,96.1574178 216.722996,97.0002945 215.620652,98.1869384 C215.505974,98.3048836 215.39703,98.4285822 215.292386,98.5551575 C215.243648,98.6141301 215.19491,98.6759795 215.150472,98.7363904 C214.106901,100.082692 213.506275,101.771322 213.526343,103.54913 L209.925451,101.090979",
+                          id: "Stroke-33",
+                          stroke: "#000000",
+                          "stroke-width": "3.47849775",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M264.864437,96.3074384 C265.207038,94.561274 266.137364,93.0337397 267.431793,91.9262055 C267.613845,91.770863 267.804497,91.6198356 268.000883,91.4831918 C269.323982,90.551137 270.948111,90.0275753 272.678317,90.090863 C274.407089,90.1541507 275.989647,90.7942192 277.236772,91.8255205 C277.367218,91.9262055 277.490497,92.0340822 277.610909,92.146274 C277.666815,92.1994932 277.72272,92.2527123 277.775759,92.3073699 C278.987046,93.5055205 279.802694,95.0992192 280.016282,96.8655205 L283.26454,93.9528493",
+                          id: "Stroke-35",
+                          stroke: "#000000",
+                          "stroke-width": "3.47849775",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M204.112561,109.821514 C206.487831,112.656514 210.65638,113.823021 214.151196,112.632062",
+                          id: "Stroke-37",
+                          stroke: "#FC5975",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M283.260956,101.883945 C286.896252,102.521137 290.836879,100.726068 292.75057,97.5588082",
+                          id: "Stroke-39",
+                          stroke: "#FC5975",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(
+        "\n\n        Sorry. Your diabetic complications would very likely lead to a decline if you applied for medical exam life insurance.\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. Over time it may well be possible to lower your cost by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future."
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-1cf325f2", module.exports)
+  }
+}
+
+/***/ }),
+/* 112 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(113)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DeclineTwo.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-09ee1ded", Component.options)
+  } else {
+    hotAPI.reload("data-v-09ee1ded", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 113 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c("h1", [
+      _c(
+        "svg",
+        {
+          attrs: {
+            width: "334px",
+            height: "209px",
+            viewBox: "0 0 334 209",
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            "xmlns:xlink": "http://www.w3.org/1999/xlink"
+          }
+        },
+        [
+          _c("desc", [_vm._v("Created with Sketch.")]),
+          _vm._v(" "),
+          _c("defs"),
+          _vm._v(" "),
+          _c(
+            "g",
+            {
+              attrs: {
+                id: "Page-1",
+                stroke: "none",
+                "stroke-width": "1",
+                fill: "none",
+                "fill-rule": "evenodd"
+              }
+            },
+            [
+              _c(
+                "g",
+                {
+                  attrs: {
+                    id: "Homepage-TypeTrue-couple",
+                    transform: "translate(-348.000000, -278.000000)"
+                  }
+                },
+                [
+                  _c(
+                    "g",
+                    {
+                      attrs: {
+                        id: "couple",
+                        transform: "translate(348.000000, 278.000000)"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M174.194331,191.88376 C174.194331,201.339514 138.57531,209.005952 94.6363914,209.005952 C50.697473,209.005952 15.0784515,201.339514 15.0784515,191.88376 C15.0784515,182.428007 50.697473,174.761568 94.6363914,174.761568 C138.57531,174.761568 174.194331,182.428007 174.194331,191.88376",
+                          id: "Fill-1",
+                          fill: "#FCD592"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M333.825976,191.88376 C333.825976,201.339514 298.206955,209.005952 254.268036,209.005952 C210.329118,209.005952 174.710096,201.339514 174.710096,191.88376 C174.710096,182.428007 210.329118,174.761568 254.268036,174.761568 C298.206955,174.761568 333.825976,182.428007 333.825976,191.88376",
+                          id: "Fill-3",
+                          fill: "#FCD592"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M325.405736,113.522836 C329.916886,155.754411 299.454079,193.659411 257.367212,198.185918 C215.278912,202.712425 177.502508,172.147356 172.991358,129.914342 C168.557615,88.4048219 212.217006,29.4207123 229.063221,4.78886301 C232.537967,-0.291410959 239.711083,-1.06236986 244.179229,3.16352055 C265.846225,23.6543425 320.971993,72.0133151 325.405736,113.522836",
+                          id: "Fill-5",
+                          fill: "#FF6D80"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M325.405736,113.522836 C325.129075,110.923726 324.651727,108.298726 323.998062,105.653589 C320.898886,141.559274 292.868688,171.419548 255.813324,175.403795 C216.970414,179.582219 181.821573,153.860096 173.084534,116.672836 C172.611487,121.229548 172.536946,125.666877 172.991358,129.914342 C177.502508,172.147356 215.278912,202.712425 257.367212,198.185918 C299.454079,193.659411 329.916886,155.754411 325.405736,113.522836",
+                          id: "Fill-7",
+                          fill: "#FC5975"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M266.500177,113.62539 C266.296623,117.659979 264.69973,121.398267 262.149576,124.305185 C262.037765,124.437514 261.92022,124.568404 261.801241,124.693541 C261.546082,124.966829 261.283756,125.232925 261.005662,125.48176 C258.343696,128.016144 254.863215,129.717719 250.956992,130.136281 C247.050769,130.556281 243.290761,129.628541 240.147147,127.732788 C239.681267,127.45087 239.225421,127.141623 238.786778,126.817993 C235.680434,124.5195 233.330967,121.205527 232.280228,117.306144 C231.982065,116.184226 232.753276,115.06087 233.904357,114.937171 L264.413035,111.656281 C265.562683,111.532582 266.554649,112.466075 266.500177,113.62539",
+                          id: "Fill-9",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M261.006379,125.481904 C258.342979,128.016288 254.863932,129.716425 250.957709,130.136425 C247.050052,130.556425 243.290044,129.628685 240.147864,127.731493 C242.101692,124.193137 245.681082,121.62711 249.998713,121.162521 C254.31061,120.69937 258.348713,122.439781 261.006379,125.481904",
+                          id: "Fill-11",
+                          fill: "#FCD4D4"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M197.288066,111.122219 C190.801585,165.58989 141.535869,204.468658 87.2529845,197.960096 C32.968667,191.451534 -5.7782,142.01811 0.709714163,87.5504384 C7.19619485,33.0813288 56.4604781,-5.796 110.743362,0.711123288 C165.02768,7.22112329 203.774547,56.6531096 197.288066,111.122219",
+                          id: "Fill-13",
+                          fill: "#538CCF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M168.49956,107.669589 C163.912435,146.184452 129.077525,173.677192 90.6933279,169.073014 C52.3091305,164.470274 24.9110961,129.516781 29.4967871,91.0019178 C34.0839116,52.4870548 68.9188215,24.9957534 107.304452,29.5984932 C145.68865,34.2012329 173.086684,69.154726 168.49956,107.669589",
+                          id: "Fill-15",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M108.303299,107.14574 C107.705539,109.261562 106.403942,111.050877 104.696672,112.28211 C104.622131,112.336767 104.54329,112.392863 104.464449,112.446082 C104.296732,112.559712 104.124715,112.669027 103.946964,112.766836 C102.225359,113.78663 100.172621,114.262726 98.0482086,114.008137 C95.9237966,113.753548 94.0402086,112.801356 92.6024318,111.410466 C92.3888438,111.203342 92.1852901,110.984712 91.9917708,110.75889 C90.6228009,109.158 89.7770498,107.112658 89.6939082,104.913411",
+                          id: "Stroke-17",
+                          stroke: "#000000",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M89.8151803,79.8773836 C98.5249828,76.9330685 106.304459,77.8133425 113.22385,82.6836164",
+                          id: "Stroke-19",
+                          stroke: "#20336F",
+                          "stroke-width": "8.565102",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261",
+                          id: "Fill-21",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261 Z",
+                          id: "Stroke-23",
+                          stroke: "#20336F",
+                          "stroke-width": "4.941846"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541",
+                          id: "Fill-25",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541 Z",
+                          id: "Stroke-27",
+                          stroke: "#20336F",
+                          "stroke-width": "4.941846"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M69.889285,87.2811781 C69.5237485,90.3520685 66.7456712,92.5441233 63.6837657,92.1773425 C60.6232936,91.8091233 58.4386755,89.0230274 58.804212,85.9506986 C59.1697485,82.8798082 61.9478258,80.6877534 65.0082979,81.0545342 C68.0702034,81.4213151 70.2548215,84.2088493 69.889285,87.2811781",
+                          id: "Fill-29",
+                          fill: "#000000"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M141.573569,95.8762192 C141.208033,98.9485479 138.429955,101.139164 135.36805,100.772384 C132.307578,100.405603 130.12296,97.6180685 130.488496,94.5471781 C130.854033,91.4748493 133.63211,89.2827945 136.694015,89.6495753 C139.754488,90.0177945 141.939106,92.8038904 141.573569,95.8762192",
+                          id: "Fill-31",
+                          fill: "#000000"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M228.473202,100.998925 C227.905545,99.3131712 226.783133,97.9194041 225.353957,96.9945411 C225.15327,96.8636507 224.945416,96.7399521 224.731828,96.6291986 C223.298352,95.8798151 221.619751,95.5748836 219.913914,95.8668699 C218.206644,96.1574178 216.722996,97.0002945 215.620652,98.1869384 C215.505974,98.3048836 215.39703,98.4285822 215.292386,98.5551575 C215.243648,98.6141301 215.19491,98.6759795 215.150472,98.7363904 C214.106901,100.082692 213.506275,101.771322 213.526343,103.54913 L209.925451,101.090979",
+                          id: "Stroke-33",
+                          stroke: "#000000",
+                          "stroke-width": "3.47849775",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M264.864437,96.3074384 C265.207038,94.561274 266.137364,93.0337397 267.431793,91.9262055 C267.613845,91.770863 267.804497,91.6198356 268.000883,91.4831918 C269.323982,90.551137 270.948111,90.0275753 272.678317,90.090863 C274.407089,90.1541507 275.989647,90.7942192 277.236772,91.8255205 C277.367218,91.9262055 277.490497,92.0340822 277.610909,92.146274 C277.666815,92.1994932 277.72272,92.2527123 277.775759,92.3073699 C278.987046,93.5055205 279.802694,95.0992192 280.016282,96.8655205 L283.26454,93.9528493",
+                          id: "Stroke-35",
+                          stroke: "#000000",
+                          "stroke-width": "3.47849775",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M204.112561,109.821514 C206.487831,112.656514 210.65638,113.823021 214.151196,112.632062",
+                          id: "Stroke-37",
+                          stroke: "#FC5975",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M283.260956,101.883945 C286.896252,102.521137 290.836879,100.726068 292.75057,97.5588082",
+                          id: "Stroke-39",
+                          stroke: "#FC5975",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(
+        "\n\n        Sorry. Your diabetes diagnosis is too recent for you to apply for a medical exam life insurance.\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. Once you diagnosis is definite an you can should improvement in your T2 control and lifestyle, changing to a medical exam policy may be a good option to lower your cost. After that, over time it may well be possible to lower your cost even more by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future."
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-09ee1ded", module.exports)
+  }
+}
+
+/***/ }),
+/* 114 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(2)
+/* script */
+var __vue_script__ = null
+/* template */
+var __vue_template__ = __webpack_require__(115)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/DeclineThree.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2c2a69ff", Component.options)
+  } else {
+    hotAPI.reload("data-v-2c2a69ff", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 115 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c("h1", [
+      _c(
+        "svg",
+        {
+          attrs: {
+            width: "334px",
+            height: "209px",
+            viewBox: "0 0 334 209",
+            version: "1.1",
+            xmlns: "http://www.w3.org/2000/svg",
+            "xmlns:xlink": "http://www.w3.org/1999/xlink"
+          }
+        },
+        [
+          _c("desc", [_vm._v("Created with Sketch.")]),
+          _vm._v(" "),
+          _c("defs"),
+          _vm._v(" "),
+          _c(
+            "g",
+            {
+              attrs: {
+                id: "Page-1",
+                stroke: "none",
+                "stroke-width": "1",
+                fill: "none",
+                "fill-rule": "evenodd"
+              }
+            },
+            [
+              _c(
+                "g",
+                {
+                  attrs: {
+                    id: "Homepage-TypeTrue-couple",
+                    transform: "translate(-348.000000, -278.000000)"
+                  }
+                },
+                [
+                  _c(
+                    "g",
+                    {
+                      attrs: {
+                        id: "couple",
+                        transform: "translate(348.000000, 278.000000)"
+                      }
+                    },
+                    [
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M174.194331,191.88376 C174.194331,201.339514 138.57531,209.005952 94.6363914,209.005952 C50.697473,209.005952 15.0784515,201.339514 15.0784515,191.88376 C15.0784515,182.428007 50.697473,174.761568 94.6363914,174.761568 C138.57531,174.761568 174.194331,182.428007 174.194331,191.88376",
+                          id: "Fill-1",
+                          fill: "#FCD592"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M333.825976,191.88376 C333.825976,201.339514 298.206955,209.005952 254.268036,209.005952 C210.329118,209.005952 174.710096,201.339514 174.710096,191.88376 C174.710096,182.428007 210.329118,174.761568 254.268036,174.761568 C298.206955,174.761568 333.825976,182.428007 333.825976,191.88376",
+                          id: "Fill-3",
+                          fill: "#FCD592"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M325.405736,113.522836 C329.916886,155.754411 299.454079,193.659411 257.367212,198.185918 C215.278912,202.712425 177.502508,172.147356 172.991358,129.914342 C168.557615,88.4048219 212.217006,29.4207123 229.063221,4.78886301 C232.537967,-0.291410959 239.711083,-1.06236986 244.179229,3.16352055 C265.846225,23.6543425 320.971993,72.0133151 325.405736,113.522836",
+                          id: "Fill-5",
+                          fill: "#FF6D80"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M325.405736,113.522836 C325.129075,110.923726 324.651727,108.298726 323.998062,105.653589 C320.898886,141.559274 292.868688,171.419548 255.813324,175.403795 C216.970414,179.582219 181.821573,153.860096 173.084534,116.672836 C172.611487,121.229548 172.536946,125.666877 172.991358,129.914342 C177.502508,172.147356 215.278912,202.712425 257.367212,198.185918 C299.454079,193.659411 329.916886,155.754411 325.405736,113.522836",
+                          id: "Fill-7",
+                          fill: "#FC5975"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M266.500177,113.62539 C266.296623,117.659979 264.69973,121.398267 262.149576,124.305185 C262.037765,124.437514 261.92022,124.568404 261.801241,124.693541 C261.546082,124.966829 261.283756,125.232925 261.005662,125.48176 C258.343696,128.016144 254.863215,129.717719 250.956992,130.136281 C247.050769,130.556281 243.290761,129.628541 240.147147,127.732788 C239.681267,127.45087 239.225421,127.141623 238.786778,126.817993 C235.680434,124.5195 233.330967,121.205527 232.280228,117.306144 C231.982065,116.184226 232.753276,115.06087 233.904357,114.937171 L264.413035,111.656281 C265.562683,111.532582 266.554649,112.466075 266.500177,113.62539",
+                          id: "Fill-9",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M261.006379,125.481904 C258.342979,128.016288 254.863932,129.716425 250.957709,130.136425 C247.050052,130.556425 243.290044,129.628685 240.147864,127.731493 C242.101692,124.193137 245.681082,121.62711 249.998713,121.162521 C254.31061,120.69937 258.348713,122.439781 261.006379,125.481904",
+                          id: "Fill-11",
+                          fill: "#FCD4D4"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M197.288066,111.122219 C190.801585,165.58989 141.535869,204.468658 87.2529845,197.960096 C32.968667,191.451534 -5.7782,142.01811 0.709714163,87.5504384 C7.19619485,33.0813288 56.4604781,-5.796 110.743362,0.711123288 C165.02768,7.22112329 203.774547,56.6531096 197.288066,111.122219",
+                          id: "Fill-13",
+                          fill: "#538CCF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M168.49956,107.669589 C163.912435,146.184452 129.077525,173.677192 90.6933279,169.073014 C52.3091305,164.470274 24.9110961,129.516781 29.4967871,91.0019178 C34.0839116,52.4870548 68.9188215,24.9957534 107.304452,29.5984932 C145.68865,34.2012329 173.086684,69.154726 168.49956,107.669589",
+                          id: "Fill-15",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M108.303299,107.14574 C107.705539,109.261562 106.403942,111.050877 104.696672,112.28211 C104.622131,112.336767 104.54329,112.392863 104.464449,112.446082 C104.296732,112.559712 104.124715,112.669027 103.946964,112.766836 C102.225359,113.78663 100.172621,114.262726 98.0482086,114.008137 C95.9237966,113.753548 94.0402086,112.801356 92.6024318,111.410466 C92.3888438,111.203342 92.1852901,110.984712 91.9917708,110.75889 C90.6228009,109.158 89.7770498,107.112658 89.6939082,104.913411",
+                          id: "Stroke-17",
+                          stroke: "#000000",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M89.8151803,79.8773836 C98.5249828,76.9330685 106.304459,77.8133425 113.22385,82.6836164",
+                          id: "Stroke-19",
+                          stroke: "#20336F",
+                          "stroke-width": "8.565102",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261",
+                          id: "Fill-21",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M60.9111356,103.89261 L41.0460197,101.510692 C32.5354704,100.490897 26.4589639,92.7395959 27.4767322,84.2000753 L29.0965605,70.5989795 C29.7860627,64.8167877 35.0153845,60.6887055 40.7779597,61.3791164 L80.3662773,66.1271301 C86.3768438,66.8477466 90.6686721,72.3221301 89.949067,78.3531575 L89.6050326,81.2485685 C87.9135305,95.4523356 75.066715,105.58987 60.9111356,103.89261 Z",
+                          id: "Stroke-23",
+                          stroke: "#20336F",
+                          "stroke-width": "4.941846"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541",
+                          id: "Fill-25",
+                          fill: "#FFFFFF"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M134.733736,112.744541 L155.539213,115.238651 C164.051196,116.259884 171.774767,110.16413 172.792535,101.62461 L174.412363,88.0235137 C175.100432,82.2413219 170.987788,76.9941986 165.225213,76.3023493 L125.636895,71.5543356 C119.624895,70.8337192 114.169084,75.1387192 113.450912,81.1711849 L112.993633,85.0101575 C111.365204,98.6918014 121.097076,111.10913 134.733736,112.744541 Z",
+                          id: "Stroke-27",
+                          stroke: "#20336F",
+                          "stroke-width": "4.941846"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M69.889285,87.2811781 C69.5237485,90.3520685 66.7456712,92.5441233 63.6837657,92.1773425 C60.6232936,91.8091233 58.4386755,89.0230274 58.804212,85.9506986 C59.1697485,82.8798082 61.9478258,80.6877534 65.0082979,81.0545342 C68.0702034,81.4213151 70.2548215,84.2088493 69.889285,87.2811781",
+                          id: "Fill-29",
+                          fill: "#000000"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M141.573569,95.8762192 C141.208033,98.9485479 138.429955,101.139164 135.36805,100.772384 C132.307578,100.405603 130.12296,97.6180685 130.488496,94.5471781 C130.854033,91.4748493 133.63211,89.2827945 136.694015,89.6495753 C139.754488,90.0177945 141.939106,92.8038904 141.573569,95.8762192",
+                          id: "Fill-31",
+                          fill: "#000000"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M228.473202,100.998925 C227.905545,99.3131712 226.783133,97.9194041 225.353957,96.9945411 C225.15327,96.8636507 224.945416,96.7399521 224.731828,96.6291986 C223.298352,95.8798151 221.619751,95.5748836 219.913914,95.8668699 C218.206644,96.1574178 216.722996,97.0002945 215.620652,98.1869384 C215.505974,98.3048836 215.39703,98.4285822 215.292386,98.5551575 C215.243648,98.6141301 215.19491,98.6759795 215.150472,98.7363904 C214.106901,100.082692 213.506275,101.771322 213.526343,103.54913 L209.925451,101.090979",
+                          id: "Stroke-33",
+                          stroke: "#000000",
+                          "stroke-width": "3.47849775",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M264.864437,96.3074384 C265.207038,94.561274 266.137364,93.0337397 267.431793,91.9262055 C267.613845,91.770863 267.804497,91.6198356 268.000883,91.4831918 C269.323982,90.551137 270.948111,90.0275753 272.678317,90.090863 C274.407089,90.1541507 275.989647,90.7942192 277.236772,91.8255205 C277.367218,91.9262055 277.490497,92.0340822 277.610909,92.146274 C277.666815,92.1994932 277.72272,92.2527123 277.775759,92.3073699 C278.987046,93.5055205 279.802694,95.0992192 280.016282,96.8655205 L283.26454,93.9528493",
+                          id: "Stroke-35",
+                          stroke: "#000000",
+                          "stroke-width": "3.47849775",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M204.112561,109.821514 C206.487831,112.656514 210.65638,113.823021 214.151196,112.632062",
+                          id: "Stroke-37",
+                          stroke: "#FC5975",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("path", {
+                        attrs: {
+                          d:
+                            "M283.260956,101.883945 C286.896252,102.521137 290.836879,100.726068 292.75057,97.5588082",
+                          id: "Stroke-39",
+                          stroke: "#FC5975",
+                          "stroke-width": "4.29975",
+                          "stroke-linecap": "round",
+                          "stroke-linejoin": "round"
+                        }
+                      })
+                    ]
+                  )
+                ]
+              )
+            ]
+          )
+        ]
+      ),
+      _vm._v(
+        "\n\n        Sorry. Your diabetes control or build would likely lead to a decline if you applied for medical exam life insurance.\n    "
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. After that, over time it may well be possible to lower your cost by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future."
+      )
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2c2a69ff", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

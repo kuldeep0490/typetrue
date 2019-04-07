@@ -183,8 +183,6 @@
                 this.calculateRating();
 
                 this.createLead();
-
-                this.$router.push('/one-last-thing');
             },
 
             selectGender(gender) {
@@ -196,7 +194,7 @@
             },
 
             createLead() {
-                axios.post('lead/store', {
+                axios.post('/lead/store', {
                     age: this.fields.basic.age,
                     gender: this.fields.basic.gender,
                     diagnosedMonthsAgo: this.calculateMonthsDiagnosed(),
@@ -207,7 +205,11 @@
                     bmi: this.bmi,
                     rating: this.rating
                 }).then((response) => {
+                    window.scrollTo(0, 0);
+                    
                     this.setLeadID(response.data.id);
+
+                    this.$router.push('/one-last-thing');
                 });
             },
         },

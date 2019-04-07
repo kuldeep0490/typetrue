@@ -40,5 +40,5 @@ export default {
 
     reason: null,
 
-    declined: null,
+    declined: false,
 };

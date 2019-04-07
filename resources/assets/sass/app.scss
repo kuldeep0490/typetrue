@@ -446,4 +446,28 @@ html {
 		  font-size: 1.5rem;
 		  font-weight: 700;
 	  }
-  }
+	}
+	
+	small {
+		font-size: 0.7rem;
+}
+
+.text-input {
+		margin-bottom: 1rem;
+}
+
+.error {
+		color: indianred !important;
+		font-size: 0.8rem !important;
+		display: block;
+		padding: 0px;
+		margin: 0px !important;
+}
+
+span.customDot {
+		cursor: none !important;
+		padding: 0 !important;
+		position: relative;
+		top: 11px;
+		left: 10px;
+}
