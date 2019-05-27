@@ -1,0 +1,51 @@
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
+$primary: #FB5975;
+$secondary: #20336F;
+$thirdy: #538CCF;
+$yellow: #FFECCA;
+
+* {
+    font-family: 'Quicksand', sans-serif;
+}
+
+// overrides
+.custom-mockup {
+    .el-step__head {
+        &.is-success {
+            color: $thirdy;
+            border-color: $thirdy;
+        }
+    
+        &.is-process {
+            color: $secondary;
+            border-color: $secondary;
+        }
+    }
+
+    .el-step__main {
+        .el-step__title {
+            &.is-success {
+                color: $thirdy;
+            }
+
+            &.is-process {
+                color: $secondary;
+            }
+        }
+
+        .el-step__description {
+            &.is-success {
+                color: $thirdy;
+            }
+
+            &.is-process {
+                color: $secondary;
+            }
+        }
+    }
+}

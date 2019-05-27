@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('mockup', function() {
+    return view('mockup');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
