@@ -1,6 +1,6 @@
 <template>
     <div class="tw-flex tw-flex-col tw-items-center">
-        <h1 class="tw-mb-10 tw-text-2xl tw-text-gray-600 tw-font-thin tw-text-center">How much do you weigh?</h1>
+        <h1 class="tw-mb-10 tw-text-2xl tw-text-gray-600 tw-font-thin tw-text-center">How much do you weigh (in pounds)?</h1>
         
         <el-input-number class="tw-mb-2" v-model="weight" :min="80" :max="450" :step="5"></el-input-number>
 

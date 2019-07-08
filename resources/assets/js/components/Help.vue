@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-fixed help-container">
+    <div class="tw-fixed help-container tw-hidden">
         <el-popover
             placement="top-end"
             width="400"
@@ -18,7 +18,6 @@
 
             <img slot="reference" class="tw-cursor-pointer tw-w-10 tw-h-10" :src="image" alt="">
         </el-popover>
-        
     </div>
 </template>
 
@@ -32,7 +31,7 @@
 <script>
     export default {
         props: ['image'],
-        
+
         data() {
             return {
                 message: null,

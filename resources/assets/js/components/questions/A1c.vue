@@ -1,17 +1,31 @@
 <template>
     <div class="tw-flex tw-flex-col tw-items-center">
         <h1 class="tw-mb-10 tw-text-2xl tw-text-gray-600 tw-font-thin tw-text-center">What was your A1C from your last bloodwork?</h1>
-        
-        <div>
-            <el-radio-group v-model="a1c">
-                <el-radio-button label="6.9">Less than 7</el-radio-button>
-                <el-radio-button label="7.5">Between 7 and 8</el-radio-button>
-                <el-radio-button label="8.5">Between 8 and 9</el-radio-button>
-                <el-radio-button label="9.5">Between 9 and 10</el-radio-button>
-                <el-radio-button label="10.1">Over 10</el-radio-button>
-            </el-radio-group>
-        </div>
 
+        <el-select class="tw-mb-10" v-model="a1c" placeholder="Select your A1C range">
+            <el-option
+                value="6.9"
+                label="Less than 7">
+            </el-option>
+            <el-option
+                value="7.5"
+                label="Between 7 and 8">
+            </el-option>
+            <el-option
+                value="8.5"
+                label="Between 8 and 9">
+            </el-option>
+            <el-option
+                value="9.5"
+                label="Between 9 and 10">
+            </el-option>
+            <el-option
+                value="10.1"
+                label="Over 10">
+            </el-option>
+        </el-select>
+
+        <el-button type="primary" v-if="a1c" @click="proceed">Next</el-button>
     </div>
 </template>
 
@@ -53,7 +67,9 @@
                 this.setBasicField({ field: 'a1cA', value: high });
 
                 this.setBasicField({ field: 'a1cB', value: low });
+            },
 
+            proceed() {
                 this.calculateA1c();
 
                 this.updateLead({ a1c: this.fields.basic.a1c });
