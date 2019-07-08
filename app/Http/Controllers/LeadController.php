@@ -33,6 +33,38 @@ class LeadController extends Controller
             $lead->last_name = $request->last_name;
         }
 
+        if ($request->filled('age')) {
+            $lead->age = $request->age;
+        }
+
+        if ($request->filled('diagnosedMonthsAgo')) {
+            $lead->diagnosedMonthsAgo = $request->diagnosedMonthsAgo;
+        }
+
+        if ($request->filled('smoker')) {
+            $lead->smoker = $request->smoker;
+        }
+
+        if ($request->filled('heightInInches')) {
+            $lead->heightInInches = $request->heightInInches;
+        }
+
+        if ($request->filled('weightInPounds')) {
+            $lead->weightInPounds = $request->weightInPounds;
+        }
+
+        if ($request->filled('a1c')) {
+            $lead->a1c = $request->a1c;
+        }
+
+        if ($request->filled('bmi')) {
+            $lead->bmi = $request->bmi;
+        }
+
+        if ($request->filled('rating')) {
+            $lead->rating = $request->rating;
+        }
+
         if ($request->filled('email')) {
             $lead->email = $request->email;
         }

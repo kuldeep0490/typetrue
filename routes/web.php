@@ -23,6 +23,10 @@ Route::get('/get-started', function () {
     return view('quote');
 });
 
+Route::get('/questions', function () {
+    return view('questions');
+});
+
 Route::post('/email-quote', function () {
     $lead = \App\Lead::findOrFail(request()->input('lead_id'));
     \Mail::to($lead->email)->send(new \App\Mail\EmailQuote($lead));

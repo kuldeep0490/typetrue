@@ -3,7 +3,7 @@ module.exports = {
     extend: {},
     maxWidth: {
       'logo': '10rem',
-    }
+    },
   },
   variants: {},
   plugins: [],

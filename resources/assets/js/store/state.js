@@ -10,7 +10,7 @@ export default {
         basic: {
             age: null,
             gender: null,
-            yearsAgo: null,
+            yearsAgo: 1,
             monthsAgo: null,
             smoker: null,
             a1c: null,
@@ -36,9 +36,11 @@ export default {
 
     bmi: null,
 
-    rating: 0,
+    rating: null,
 
     reason: null,
 
     declined: false,
+
+    progress: 0,
 };

@@ -29,3 +29,7 @@ export const declined = (state) => {
 export const reason = (state) => {
     return state.reason;
 }
+
+export const progress = (state) => {
+    return state.progress;
+}

@@ -10,7 +10,7 @@
 
                                 <p>Imagine getting the same low price as a non-diabetic!</p>
 
-                                <router-link to="/get-started" class="btn btn-primary btn-custom">Get your FREE quote</router-link>
+                                <a class="btn btn-primary btn-custom" href="/questions#/what-is-your-gender">Get your FREE quote</a>
                             </div>
                         </div>
                     </div>

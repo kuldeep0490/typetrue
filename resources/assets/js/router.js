@@ -14,7 +14,7 @@ const routes = [
     { path: '/one-last-thing', component: OneLastThing },
     { path: '/enter-your-info', component: EnterYourInfo },
     { path: '/select-product', component: SelectProduct },
-    { path: '/thank-you', component: ThankYou }
+    { path: '/thank-you', component: ThankYou },
 ];
 
 const router = new VueRouter({
