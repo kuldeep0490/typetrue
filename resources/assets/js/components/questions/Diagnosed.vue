@@ -11,17 +11,17 @@
             </el-option>
         </el-select>
 
-        <div v-if="years == 1">
+        <div v-if="years === 0">
             <h1 class="tw-mb-10 tw-text-xl tw-text-gray-600 tw-font-thin tw-text-center">Were you diagnosed with Type 2 less than 6 months ago?</h1>
         
             <div class="tw-flex tw-justify-center tw-mb-10">
-                <el-button @click="setMonths(true)">Yes</el-button>
+                <el-button class="btn-lg text-lg" @click="setMonths(true)">Yes</el-button>
 
-                <el-button @click="setMonths(false)">No</el-button>
+                <el-button class="btn-lg text-lg" @click="setMonths(false)">No</el-button>
             </div>
         </div>
 
-        <el-button v-if="years != 1" type="primary" @click="setDiagnosed">Next</el-button>
+        <el-button class="btn-lg text-lg" v-if="years !== 0" type="primary" @click="setDiagnosed">Next</el-button>
     </div>
 </template>
 
@@ -47,7 +47,7 @@
             }),
 
             generateYears() {
-                return range(1, 100);
+                return range(0, 100);
             }  
         },
 
@@ -57,14 +57,16 @@
                 setProgress: 'typetrue/setProgress'
             }),
 
-            setDiagnosed() {
+            async setDiagnosed() {
                 this.setBasicField({ field: 'yearsAgo', value: this.years });
 
                 this.setBasicField({ field: 'monthsAgo', value: this.months });
 
-                this.updateLead({ diagnosedMonthsAgo: this.calculateMonthsDiagnosed() });
+                await this.updateLead({ diagnosedMonthsAgo: this.calculateMonthsDiagnosed() });
 
-                this.$router.push({ name: 'smoker'});
+                window.scrollTo(0, 0);
+
+                await this.$router.push({ name: 'smoker'});
             },
 
             setMonths(status) {

@@ -144,6 +144,8 @@
 
                 this.updateLead({ heightInInches: this.calculateHeight() });
 
+                window.scrollTo(0, 0);
+
                 this.$router.push({ name: 'weight' });
             },
         },

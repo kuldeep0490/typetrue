@@ -49,3 +49,36 @@ $yellow: #FFECCA;
         }
     }
 }
+
+button {
+    touch-action: manipulation;
+}
+
+.el-scrollbar {
+    > .el-scrollbar__bar {
+        opacity: 1;
+    }
+}
+
+.el-input-number__increase, .el-input-number__decrease {
+    height: 58px !important;
+    line-height: 58px !important;
+}
+
+.btn-lg {
+    padding: 20px 30px !important;
+}
+
+.text-lg {
+    font-size: 18px !important;
+}
+
+.el-input__inner {
+    height: 60px !important;
+    font-size: 20px !important;
+}
+
+.el-select-dropdown__item:hover {
+    background-color: #333 !important;
+    color: #FFF !important;
+}

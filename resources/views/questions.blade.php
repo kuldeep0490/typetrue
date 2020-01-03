@@ -11,14 +11,14 @@
         </div>
 
         <div class="tw-flex-1 tw-flex tw-justify-center tw-items-start">
-            <transition name="el-fade-in-linear" appear mode="out-in">
-                <router-view></router-view>
-            </transition>
+            <router-view></router-view>
         </div>
 
-        <p style="position: fixed; bottom: 20px; left: 20px;" class="tw-text-xs tw-text-gray-600 tw-font-thin">{{ date('Y') }} Type True.</p>
+        <div class="tw-w-full tw-fixed tw-flex tw-justify-between tw-items-center tw-px-10 tw-bg-white" style="bottom: 0px; left: 0px; height: 40px;">
+            <p class="tw-text-xs tw-text-gray-600 tw-font-thin">{{ date('Y') }} Type True.</p>
 
-        <p style="position: fixed; bottom: 20px; right: 20px;" class="tw-text-xs tw-text-gray-600 tw-font-thin">All Rights Reserved.</p>
+            <p class="tw-text-xs tw-text-gray-600 tw-font-thin">All Rights Reserved.</p>
+        </div>
 
         <true-help image="{{ asset('question.png') }}" />
     </div>

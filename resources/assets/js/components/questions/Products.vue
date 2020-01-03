@@ -6,7 +6,7 @@
 
         <div class="tw-mb-10 tw-text-center">
             <p class="tw-mb-10 tw-text-xl tw-text-gray-600 tw-font-thin">
-                per month for <b class="tw-underline">{{ faceAmount | formatNum }}</b> in <br>
+                per month for <b class="tw-underline tw-text-black tw-text-2xl" style="font-weight: 900;">{{ faceAmount | formatNum }}</b> in <br>
                 <el-select @change="selectProduct" v-model="selectedProduct" placeholder="Select">
                     <el-option 
                         v-if="showT10"
@@ -56,7 +56,7 @@
         </div>
 
         <div class="tw-mb-10">
-            <el-button type="primary" @click.prevent="nextPage">Email Quote</el-button>
+            <el-button class="btn-lg text-lg" type="primary" @click.prevent="nextPage">Email Quote</el-button>
         </div>
     
         <p class="tw-text-xs tw-text-gray-600 tw-font-thin tw-text-center">These quotes are based on information you entered. Your actual price will be based on the information in your application.</p>
@@ -158,12 +158,14 @@
                 setRating: 'typetrue/setRating'
             }),
 
-            nextPage() {
-                axios.post('email-quote', {
+            async nextPage() {
+                await axios.post('email-quote', {
                     lead_id: this.leadID
                 });
 
-                this.$router.push({ name: 'thanks' });
+                window.scrollTo(0, 0);
+
+                await this.$router.push({ name: 'thanks' });
             },
 
             increaseFaceAmount() {
@@ -351,7 +353,7 @@
             },
         },
 
-        created() {
+        async created() {
             if (! this.leadID) {
                 return;
             }
@@ -362,7 +364,7 @@
 
             this.checkIfDecline();
 
-            this.updateLead({
+            await this.updateLead({
                 lead_id: this.leadID,
                 bmi: this.bmi,
                 rating: this.rating,
@@ -371,6 +373,8 @@
             });
 
             if (this.declined) {
+                window.scrollTo(0, 0);
+
                 this.$router.push({ name: 'sorry' });
             }
         },

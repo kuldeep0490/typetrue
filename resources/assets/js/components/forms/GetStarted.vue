@@ -193,7 +193,7 @@
                 this.fields.basic.smoker = status;
             },
 
-            createLead() {
+            async createLead() {
                 axios.post('/lead/store', {
                     age: this.fields.basic.age,
                     gender: this.fields.basic.gender,

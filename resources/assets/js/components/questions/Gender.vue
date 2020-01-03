@@ -3,9 +3,9 @@
         <h1 class="tw-mb-10 tw-text-2xl tw-text-gray-600 tw-font-thin tw-text-center">What is your gender?</h1>
 
         <div>
-            <el-button @click="setGender('male')">Male</el-button>
+            <el-button class="btn-lg text-lg" @click="setGender('male')">Male</el-button>
 
-            <el-button @click="setGender('female')">Female</el-button>
+            <el-button class="btn-lg text-lg" @click="setGender('female')">Female</el-button>
         </div>
     </div>
 </template>
@@ -23,12 +23,14 @@
                 setProgress: 'typetrue/setProgress',
             }),
 
-            setGender(gender) {
+            async setGender(gender) {
                 this.setBasicField({ field: 'gender', value: gender });
 
-                this.createLead({ gender });
+                await this.createLead({ gender });
 
-                this.$router.push({ name: 'age'});
+                window.scrollTo(0, 0);
+
+                await this.$router.push({ name: 'age'});
             }
         },
 

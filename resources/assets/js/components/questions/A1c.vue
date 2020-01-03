@@ -25,7 +25,7 @@
             </el-option>
         </el-select>
 
-        <el-button type="primary" v-if="a1c" @click="proceed">Next</el-button>
+        <el-button class="btn-lg text-lg" type="primary" v-if="a1c" @click="proceed">Next</el-button>
     </div>
 </template>
 
@@ -69,12 +69,14 @@
                 this.setBasicField({ field: 'a1cB', value: low });
             },
 
-            proceed() {
+            async proceed() {
                 this.calculateA1c();
 
-                this.updateLead({ a1c: this.fields.basic.a1c });
+                await this.updateLead({ a1c: this.fields.basic.a1c });
 
-                this.$router.push({ name: 'height' });
+                window.scrollTo(0, 0);
+
+                await this.$router.push({ name: 'height' });
             }
         },
 

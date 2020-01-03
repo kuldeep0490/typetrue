@@ -1,11 +1,11 @@
-export const createLead = ({ commit, state }, payload) => {
-    axios.post('/lead/store', payload).then((response) => {
+export const createLead = async ({ commit, state }, payload) => {
+    return await axios.post('/lead/store', payload).then((response) => {
         commit('setLeadID', response.data.id);
     });
 }
 
-export const updateLead = ({ commit, state }, payload) => {
-    axios.patch('/lead/update', {
+export const updateLead = async ({ commit, state }, payload) => {
+    return await axios.patch('/lead/update', {
         ...payload,
         lead_id: state.leadID,
     });

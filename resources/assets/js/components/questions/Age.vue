@@ -2,16 +2,17 @@
     <div class="tw-flex tw-flex-col tw-items-center">
         <h1 class="tw-mb-10 tw-text-2xl tw-text-gray-600 tw-font-thin tw-text-center">How old are you?</h1>
         
-        <el-select class="tw-mb-10" v-model="age">
+        <el-select class="tw-mb-10" v-model="age" size="large">
             <el-option
-                v-for="number in generateAge"
-                :key="`age_${number}`"
+                class="text-lg"
+                v-for="(number, index) in generateAge"
+                :key="`age_${index}_${number}`"
                 :label="number"
                 :value="number">
             </el-option>
         </el-select>
 
-        <el-button type="primary" @click="setAge">Next</el-button>
+        <el-button class="btn-lg text-lg" type="primary" @click="setAge">Next</el-button>
     </div>
 </template>
 
@@ -41,12 +42,14 @@
                 setProgress: 'typetrue/setProgress'
             }),
 
-            setAge() {
+            async setAge() {
                 this.setBasicField({ field: 'age', value: this.age });
 
-                this.updateLead({ age: this.age})
+                await this.updateLead({ age: this.age});
 
-                this.$router.push({ name: 'diagnosed' });
+                window.scrollTo(0, 0);
+
+                await this.$router.push({ name: 'diagnosed' });
             },
         },
 

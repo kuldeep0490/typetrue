@@ -32,6 +32,16 @@ Route::post('/email-quote', function () {
     \Mail::to($lead->email)->send(new \App\Mail\EmailQuote($lead));
 });
 
+Route::get('/email-validate/{address}', function($address) {
+    $client = new GuzzleHttp\Client();
+
+    $result = $client->get('https://api:' . env('MAILGUN_API') . '@api.mailgun.net/v4/address/validate', [
+        'form_params' => ['address' => $address]
+    ]);
+
+    return response()->json(json_decode($result->getBody()->getContents()));
+});
+
 Route::prefix('lead')->group(function () {
     Route::post('store', 'LeadController@store');
 

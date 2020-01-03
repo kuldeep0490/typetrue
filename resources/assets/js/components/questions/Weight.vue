@@ -6,7 +6,7 @@
 
         <p class="tw-mb-10 tw-text-xs tw-text-gray-600 tw-font-thin">Enter your weight or use the plus/minus button.</p>
 
-        <el-button type="primary" @click="setWeight">Next</el-button>
+        <el-button class="btn-lg text-lg" type="primary" @click="setWeight">Next</el-button>
     </div>
 </template>
 
@@ -30,12 +30,14 @@
                 setProgress: 'typetrue/setProgress'
             }),
 
-            setWeight() {
+            async setWeight() {
                 this.setBasicField({ field: 'pounds', value: this.weight });
 
-                this.updateLead({ weightInPounds: this.weight });
+                await this.updateLead({ weightInPounds: this.weight });
 
-                this.$router.push({ name: 'conditions' });
+                window.scrollTo(0, 0);
+
+                await this.$router.push({ name: 'conditions' });
             }
         },
 
