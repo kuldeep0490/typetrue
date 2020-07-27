@@ -1,12 +1,8 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="tw-container tw-mx-auto tw-p-10 tw-flex tw-flex-col tw-h-screen">
-        <div>
-            <p class="tw-mb-10">
-                <a href="{{ url('/') }}">@include('assets.logo_v3')</a>
-            </p>
-
+    <div class="tw-container tw-mx-auto tw-px-10 tw-flex tw-flex-col">
+        <div class="tw-mt-20 negative-z-index">
             <progress-bar />
         </div>
 
@@ -19,7 +15,5 @@
 
             <p class="tw-text-xs tw-text-gray-600 tw-font-thin">All Rights Reserved.</p>
         </div>
-
-        <true-help image="{{ asset('question.png') }}" />
     </div>
 @endsection

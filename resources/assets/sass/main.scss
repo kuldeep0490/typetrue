@@ -8,9 +8,18 @@ $primary: #FB5975;
 $secondary: #20336F;
 $thirdy: #538CCF;
 $yellow: #FFECCA;
+$blue: #20336f;
+$gray: #626162;
+$light-gray: #f6f3f3;
+$light-font-color: #747473;
 
 * {
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Helvetica', 'Open Sans', sans-serif;
+    color: $gray;
+}
+
+img {
+    height: auto;
 }
 
 // overrides
@@ -79,6 +88,88 @@ button {
 }
 
 .el-select-dropdown__item:hover {
-    background-color: #333 !important;
+    background-color: $gray !important;
     color: #FFF !important;
+}
+
+.bm-burger-button {
+    top: 0px !important;
+    position: relative !important;
+    right: 0px !important;
+}
+
+.text-blue {
+    color: $blue !important;
+}
+
+.text-light-blue {
+    color: $thirdy !important;
+}
+
+.header-container {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.banner {
+    background-image: url('../images/header-banner.jpg');
+}
+
+.footer-banner {
+    background-image: url('../images/footer-banner.jpg');
+}
+
+.custom-button {
+    color: #FFF !important;
+    background-color: $primary !important;
+    border-color: $primary !important;
+}
+
+.bm-menu {
+    height: 100vh !important;
+}
+
+.negative-z-index {
+    z-index: -1 !important;
+}
+
+.home-icons {
+    width: 100px;
+    height: auto;
+}
+
+.home-sub-icons {
+    width: 180px;
+    height: auto;
+}
+
+.home-company-icons {
+    width: 150px;
+    height: auto;
+}
+
+.gray-bg {
+    background: $gray;
+}
+
+.light-gray-bg {
+    background: $light-gray;
+}
+
+.light-font-color {
+    color: $light-font-color;
+}
+
+.testimonial-arrow {
+    position: absolute;
+    left: 20px;
+    bottom: -15px;
+}
+
+.comment-box {
+    min-height: 180px;
+}
+
+.el-collapse-item__header, .el-collapse-item__wrap {
+    background: transparent !important;
 }

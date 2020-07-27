@@ -15,11 +15,6 @@ Vue.use(VueAnalytics, {
 
 const store = storeFactory();
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faHeart, faStar, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-library.add(faHeart, faStar, faPlusCircle, faMinusCircle);
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.component('tt-clouds', require('./components/Clouds.vue'));
 
 const app = new Vue({

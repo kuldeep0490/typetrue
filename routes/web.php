@@ -11,16 +11,12 @@
 |
 */
 
-Route::get('mockup', function() {
-    return view('mockup');
+Route::get('temp/home', function() {
+    return view('homepage');
 });
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/get-started', function () {
-    return view('quote');
 });
 
 Route::get('/questions', function () {

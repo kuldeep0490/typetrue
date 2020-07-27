@@ -1,8 +1,9 @@
 module.exports = {
   theme: {
-    extend: {},
-    maxWidth: {
-      'logo': '10rem',
+    extend: {
+      colors: {
+        primary: '#538CCF'
+      }
     },
   },
   variants: {},

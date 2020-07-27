@@ -19,14 +19,10 @@
         "node-sass": "^4.9.3",
         "popper.js": "^1.12",
         "sass-loader": "^7.1.0",
-        "tailwindcss": "^1.0.1",
+        "tailwindcss": "^1.5.2",
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.3.1",
-        "@fortawesome/fontawesome-svg-core": "^1.2.4",
-        "@fortawesome/free-solid-svg-icons": "^5.3.1",
-        "@fortawesome/vue-fontawesome": "^0.1.1",
         "animate.css": "^3.6.1",
         "dinero.js": "^1.4.0",
         "element-ui": "^2.8.2",
@@ -35,6 +31,7 @@
         "materialize-css": "^1.0.0",
         "scss-loader": "^0.0.1",
         "vue-analytics": "^5.16.4",
+        "vue-burger-menu": "^2.0.5",
         "vue-router": "^3.0.2",
         "vue-the-mask": "^0.11.1",
         "vuex": "^3.1.0"

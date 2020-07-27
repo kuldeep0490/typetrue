@@ -10,7 +10,9 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="{{ mix('css/main.css') }}" rel="stylesheet">
 
     @yield('header')
@@ -33,8 +35,45 @@
     <!-- End Facebook Pixel Code -->
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="tw-min-h-screen">
+        <div class="header-container tw-container tw-absolute tw-mx-auto tw-flex tw-justify-between tw-items-center tw-py-4 tw-px-4 md:tw-px-0">
+            <a href="{{ url('/') }}" class="tw-w-1/4 tw-mb-4 sm:tw-mb-0 sm:tw-w-1/4">
+                <img src="{{ url('images/logo.png') }}" alt="Type True">
+            </a>
+
+            <div class="tw-flex tw-items-center">
+                <div class="tw-flex tw-flex-col tw-items-end tw-text-xs sm:tw-text-xl tw-font-semibold">
+                    <span class="text-blue">PHONE: 1-877-TYPE-TRU</span>
+                    <span class="text-blue">1-877-897-3878</span>
+                </div>
+
+                <div class="tw-ml-4 tw-z-20">
+                    <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
+                        <a id="home" href="{{ url('/') }}">
+                            <span>Home</span>
+                        </a>
+
+                        <a id="home" href="{{ url('/') }}">
+                            <span>Contact Us</span>
+                        </a>
+
+                        <a id="home" href="{{ url('/') }}">
+                            <span>Privacy Policy</span>
+                        </a>
+
+                        <a id="home" href="{{ url('/') }}">
+                            <span>Terms of Use</span>
+                        </a>
+                    </burger-menu>
+                </div>
+            </div>
+        </div>
+
+        @yield('banner')
+
         @yield('content')
+
+        @yield('footer')
     </div>
 
     <script src="{{ mix('js/main.js') }}"></script>
