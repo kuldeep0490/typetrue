@@ -36,35 +36,37 @@
 </head>
 <body>
     <div id="app" class="tw-min-h-screen">
-        <div class="header-container tw-container tw-absolute tw-mx-auto tw-flex tw-justify-between tw-items-center tw-py-4 tw-px-4 md:tw-px-0">
-            <a href="{{ url('/') }}" class="tw-w-1/4 tw-mb-4 sm:tw-mb-0 sm:tw-w-1/4">
-                <img src="{{ url('images/logo.png') }}" alt="Type True">
-            </a>
+        <div class="tw-w-full tw-absolute">
+            <div class="tw-container tw-mx-auto tw-flex tw-justify-between tw-items-center tw-p-4">
+                <a href="{{ url('/') }}" class="tw-w-1/4 tw-mb-4 sm:tw-mb-0 sm:tw-w-1/4">
+                    <img src="{{ url('images/logo.png') }}" alt="Type True">
+                </a>
 
-            <div class="tw-flex tw-items-center">
-                <div class="tw-flex tw-flex-col tw-items-end tw-text-xs sm:tw-text-xl tw-font-semibold">
-                    <span class="text-blue">PHONE: 1-877-TYPE-TRU</span>
-                    <span class="text-blue">1-877-897-3878</span>
-                </div>
+                <div class="tw-flex tw-items-center">
+                    <div class="tw-flex tw-flex-col tw-items-end tw-text-xs sm:tw-text-xl tw-font-semibold">
+                        <span class="text-blue">PHONE: 1-877-TYPE-TRU</span>
+                        <span class="text-blue">1-877-897-3878</span>
+                    </div>
 
-                <div class="tw-ml-4 tw-z-20">
-                    <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
-                        <a id="home" href="{{ url('/') }}">
-                            <span>Home</span>
-                        </a>
+                    <div class="tw-ml-4 tw-z-20">
+                        <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
+                            <a id="home" href="{{ url('/homepage') }}">
+                                <span>Home</span>
+                            </a>
 
-                        <a id="home" href="{{ url('/') }}">
-                            <span>Contact Us</span>
-                        </a>
+                            <a id="home" href="{{ url('/contact-us') }}">
+                                <span>Contact Us</span>
+                            </a>
 
-                        <a id="home" href="{{ url('/') }}">
-                            <span>Privacy Policy</span>
-                        </a>
+                            <a id="home" href="{{ url('/privacy-policy') }}">
+                                <span>Privacy Policy</span>
+                            </a>
 
-                        <a id="home" href="{{ url('/') }}">
-                            <span>Terms of Use</span>
-                        </a>
-                    </burger-menu>
+                            <a id="home" href="{{ url('/terms-of-use') }}">
+                                <span>Terms of Use</span>
+                            </a>
+                        </burger-menu>
+                    </div>
                 </div>
             </div>
         </div>
@@ -73,7 +75,33 @@
 
         @yield('content')
 
-        @yield('footer')
+        <div class="footer bg-blue tw-py-6">
+            <div class="tw-container tw-mx-auto tw-px-4">
+                <div class="tw-text-center">
+                    <h5 class="tw-text-center tw-text-white tw-text-2xl sm:tw-text-4xl tw-font-semibold tw-mb-4">Contact Us</h5>
+
+                    <p class="tw-text-white tw-mb-4">Phone: 1-877-TYPE-TRU</p>
+
+                    <address class="tw-text-white tw-mb-4">
+                        Suite 706, 1 Concorde Gate<br>
+                        North York, ON<br>
+                        M3C3N6
+                    </address>
+
+                    <p class="tw-text-white"><a href="mailto:info@typetrue.ca">info@typetrue.ca</a></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer bottom-footer bg-blue tw-py-6 tw-border-t ">
+            <div class="tw-container tw-mx-auto tw-px-4">
+                <div class="tw-text-center">
+                    <p class="tw-text-white tw-mb-4">
+                        <a href="{{ url('/privacy-policy') }}">Privacy Policy</a> | <a href="{{ url('/terms-of-use') }}">Terms of Use</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="{{ mix('js/main.js') }}"></script>

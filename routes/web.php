@@ -11,8 +11,20 @@
 |
 */
 
-Route::get('temp/home', function() {
+Route::get('homepage', function() {
     return view('homepage');
+});
+
+Route::get('privacy-policy', function() {
+    return view('privacy-policy');
+});
+
+Route::get('terms-of-use', function() {
+    return view('terms-of-use');
+});
+
+Route::get('contact-us', function() {
+    return view('contact-us');
 });
 
 Route::get('/', function () {

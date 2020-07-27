@@ -12,7 +12,7 @@
             </el-option>
         </el-select>
 
-        <el-button class="btn-lg text-lg" type="primary" @click="setAge">Next</el-button>
+        <el-button class="btn-lg text-lg tw-text-white" type="primary" @click="setAge">Next</el-button>
     </div>
 </template>
 

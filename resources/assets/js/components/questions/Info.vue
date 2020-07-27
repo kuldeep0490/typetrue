@@ -28,7 +28,7 @@
 
         <p class="tw-mb-10 tw-text-xs tw-text-gray-600 tw-font-thin tw-text-center">Your information will be kept secure and confidential and will not be shared with anyone.</p>
 
-        <el-button class="btn-lg text-lg" type="primary" @click="setInformation" v-if="hasInfo">Get Quote</el-button>
+        <el-button class="btn-lg text-lg tw-text-white" type="primary" @click="setInformation" v-if="hasInfo">Get Quote</el-button>
     </div>
 </template>
 

@@ -15,6 +15,9 @@ $light-font-color: #747473;
 
 * {
     font-family: 'Helvetica', 'Open Sans', sans-serif;
+}
+
+p, h1, h2, h3, h4, h5, h6, li, div, address {
     color: $gray;
 }
 
@@ -106,11 +109,6 @@ button {
     color: $thirdy !important;
 }
 
-.header-container {
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .banner {
     background-image: url('../images/header-banner.jpg');
 }
@@ -172,4 +170,37 @@ button {
 
 .el-collapse-item__header, .el-collapse-item__wrap {
     background: transparent !important;
+}
+
+.el-collapse-item__header {
+    .el-icon-plus {
+        display: inline-block;
+    }
+
+    .el-icon-minus {
+        background: $thirdy !important;
+        display: none;
+    }
+
+    &.is-active {
+        .el-icon-plus {
+            display: none;
+        }
+
+        .el-icon-minus {
+            display: inline-block;
+        }
+    }
+
+    .el-collapse-item__arrow {
+        display: none;
+    }
+}
+
+.bg-blue {
+    background: $blue;
+}
+
+.bottom-footer {
+    border-color: #34457c;
 }

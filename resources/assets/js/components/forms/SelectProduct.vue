@@ -35,7 +35,7 @@
                             <div id="progressContainer">
 
                                 <button @click="decrementSlider" class="buttonController">
-                                    <font-awesome-icon icon="minus-circle" />
+                                    <i class="el-icon-remove"></i>
                                 </button>
 
                                 <progress id="faceAmount" name="faceAmount" :max="maxFaceAmount" :value="faceAmount" :min="minFaceAmount">
@@ -43,7 +43,7 @@
                                 </progress>
 
                                 <button @click="incrementSlider" class="buttonController">
-                                    <font-awesome-icon icon="plus-circle" />
+                                    <i class="el-icon-circle-plus"></i>
                                 </button>
 
                             </div>

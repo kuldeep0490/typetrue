@@ -8,6 +8,7 @@ export default {
     },
 
     beforeMount() {
+        console.log('asdfasd');
         if (! this.leadID) {
             this.$router.push('/get-started');
         }

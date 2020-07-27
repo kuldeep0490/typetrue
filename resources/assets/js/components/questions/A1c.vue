@@ -25,7 +25,7 @@
             </el-option>
         </el-select>
 
-        <el-button class="btn-lg text-lg" type="primary" v-if="a1c" @click="proceed">Next</el-button>
+        <el-button class="btn-lg text-lg tw-text-white" type="primary" v-if="a1c" @click="proceed">Next</el-button>
     </div>
 </template>
 

@@ -42,7 +42,7 @@
 
             <div class="tw-flex tw-items-center">
                 <button @click="decrementSlider" class="tw-text-gray-600 tw-text-3xl no-outline">
-                    <font-awesome-icon icon="minus-circle" />
+                    <i class="el-icon-remove"></i>
                 </button>
 
                 <progress class="tw-mx-5" id="faceAmount" :max="maxFaceAmount" :value="faceAmount" :min="minFaceAmount">
@@ -50,13 +50,13 @@
                 </progress>
 
                 <button @click="incrementSlider" class="tw-text-gray-600 tw-text-3xl no-outline">
-                    <font-awesome-icon icon="plus-circle" />
+                    <i class="el-icon-circle-plus"></i>
                 </button>
             </div>
         </div>
 
         <div class="tw-mb-10">
-            <el-button class="btn-lg text-lg" type="primary" @click.prevent="nextPage">Email Quote</el-button>
+            <el-button class="btn-lg text-lg tw-text-white" type="primary" @click.prevent="nextPage">Email Quote</el-button>
         </div>
     
         <p class="tw-text-xs tw-text-gray-600 tw-font-thin tw-text-center">These quotes are based on information you entered. Your actual price will be based on the information in your application.</p>
