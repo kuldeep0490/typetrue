@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('banner')
-    <div class="tw-mb-10 banner tw-bg-fixed tw-bg-center sm:tw-bg-left-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
+    <div class="tw-mb-10 banner sm:tw-bg-fixed tw-bg-center sm:tw-bg-left-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
         <div class="tw-h-screen tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white sm:tw-bg-transparent tw-flex tw-items-center">
             <div class="tw-container tw-mx-auto tw-px-4">
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
@@ -146,7 +146,7 @@
         </div>
     </div>
 
-    <div class="footer-banner tw-bg-fixed tw-bg-cover tw-bg-center sm:tw-bg-center sm:tw-bg-top tw-bg-no-repeat">
+    <div class="footer-banner sm:tw-bg-fixed tw-bg-cover tw-bg-center sm:tw-bg-center sm:tw-bg-top tw-bg-no-repeat">
         <div class="tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white tw-py-6">
             <div class="tw-container tw-mx-auto tw-px-4">
                 <div class="tw-flex tw-justify-end">

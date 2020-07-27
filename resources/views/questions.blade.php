@@ -1,9 +1,9 @@
 @extends('layout.main')
 
 @section('content')
-    <div class="tw-container tw-mx-auto tw-px-10 tw-flex tw-justify-center tw-h-screen tw-items-center">
-        <div class="tw-flex tw-flex-col tw-w-full">
-            <div class="negative-z-index tw-mb-10">
+    <div class="tw-container tw-mx-auto tw-px-10 tw-flex tw-justify-center tw-min-h-screen tw-items-start">
+        <div class="tw-flex tw-flex-col tw-w-full tw-mt-40 tw-mb-10">
+            <div class="negative-z-index tw-mb-4">
                 <progress-bar />
             </div>
 

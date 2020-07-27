@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-mx-auto tw-w-full tw-pb-20" v-if="progress != 100">
+    <div class="tw-mx-auto tw-w-full" v-if="progress != 100">
         <el-progress :percentage="progress" color="#FB5975" :show-text="false"></el-progress>
     </div>
 </template>
