@@ -52,7 +52,9 @@
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
-                <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.png')  }}" alt="">
+                <a href="https://www.zoomerradio.ca/show/tonic/the-tonic-show-podcast/tonic-podcast-october-27th/" target="_blank">
+                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.png')  }}" alt="">
+                </a>
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
