@@ -44,7 +44,7 @@ Route::get('/email-validate/{address}', function($address) {
     $client = new GuzzleHttp\Client();
 
     $result = $client->get('https://api:' . env('MAILGUN_API') . '@api.mailgun.net/v4/address/validate', [
-        'form_params' => ['address' => $address]
+        'query' => ['address' => $address]
     ]);
 
     return response()->json(json_decode($result->getBody()->getContents()));
