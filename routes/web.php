@@ -28,7 +28,7 @@ Route::get('contact-us', function() {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
 
 Route::get('/questions', function () {

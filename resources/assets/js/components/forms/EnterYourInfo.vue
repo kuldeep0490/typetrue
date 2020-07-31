@@ -7,7 +7,7 @@
                         <h1>
                             <img-couple />
 
-                            We need your email so we can send your quote later.
+                            Enter your information and we will instantly email you a free quote.
                         </h1>
 
                         <div class="basicDetails">

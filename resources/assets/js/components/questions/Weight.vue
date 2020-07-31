@@ -6,7 +6,7 @@
 
         <p class="tw-mb-10 tw-text-xs tw-text-gray-600 tw-font-thin">Enter your weight or use the plus/minus button.</p>
 
-        <el-button class="btn-lg text-lg tw-text-white" type="primary" @click="setWeight">Next</el-button>
+        <el-button class="custom-button btn-lg text-lg tw-inline-block" @click="setWeight">Next</el-button>
     </div>
 </template>
 

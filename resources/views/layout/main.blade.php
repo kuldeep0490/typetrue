@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Get the best price on life insurance for type two diabetics."/>
 
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="60x60" href="{{ url('apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url('favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ url('site.webmanifest"') }}>
+    <link rel="mask-icon" href="{{ url('safari-pinned-tab.svg') }}" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -35,70 +44,76 @@
     <!-- End Facebook Pixel Code -->
 </head>
 <body>
-    <div id="app" class="tw-min-h-screen">
-        <div class="tw-w-full tw-absolute">
-            <div class="tw-container tw-mx-auto tw-flex tw-justify-between tw-items-center tw-p-4">
-                <a href="{{ url('/') }}" class="tw-w-1/4 tw-mb-4 sm:tw-mb-0 sm:tw-w-1/4">
-                    <img src="{{ url('images/logo.png') }}" alt="Type True">
-                </a>
+    <div id="app" class="tw-min-h-screen tw-flex tw-flex-col">
+        <div class="tw-flex-1">
+            <div class="tw-w-full tw-absolute">
+                <div class="tw-container tw-mx-auto tw-flex tw-justify-between tw-items-center tw-p-4">
+                    <a href="{{ url('/') }}" class="tw-w-1/4 tw-mb-4 sm:tw-mb-0 sm:tw-w-1/4">
+                        <img src="{{ url('images/logo.png') }}" alt="Type True">
+                    </a>
 
-                <div class="tw-flex tw-items-center">
-                    <div class="tw-flex tw-flex-col tw-items-end tw-text-xs sm:tw-text-xl tw-font-semibold">
-                        <span class="text-blue">PHONE: 1-877-TYPE-TRU</span>
-                        <span class="text-blue">1-877-897-3878</span>
-                    </div>
+                    <div class="tw-flex tw-items-center">
+                        <div class="tw-flex tw-flex-col tw-items-end tw-text-xs sm:tw-text-xl tw-font-semibold">
+                            <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">PHONE: 1-877-TYPE-TRU</a></span>
+                            <span class="text-blue phone-margin-right"><a href="tel:+18778973878" class="hover:tw-underline">1-877-897-3878</a></span>
+                        </div>
 
-                    <div class="tw-ml-4 tw-z-20">
-                        <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
-                            <a id="home" href="{{ url('/homepage') }}">
-                                <span>Home</span>
-                            </a>
+                        <div class="tw-ml-4 tw-z-20">
+                            <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
+                                <a id="home" href="{{ url('/homepage') }}">
+                                    <span>Home</span>
+                                </a>
 
-                            <a id="home" href="{{ url('/contact-us') }}">
-                                <span>Contact Us</span>
-                            </a>
+                                <a id="home" href="{{ url('/contact-us') }}">
+                                    <span>Contact Us</span>
+                                </a>
 
-                            <a id="home" href="{{ url('/privacy-policy') }}">
-                                <span>Privacy Policy</span>
-                            </a>
+                                <a id="home" href="{{ url('/privacy-policy') }}">
+                                    <span>Privacy Policy</span>
+                                </a>
 
-                            <a id="home" href="{{ url('/terms-of-use') }}">
-                                <span>Terms of Use</span>
-                            </a>
-                        </burger-menu>
+                                <a id="home" href="{{ url('/terms-of-use') }}">
+                                    <span>Terms of Use</span>
+                                </a>
+                            </burger-menu>
+                        </div>
                     </div>
                 </div>
             </div>
+
+            @yield('banner')
+
+            @yield('content')
         </div>
 
-        @yield('banner')
+        <div>
+            <div class="footer bg-blue tw-py-6">
+                <div class="tw-container tw-mx-auto tw-px-4">
+                    <div class="tw-text-center">
+                        <h5 class="tw-text-center tw-text-white tw-text-2xl sm:tw-text-4xl tw-font-semibold tw-mb-4">
+                            <a href="{{ url('/contact-us') }}" class="hover:tw-underline">Contact Us</a>
+                        </h5>
 
-        @yield('content')
+                        <p class="tw-text-white tw-mb-4"><a href="tel:+18778973878" class="hover:tw-underline">Phone: 1-877-TYPE-TRU</a></p>
 
-        <div class="footer bg-blue tw-py-6">
-            <div class="tw-container tw-mx-auto tw-px-4">
-                <div class="tw-text-center">
-                    <h5 class="tw-text-center tw-text-white tw-text-2xl sm:tw-text-4xl tw-font-semibold tw-mb-4">Contact Us</h5>
+                        <address class="tw-text-white tw-mb-4">
+                            Suite 706, 1 Concorde Gate<br>
+                            North York, ON<br>
+                            M3C3N6
+                        </address>
 
-                    <p class="tw-text-white tw-mb-4">Phone: 1-877-TYPE-TRU</p>
-
-                    <address class="tw-text-white tw-mb-4">
-                        Suite 706, 1 Concorde Gate<br>
-                        North York, ON<br>
-                        M3C3N6
-                    </address>
-
-                    <p class="tw-text-white"><a href="mailto:info@typetrue.ca">info@typetrue.ca</a></p>
+                        <p class="tw-text-white"><a href="mailto:info@typetrue.ca" class="hover:tw-underline">info@typetrue.ca</a></p>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="footer bottom-footer bg-blue tw-py-6 tw-border-t ">
-            <div class="tw-container tw-mx-auto tw-px-4">
-                <div class="tw-text-center">
-                    <p class="tw-text-white tw-mb-4">
-                        <a href="{{ url('/privacy-policy') }}">Privacy Policy</a> | <a href="{{ url('/terms-of-use') }}">Terms of Use</a>
-                    </p>
+            <div class="footer bottom-footer bg-blue tw-py-6 tw-border-t ">
+                <div class="tw-container tw-mx-auto tw-px-4">
+                    <div class="tw-text-center">
+                        <p class="tw-text-white tw-mb-4">
+                            <a href="{{ url('/privacy-policy') }}" class="hover:tw-underline">Privacy Policy</a> | <a href="{{ url('/terms-of-use') }}" class="hover:tw-underline">Terms of Use</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>

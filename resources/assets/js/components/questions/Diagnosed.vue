@@ -21,7 +21,7 @@
             </div>
         </div>
 
-        <el-button class="btn-lg text-lg" v-if="years !== 0" type="primary" @click="setDiagnosed">Next</el-button>
+        <el-button class="custom-button btn-lg text-lg tw-inline-block" v-if="years !== 0" type="primary" @click="setDiagnosed">Next</el-button>
     </div>
 </template>
 

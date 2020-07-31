@@ -58,7 +58,9 @@
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
-                <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.png')  }}" alt="">
+                <a href="https://www.mcafeesecure.com/for-consumers" target="_blank">
+                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.png')  }}" alt="">
+                </a>
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">

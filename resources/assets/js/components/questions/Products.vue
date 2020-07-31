@@ -6,7 +6,7 @@
 
         <div class="tw-mb-10 tw-text-center">
             <p class="tw-mb-10 tw-text-xl tw-text-gray-600 tw-font-thin">
-                per month for <b class="tw-underline tw-text-black tw-text-2xl" style="font-weight: 900;">{{ faceAmount | formatNum }}</b> in <br>
+                per month for <b class="tw-underline tw-text-black tw-text-2xl text-light-blue" style="font-weight: 900;">{{ faceAmount | formatNum }}</b> in <br>
                 <el-select @change="selectProduct" v-model="selectedProduct" placeholder="Select">
                     <el-option 
                         v-if="showT10"
@@ -56,7 +56,7 @@
         </div>
 
         <div class="tw-mb-10">
-            <el-button class="btn-lg text-lg tw-text-white" type="primary" @click.prevent="nextPage">Email Quote</el-button>
+            <el-button class="custom-button btn-lg text-lg tw-inline-block" @click.prevent="nextPage">Email Quote</el-button>
         </div>
     
         <p class="tw-text-xs tw-text-gray-600 tw-font-thin tw-text-center">These quotes are based on information you entered. Your actual price will be based on the information in your application.</p>
@@ -406,11 +406,15 @@
 
 <style scoped lang="scss">
     .price {
-        color: #FB5975;
+        color: #20336f;
     }
 
     .no-outline {
         outline: none;
+    }
+
+    .text-light-blue {
+        color: #538CCF;
     }
 
     #faceAmount {
@@ -418,7 +422,7 @@
         width: 75%;
 
         &::-webkit-progress-value {
-            background-color: #FB5975;
+            background-color: #538CCF;
             border-radius: 0.25rem;
         }
 
