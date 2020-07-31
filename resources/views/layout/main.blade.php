@@ -53,9 +53,13 @@
                     </a>
 
                     <div class="tw-flex tw-items-center">
-                        <div class="tw-flex tw-flex-col tw-items-end tw-text-xs sm:tw-text-xl tw-font-semibold">
-                            <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">PHONE: 1-877-TYPE-TRU</a></span>
-                            <span class="text-blue phone-margin-right"><a href="tel:+18778973878" class="hover:tw-underline">1-877-897-3878</a></span>
+                        <div class="tw-flex tw-text-xs sm:tw-text-xl tw-font-semibold">
+                            <span>PHONE:</span>
+
+                            <div class="tw-flex tw-flex-col tw-ml-2">
+                                <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">1-877-TYPE-TRU</a></span>
+                                <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">1-877-897-3878</a></span>
+                            </div>
                         </div>
 
                         <div class="tw-ml-4 tw-z-20">
