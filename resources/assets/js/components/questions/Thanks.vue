@@ -17,17 +17,33 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex';
+    import { mapMutations, mapGetters } from 'vuex';
 
     export default {
         methods: {
             ...mapMutations({
                 setProgress: 'typetrue/setProgress'
-            })
+            }),
         },
 
-        created() {            
+        computed: {
+            ...mapGetters({
+                leadID: 'typetrue/leadID',
+            }),
+        },
+
+        created() {
+            if (! this.leadID) {
+                this.$router.push({ name: 'gender' });
+            }
+
             this.setProgress({ value: 100 });
+
+            setTimeout(() => {
+                axios.post('email-quote', {
+                    lead_id: this.leadID
+                });
+            }, 2000);
         }
     }
 </script>

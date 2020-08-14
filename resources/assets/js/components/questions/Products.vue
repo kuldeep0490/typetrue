@@ -403,7 +403,7 @@
 
                 this.calculatePremium(this.selectedProduct, this.faceAmount2, 'monthlyPremium2');
 
-                this.update();
+                await this.update();
 
                 this.$router.push({ name: 'thanks' });
             }
