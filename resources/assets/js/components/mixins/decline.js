@@ -13,7 +13,7 @@ export default {
 
     methods: {
         ...mapMutations({
-            'setDeclineReason': 'typetrue/setDeclineReaso∑∑∑n'
+            'setDeclineReason': 'typetrue/setDeclineReason'
         }),
 
         checkIfDecline() {
