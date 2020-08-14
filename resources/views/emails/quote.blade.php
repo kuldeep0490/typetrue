@@ -36,9 +36,9 @@ For ${{ number_format($lead->faceAmount2, 2) }} of coverage over a 10 year term,
 
 If you have any questions or would like more information on how to obtain the best price on life insurance for type 2 diabetics, contact us at:
 
-### 1-877-TYPE-TRU<br>
-### 1-877-897-3878<br>
-### info@typetrue.com
+1-877-TYPE-TRU<br>
+1-877-897-3878<br>
+info@typetrue.com
 
 Thanks,<br>
 {{ config('app.name') }}
