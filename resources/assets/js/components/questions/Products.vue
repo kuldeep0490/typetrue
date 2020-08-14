@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-flex tw-flex-col tw-items-center">
+    <div class="tw-flex tw-flex-col tw-items-center" v-show="false">
         <h1 class="tw-mb-10 tw-text-5xl tw-font-bold tw-text-center price">
             {{ monthlyPremium | formatNum }}
         </h1>
@@ -91,13 +91,17 @@
                 },
 
                 selectedProduct: 't10',
-                faceAmount: 500000,
+
                 oldFaceAmount: 450000,
                 minFaceAmount: 25000,
                 maxFaceAmount: 1000000,
                 stepFaceAmount: 50000,
 
+                faceAmount: 250000,
                 monthlyPremium: 0,
+                faceAmount2: 500000,
+                monthlyPremium2: 0,
+
                 bandBracket: 100000,
 
                 policyFee: 50,
@@ -237,7 +241,7 @@
             setAndCalculate() {
                 this.setBandBracket();
 
-                this.calculatePremium(this.selectedProduct);
+                this.calculatePremium(this.selectedProduct, this.faceAmount, this.monthlyPremium);
 
                 this.update();
             },
@@ -245,9 +249,14 @@
             update: debounce(function() {
                 this.updateLead({
                     lead_id: this.leadID,
-                    product: this.selectedProduct,
+                    // product: this.selectedProduct,
                     faceAmount: this.faceAmount,
                     monthlyPremium: this.monthlyPremium,
+                    // Add another faceAmount and monthlyPremium
+                    product: 't10',
+                    product2: 't20',
+                    faceAmount2: this.faceAmount2,
+                    monthlyPremium2: this.monthlyPremium2,
                 });
             }, 1000),
 
@@ -255,17 +264,27 @@
                 this.setAndCalculate();
             },
 
-            calculatePremium(product) {
+            calculatePremium(product, faceAmount, monthlyPremium) {
                 let rate = this.calculatedRate(product);
+                let calculatedMonthlyPremium = 0;
 
                 if (rate !== undefined) {
                     if (this.selectedProduct !== 't100') {
-                        this.monthlyPremium = 0.09 * (((parseInt(this.faceAmount) / 1000) * rate * (1 + (parseInt(this.rating) / 100))) + this.policyFee);
+                        calculatedMonthlyPremium = 0.09 * (((parseInt(faceAmount) / 1000) * rate * (1 + (parseInt(this.rating) / 100))) + this.policyFee);
                     } else {
-                        this.monthlyPremium = (((parseInt(this.faceAmount) / 1000) * rate) + 144) / 12;
+                        calculatedMonthlyPremium = (((parseInt(faceAmount) / 1000) * rate) + 144) / 12;
                     }
                 } else {
-                    this.monthlyPremium = '--';
+                    calculatedMonthlyPremium = '--';
+                }
+
+                console.log(calculatedMonthlyPremium);
+
+                // TODO: fix this in the future
+                if (monthlyPremium === 'monthlyPremium') {
+                    this.monthlyPremium = calculatedMonthlyPremium;
+                } else {
+                    this.monthlyPremium2 = calculatedMonthlyPremium;
                 }
             },
 
@@ -376,6 +395,17 @@
                 window.scrollTo(0, 0);
 
                 this.$router.push({ name: 'sorry' });
+            } else {
+                // Calculate for static values and just update lead and redirect to thank you page
+                this.calculatePremium(this.selectedProduct, this.faceAmount, 'monthlyPremium');
+
+                this.selectedProduct = 't20';
+
+                this.calculatePremium(this.selectedProduct, this.faceAmount2, 'monthlyPremium2');
+
+                this.update();
+
+                this.$router.push({ name: 'thanks' });
             }
         },
 

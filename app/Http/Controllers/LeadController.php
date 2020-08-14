@@ -97,6 +97,18 @@ class LeadController extends Controller
             $lead->monthlyPremium = $request->monthlyPremium;
         }
 
+        if ($request->filled('product2')) {
+            $lead->product2 = $request->product2;
+        }
+
+        if ($request->filled('faceAmount2')) {
+            $lead->faceAmount2 = $request->faceAmount2;
+        }
+
+        if ($request->filled('monthlyPremium2')) {
+            $lead->monthlyPremium2 = $request->monthlyPremium2;
+        }
+
         $lead->save();
 
         return $lead;

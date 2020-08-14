@@ -20,24 +20,30 @@
 
         <div class="sm:tw-flex tw-justify-between">
             <div class="tw-text-center sm:tw-w-1/3 tw-mb-4">
-                <img class="tw-mb-4 tw-w-10 sm:tw-w-16 tw-inline-block" src="{{ url('images/icon-1.png') }}" alt="Fast and accurate online quote">
+                <div class="tw-mb-4 tw-min-h-150">
+                    <img class="tw-mb-4 tw-w-10 sm:tw-w-16 tw-inline-block tw-min-h-64" src="{{ url('images/icon-1.png') }}" alt="Fast and accurate online quote">
 
-                <h3 class="tw-uppercase tw-mb-4 tw-font-semibold tw-text-md sm:tw-text-xl text-blue">Fast and accurate<br> online quote</h3>
+                    <h3 class="tw-uppercase tw-font-semibold tw-text-md sm:tw-text-xl text-blue">Fast and accurate<br> online quote</h3>
+                </div>
 
                 <p>Get a personalized price estimate in minutes.</p>
             </div>
             <div class="tw-text-center sm:tw-w-1/3 tw-mb-4">
-                <img class="tw-mb-4 tw-w-10 sm:tw-w-16 tw-inline-block" src="{{ url('images/icon-2.png') }}" alt="Best price guarantee<">
+                <div class="tw-mb-4 tw-min-h-150">
+                    <img class="tw-mb-4 tw-w-10 sm:tw-w-16 tw-inline-block tw-min-h-64" src="{{ url('images/icon-2.png') }}" alt="Best price guarantee<">
 
-                <h3 class="tw-uppercase tw-mb-4 tw-font-semibold tw-text-md sm:tw-text-xl text-blue">Best price<br> guarantee</h3>
+                    <h3 class="tw-uppercase tw-font-semibold tw-text-md sm:tw-text-xl text-blue">Best price<br> guarantee</h3>
+                </div>
 
                 <p>Find the lowest price for your diabetes profile. Get a personalized price estimate in minutes.</p>
             </div>
 
             <div class="tw-text-center sm:tw-w-1/3 tw-mb-4">
-                <img class="tw-mb-4 tw-w-10 sm:tw-w-16 tw-inline-block" src="{{ url('images/icon-3.png') }}" alt="Trusted providers">
+                <div class="tw-mb-4 tw-min-h-150">
+                    <img class="tw-mb-4 tw-w-10 sm:tw-w-16 tw-inline-block tw-min-h-64" src="{{ url('images/icon-3.png') }}" alt="Trusted providers">
 
-                <h3 class="tw-uppercase tw-mb-4 tw-font-semibold tw-text-md sm:tw-text-xl text-blue">Trusted<br> providers</h3>
+                    <h3 class="tw-uppercase tw-font-semibold tw-text-md sm:tw-text-xl text-blue">Trusted<br> providers</h3>
+                </div>
 
                 <p>Buy your policy from leading Canadian insurance companies.</p>
             </div>
@@ -53,13 +59,13 @@
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
                 <a href="https://www.zoomerradio.ca/show/tonic/the-tonic-show-podcast/tonic-podcast-october-27th/" target="_blank">
-                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.png')  }}" alt="">
+                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.svg')  }}" alt="">
                 </a>
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
                 <a href="https://www.mcafeesecure.com/for-consumers" target="_blank">
-                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.png')  }}" alt="">
+                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.svg')  }}" alt="">
                 </a>
             </div>
 
@@ -89,7 +95,7 @@
 
             <div class="sm:tw-w-1/3 tw-px-4 tw-mb-4">
                 <div class="light-gray-bg tw-p-4 tw-mb-4 tw-relative comment-box">
-                    <p class="tw-italic light-font-color">Options for diabetics are VERY expensive. This business gave me better rates (still high for my budget), but I appreciate they didn’t take my information and sell it to sleazy salesmen.</p>
+                    <p class="tw-italic light-font-color">I worked with TypeTrue and found them very helpful and responsive. I would highly recommend them for your diabetic life insurance needs!</p>
 
                     <img src="{{ url('images/arrow-down.png') }}" alt="" class="testimonial-arrow">
                 </div>
@@ -97,7 +103,7 @@
                 <div class="tw-flex">
                     <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="">
 
-                    <span>Anne Sutter</span>
+                    <span>Tina</span>
                 </div>
             </div>
 
@@ -129,22 +135,22 @@
             
             <div class="tw-flex tw-flex-wrap md:tw-flex-no-wrap tw-justify-between tw-items-center">
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/canada-life-logo.png') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/canada-life-logo.svg') }}" alt="">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/empire-life-logo.png') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/empire-life-logo.svg') }}" alt="">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/manulife-logo.png') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/manulife-logo.svg') }}" alt="">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/assumption-life-logo.png') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/assumption-life-logo.svg') }}" alt="">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/canada-protection-plan-logo.png') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/canada-protection-plan-logo.svg') }}" alt="">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/equitable-life-logo.png') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/equitable-life-logo.svg') }}" alt="">
                 </div>
             </div>
         </div>

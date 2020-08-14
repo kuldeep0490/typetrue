@@ -1,29 +1,44 @@
 @component('mail::message')
 # Hello,
 
+@if($lead->rating <= 75 && $lead->rating > 0)
+### Here are a few quotes based on the information provided:
+
 @component('mail::panel')
-Face Amount: $ {{ number_format($lead->faceAmount, 2) }}<br>
-Monthly Premium: $ {{ number_format($lead->monthlyPremium, 2) }}<br>
-Product: {{ strtoupper($lead->product) }}<br>
+For ${{ number_format($lead->faceAmount, 2) }} of coverage over a 10 year term, monthly premium: ${{ number_format($lead->monthlyPremium, 2) }}<br>
+For ${{ number_format($lead->faceAmount2, 2) }} of coverage over a 10 year term, monthly premium: ${{ number_format($lead->monthlyPremium2, 2) }}<br>
 @endcomponent
 
-@if($lead->rating <= 75 && $lead->rating > 0)
-### Pretty Good. You can get reasonably low, just not the lowest cost possible life insurance rates.
-
-*Based on your information, you are likely to get the best value from medical exam life insurance possibly combined with some no-medical-exam life insurance. Over time it may well be possible to lower your cost by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future.*
+*Based on your profile you should be able to get life insurance rates that are comparable to rates of a non-diabetic. Over time it may also be possible to lower your cost by improving your condition.*
 @endif
 
 @if($lead->rating > 75)
-### Bad news first. Your life insurance cost will definitely be significantly higher than a typical T2.
+### Here are a few quotes based on the information provided:
 
-*You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. Medical exam insurance would be useful only if you need life insurance in excess of $500,000. Good news is that it is possible to lower your cost by improving your type two control or lifestyle. We’re glad to help you with your life insurance now and in the future.*
+@component('mail::panel')
+For ${{ number_format($lead->faceAmount, 2) }} of coverage over a 10 year term, monthly premium: ${{ number_format($lead->monthlyPremium, 2) }}<br>
+For ${{ number_format($lead->faceAmount2, 2) }} of coverage over a 10 year term, monthly premium: ${{ number_format($lead->monthlyPremium2, 2) }}<br>
+@endcomponent
+
+*You are likely a good candidate for no-medical-exam life insurance or guaranteed issue life insurance. Over time it may also be possible to lower your cost by improving your condition.*
 @endif
 
 @if($lead->rating === 0 || $lead->rating == '')
-### Yes! You are likely to qualify for the lowest cost life insurance.
+### Here are a few quotes based on the information provided:
 
-*Based on your information, you definitely should apply for life insurance with a medical exam. This will allow you to get the lowest cost life insurance for people with type two. We’ll be glad to help you do that.*
+@component('mail::panel')
+For ${{ number_format($lead->faceAmount, 2) }} of coverage over a 10 year term, monthly premium: ${{ number_format($lead->monthlyPremium, 2) }}<br>
+For ${{ number_format($lead->faceAmount2, 2) }} of coverage over a 10 year term, monthly premium: ${{ number_format($lead->monthlyPremium2, 2) }}<br>
+@endcomponent
+
+*Based on your profile, you likely qualify for the lowest cost life insurance. We recommend applying for life insurance with a medical exam. This will allow you to get the lowest cost life insurance for type 2 diabetics. We’ll be glad to help you do that.*
 @endif
+
+If you have any questions or would like more information on how to obtain the best price on life insurance for type 2 diabetics, contact us at:
+
+1-877-TYPE-TRU
+1-877-897-3878
+info@typetrue.com
 
 Thanks,<br>
 {{ config('app.name') }}

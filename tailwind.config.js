@@ -5,6 +5,11 @@ module.exports = {
         primary: '#FB5975'
       }
     },
+
+    minHeight: {
+      '150': '150px',
+      '64': '64px'
+    }
   },
   variants: {},
   plugins: [],

@@ -37,6 +37,7 @@ Route::get('/questions', function () {
 
 Route::post('/email-quote', function () {
     $lead = \App\Lead::findOrFail(request()->input('lead_id'));
+
     \Mail::to($lead->email)->send(new \App\Mail\EmailQuote($lead));
 });
 
