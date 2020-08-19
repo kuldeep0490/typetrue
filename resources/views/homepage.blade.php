@@ -54,7 +54,7 @@
     <div class="gray-bg tw-py-6 tw-mb-10">
         <div class="tw-container tw-mx-auto tw-px-4 tw-flex tw-flex-wrap tw-justify-between tw-items-center">
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
-                <img class="tw-inline-block home-sub-icons" src="{{ url('images/best-price-logo.png')  }}" alt="">
+                <img class="tw-inline-block home-sub-icons" src="{{ url('images/best-price-logo.svg')  }}" alt="">
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
@@ -70,7 +70,7 @@
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
-                <img class="tw-inline-block home-sub-icons" src="{{ url('images/ssl-logo.png')  }}" alt="">
+                <img class="tw-inline-block home-sub-icons" src="{{ url('images/ssl-logo.svg')  }}" alt="">
             </div>
         </div>
     </div>
