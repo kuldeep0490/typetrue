@@ -4,6 +4,10 @@
     <div class="tw-mb-10 banner sm:tw-bg-fixed tw-bg-center sm:tw-bg-left-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
         <div class="tw-h-screen tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white sm:tw-bg-transparent tw-flex tw-items-center">
             <div class="tw-container tw-mx-auto tw-px-4">
+                <a target="_blank" class="tw-mb-4 tw-inline-block" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
+                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="https://seal-mwco.bbb.org/seals/blue-seal-187-130-typetrueltd-1376679.png">
+                </a>
+
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
 
                 <a plain class="custom-button btn-lg text-lg tw-inline-block" href="{{ url('/questions#/what-is-your-gender') }}">
@@ -53,23 +57,29 @@
 
     <div class="gray-bg tw-py-6 tw-mb-10">
         <div class="tw-container tw-mx-auto tw-px-4 tw-flex tw-flex-wrap tw-justify-between tw-items-center">
-            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
+            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <img class="tw-inline-block home-sub-icons" src="{{ url('images/best-price-logo.svg')  }}" alt="">
             </div>
 
-            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
+            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
+                <a target="_blank" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
+                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo.png')  }}">
+                </a>
+            </div>
+
+            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <a href="https://www.zoomerradio.ca/show/tonic/the-tonic-show-podcast/tonic-podcast-october-27th/" target="_blank">
                     <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.svg')  }}" alt="">
                 </a>
             </div>
 
-            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
+            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <a href="https://www.mcafeesecure.com/for-consumers" target="_blank">
                     <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.svg')  }}" alt="">
                 </a>
             </div>
 
-            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/4 tw-px-4">
+            <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <img class="tw-inline-block home-sub-icons" src="{{ url('images/ssl-logo.svg')  }}" alt="">
             </div>
         </div>

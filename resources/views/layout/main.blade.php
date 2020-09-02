@@ -52,17 +52,23 @@
                         <img src="{{ url('images/logo.png') }}" alt="Type True">
                     </a>
 
-                    <div class="tw-flex tw-items-center">
-                        <div class="tw-flex tw-text-xs sm:tw-text-xl tw-font-semibold">
-                            <span>PHONE:</span>
+                    <div class="tw-flex tw-items-start">
+                        <div class="tw-flex tw-flex-col">
+                            <div class="tw-flex tw-text-xs sm:tw-text-xl tw-font-semibold">
+                                <span>PHONE:</span>
 
-                            <div class="tw-flex tw-flex-col tw-ml-2">
-                                <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">1-877-TYPE-TRU</a></span>
-                                <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">1-877-897-3878</a></span>
+                                <div class="tw-flex tw-flex-col tw-ml-2">
+                                    <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">1-877-TYPE-TRU</a></span>
+                                    <span class="text-blue"><a href="tel:+18778973878" class="hover:tw-underline">1-877-897-3878</a></span>
+                                </div>
                             </div>
+
+                            <a plain class="custom-button-blue btn-sm tw-inline-block tw-text-center" href="{{ url('/contact-us') }}">
+                                Request A Call Back
+                            </a>
                         </div>
 
-                        <div class="tw-ml-4 tw-z-20">
+                        <div class="tw-ml-4 tw-z-20 tw-mt-4">
                             <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
                                 <a id="home" href="{{ url('/homepage') }}">
                                     <span>Home</span>

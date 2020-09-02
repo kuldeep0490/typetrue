@@ -81,6 +81,14 @@ button {
     padding: 20px 30px !important;
 }
 
+.btn-sm {
+    padding: 10px 20px !important;
+
+    @media handheld {
+        padding: 5px 5px !important;
+    }
+}
+
 .text-lg {
     font-size: 18px !important;
 }
@@ -127,6 +135,12 @@ button {
     color: #FFF !important;
     background-color: $primary !important;
     border-color: $primary !important;
+}
+
+.custom-button-blue {
+    color: #FFF !important;
+    background-color: $secondary !important;
+    border-color: $secondary !important;
 }
 
 .bm-menu {
