@@ -20,12 +20,12 @@ Vue.use(VueAnalytics, {
 const store = storeFactory();
 
 import ProgressBar from './components/questions/Progress';
-import TrueHelp from './components/Help';
 import { Slide } from 'vue-burger-menu'
+import RequestCallbackForm from './components/global/RequestCallbackForm'
 
 Vue.component('progress-bar', ProgressBar);
-Vue.component('true-help', TrueHelp);
 Vue.component('burger-menu', Slide);
+Vue.component('request-callback', RequestCallbackForm);
 
 const app = new Vue({
     el: '#app',

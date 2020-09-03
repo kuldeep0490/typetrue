@@ -35,6 +35,18 @@ Route::get('/questions', function () {
     return view('questions');
 });
 
+Route::post('/request-callback', function () {
+    $info['first_name'] = request()->input('first_name');
+    $info['last_name'] = request()->input('last_name');
+    $info['email'] = request()->input('email');
+    $info['phone'] = request()->input('phone');
+    $info['comment'] = request()->input('comment');
+
+    \Mail::to('info@typetrue.com')->send(new \App\Mail\RequestACallback($info));
+
+    return response()->json(['status' => 'success']);
+});
+
 Route::post('/email-quote', function () {
     $lead = \App\Lead::findOrFail(request()->input('lead_id'));
 

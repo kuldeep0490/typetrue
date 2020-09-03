@@ -5,7 +5,7 @@
         <div class="tw-h-screen tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white sm:tw-bg-transparent tw-flex tw-items-center">
             <div class="tw-container tw-mx-auto tw-px-4">
                 <a target="_blank" class="tw-mb-4 tw-inline-block" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
-                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="https://seal-mwco.bbb.org/seals/blue-seal-187-130-typetrueltd-1376679.png">
+                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo-blue.png')  }}" class="bbb-logo">
                 </a>
 
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>

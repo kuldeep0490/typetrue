@@ -52,7 +52,7 @@
                         <img src="{{ url('images/logo.png') }}" alt="Type True">
                     </a>
 
-                    <div class="tw-flex tw-items-start">
+                    <div class="tw-flex tw-items-center md:tw-items-start">
                         <div class="tw-flex tw-flex-col">
                             <div class="tw-flex tw-text-xs sm:tw-text-xl tw-font-semibold">
                                 <span>PHONE:</span>
@@ -63,12 +63,14 @@
                                 </div>
                             </div>
 
-                            <a plain class="custom-button-blue btn-sm tw-inline-block tw-text-center" href="{{ url('/contact-us') }}">
-                                Request A Call Back
-                            </a>
+                            @unless (Request::is('contact-us'))
+                                <a plain class="custom-button-blue btn-sm tw-hidden md:tw-inline-block tw-text-center" href="{{ url('/contact-us') }}">
+                                    Request A Call Back
+                                </a>
+                            @endunless
                         </div>
 
-                        <div class="tw-ml-4 tw-z-20 tw-mt-4">
+                        <div class="tw-ml-4 tw-z-20 md:tw-mt-4">
                             <burger-menu right noOverlay disableOutsideClick :closeOnNavigation="true">
                                 <a id="home" href="{{ url('/homepage') }}">
                                     <span>Home</span>
@@ -89,6 +91,14 @@
                         </div>
                     </div>
                 </div>
+
+                @unless (Request::is('contact-us'))
+                    <div class="tw-text-right tw-container tw-mx-auto tw-px-4">
+                        <a plain class="custom-button-blue btn-sm tw-inline-block md:tw-hidden tw-text-center" href="{{ url('/contact-us') }}">
+                            Request A Call Back
+                        </a>
+                    </div>
+                @endunless
             </div>
 
             @yield('banner')

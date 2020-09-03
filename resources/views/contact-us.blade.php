@@ -2,9 +2,15 @@
 
 @section('content')
     <div class="tw-container tw-mx-auto tw-px-6">
-        <div class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-min-h-screen tw-pt-20">
+        <div class="tw-pt-40 tw-mb-10">
+            <h1 class="tw-mb-4 text-blue tw-text-4xl tw-font-semibold">Request A Callback</h1>
+
+            <request-callback></request-callback>
+        </div>
+
+        <div class="tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-mb-10">
             <div class="sm:tw-w-1/2 tw-mb-4">
-                <h1 class="tw-mb-4 text-blue tw-text-4xl tw-font-semibold">Contact</h1>
+                <h2 class="tw-mb-4 text-blue tw-text-4xl tw-font-semibold">Contact</h2>
 
                 <p class="tw-mb-4">
                     Our help line is your one-stop shop for TypeTrue support. We are here to help answer any of your questions regarding our life insurance advice recommendation, your application, or your life insurance policy.

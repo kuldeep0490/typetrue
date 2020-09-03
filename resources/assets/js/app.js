@@ -2,7 +2,7 @@ import './bootstrap';
 import Vue from 'vue';
 import Vuex from 'vuex';
 import VueRouter from 'vue-router';
-import router from './router';
+import router from './router.old';
 import storeFactory from './store.js';
 import VueAnalytics from 'vue-analytics';
 
