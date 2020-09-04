@@ -9,8 +9,8 @@
             </el-alert>
         </div>
 
-        <div class="tw-flex tw--mx-2">
-            <div class="tw-w-1/2 tw-mx-2">
+        <div class="tw-flex tw-flex-col md:tw-flex-row tw--mx-2">
+            <div class="md:tw-w-1/2 tw-mx-2">
                 <div class="tw-mb-5 tw-w-full">
                     <el-input placeholder="First Name" v-model="info.first_name"></el-input>
 
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="tw-w-1/2 tw-mx-2">
+            <div class="md:tw-w-1/2 tw-mx-2">
                 <div class="tw-w-full">
                     <el-input class="tw-mb-5" placeholder="(Optional) Enter addiotional notes" v-model="info.comment" type="textarea" rows="8"></el-input>
                 </div>
