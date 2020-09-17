@@ -4,15 +4,17 @@
     <div class="tw-mb-10 banner sm:tw-bg-fixed tw-bg-center sm:tw-bg-left-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
         <div class="tw-h-screen tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white sm:tw-bg-transparent tw-flex tw-items-center">
             <div class="tw-container tw-mx-auto tw-px-4">
-                <a target="_blank" class="tw-mb-4 tw-inline-block" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
-                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo-blue.png')  }}" class="bbb-logo">
-                </a>
-
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
 
-                <a plain class="custom-button btn-lg text-lg tw-inline-block" href="{{ url('/questions#/what-is-your-gender') }}">
-                    Get your FREE quote
-                </a>
+                <div class="tw-mb-4 tw-flex tw-items-center">
+                    <a plain class="custom-button btn-lg text-lg tw-inline-block tw-mr-4" href="{{ url('/questions#/what-is-your-gender') }}">
+                        Get your FREE quote
+                    </a>
+
+                    <a target="_blank" class="tw-inline-block" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
+                        <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo.png')  }}" class="bbb-logo">
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -58,7 +60,7 @@
     <div class="gray-bg tw-py-6 tw-mb-10">
         <div class="tw-container tw-mx-auto tw-px-4 tw-flex tw-flex-wrap tw-justify-between tw-items-center">
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
-                <img class="tw-inline-block home-sub-icons" src="{{ url('images/best-price-logo.svg')  }}" alt="">
+                <img class="tw-inline-block home-sub-icons" src="{{ url('images/best-price-logo.svg')  }}" alt="best price">
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
@@ -69,18 +71,18 @@
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <a href="https://www.zoomerradio.ca/show/tonic/the-tonic-show-podcast/tonic-podcast-october-27th/" target="_blank">
-                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.svg')  }}" alt="">
+                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/zoomer-radio-logo.svg')  }}" alt="zoomer">
                 </a>
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <a href="https://www.mcafeesecure.com/for-consumers" target="_blank">
-                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.svg')  }}" alt="">
+                    <img class="tw-inline-block home-sub-icons" src="{{ url('images/mcafee-logo.svg')  }}" alt="mcafee">
                 </a>
             </div>
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
-                <img class="tw-inline-block home-sub-icons" src="{{ url('images/ssl-logo.svg')  }}" alt="">
+                <img class="tw-inline-block home-sub-icons" src="{{ url('images/ssl-logo.svg')  }}" alt="ssl">
             </div>
         </div>
     </div>
@@ -93,11 +95,11 @@
                 <div class="light-gray-bg tw-p-4 tw-mb-4 tw-relative comment-box">
                     <p class="tw-italic light-font-color">I was able to compare prices for different coverage and it was awesome! The real value was knowing i have the information and confidence when purchasing term insurance. This has been a life saver for Type 2 Diabetics like me.</p>
 
-                    <img src="{{ url('images/arrow-down.png') }}" alt="" class="testimonial-arrow">
+                    <img src="{{ url('images/arrow-down.png') }}" alt="arrow down" class="testimonial-arrow">
                 </div>
 
                 <div class="tw-flex">
-                    <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="">
+                    <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="user-icon">
 
                     <span>Arkhe Sorde Salcedo</span>
                 </div>
@@ -107,11 +109,11 @@
                 <div class="light-gray-bg tw-p-4 tw-mb-4 tw-relative comment-box">
                     <p class="tw-italic light-font-color">I worked with TypeTrue and found them very helpful and responsive. I would highly recommend them for your diabetic life insurance needs!</p>
 
-                    <img src="{{ url('images/arrow-down.png') }}" alt="" class="testimonial-arrow">
+                    <img src="{{ url('images/arrow-down.png') }}" alt="arrow down" class="testimonial-arrow">
                 </div>
 
                 <div class="tw-flex">
-                    <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="">
+                    <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="user-icon">
 
                     <span>Tina</span>
                 </div>
@@ -121,11 +123,11 @@
                 <div class="light-gray-bg tw-p-4 tw-mb-4 tw-relative comment-box">
                     <p class="tw-italic light-font-color">When my father turned 60, I was put in charge of helping him get his retirement plan in order - which included his life insurance. My pops opted out of ever finding something for himself, since most agents wouldn’t even consider a type-2 diabetic with spotty health.</p>
 
-                    <img src="{{ url('images/arrow-down.png') }}" alt="" class="testimonial-arrow">
+                    <img src="{{ url('images/arrow-down.png') }}" alt="arrow down" class="testimonial-arrow">
                 </div>
 
                 <div class="tw-flex">
-                    <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="">
+                    <img class="tw-mr-4 tw-w-4 " src="{{ url('images/user-icon.png') }}" alt="user-icon">
 
                     <span>Alan Rooke</span>
                 </div>
@@ -145,22 +147,22 @@
             
             <div class="tw-flex tw-flex-wrap md:tw-flex-no-wrap tw-justify-between tw-items-center">
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/canada-life-logo.svg') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/canada-life-logo.svg') }}" alt="canada life">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/empire-life-logo.svg') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/empire-life-logo.svg') }}" alt="empire life">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/manulife-logo.svg') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/manulife-logo.svg') }}" alt="manulife">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/assumption-life-logo.svg') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/assumption-life-logo.svg') }}" alt="assumption life">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/canada-protection-plan-logo.svg') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/canada-protection-plan-logo.svg') }}" alt="canada protection plan">
                 </div>
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
-                    <img class="tw-inline-block" src="{{ url('images/equitable-life-logo.svg') }}" alt="">
+                    <img class="tw-inline-block" src="{{ url('images/equitable-life-logo.svg') }}" alt="equitable life">
                 </div>
             </div>
         </div>

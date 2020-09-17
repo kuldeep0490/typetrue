@@ -15,9 +15,6 @@
                 <p class="tw-mb-4">
                     Our help line is your one-stop shop for TypeTrue support. We are here to help answer any of your questions regarding our life insurance advice recommendation, your application, or your life insurance policy.
                 </p>
-                <p class="tw-mb-4">
-                    You can give us a call between 9:00 am and 8:00 pm (EST) Monday through Thursday, or between 9:00 am and 5:30 pm on Fridays!  Send us an email 24/7 – we are available when you need us.
-                </p>
 
                 <address class="tw-mb-4">
                     Suite 706, 1 Concorde Gate<br>

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Get the best price on life insurance for type two diabetics."/>
 
+    <link rel="canonical" href="https://typetrue.ca" />
+
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="60x60" href="{{ url('apple-touch-icon.png') }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ url('favicon-32x32.png') }}">
