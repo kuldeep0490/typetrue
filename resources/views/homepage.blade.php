@@ -6,14 +6,18 @@
             <div class="tw-container tw-mx-auto tw-px-4">
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
 
-                <div class="tw-mb-4 tw-flex md:tw-flex-col tw-items-center">
-                    <a plain class="custom-button btn-lg text-lg tw-inline-block tw-mr-4" href="{{ url('/questions#/what-is-your-gender') }}">
-                        Get your FREE quote
-                    </a>
+                <div class="tw-mb-4 tw-flex tw-flex-col md:tw-flex-row md:tw-items-center">
+                    <div class="tw-mr-4 tw-mb-4 md:tw-mb-0">
+                        <a plain class="custom-button btn-lg text-lg tw-inline-block" href="{{ url('/questions#/what-is-your-gender') }}">
+                            Get your FREE quote
+                        </a>
+                    </div>
 
-                    <a target="_blank" class="tw-inline-block" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
-                        <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo.png')  }}" class="bbb-logo">
-                    </a>
+                    <div class="tw-flex tw-items-center">
+                        <a target="_blank" class="tw-inline-block" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
+                            <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo.png')  }}" class="bbb-logo">
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
