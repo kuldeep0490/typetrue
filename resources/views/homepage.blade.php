@@ -6,7 +6,7 @@
             <div class="tw-container tw-mx-auto tw-px-4">
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
 
-                <div class="tw-mb-4 tw-flex tw-items-center">
+                <div class="tw-mb-4 tw-flex md:tw-flex-col tw-items-center">
                     <a plain class="custom-button btn-lg text-lg tw-inline-block tw-mr-4" href="{{ url('/questions#/what-is-your-gender') }}">
                         Get your FREE quote
                     </a>

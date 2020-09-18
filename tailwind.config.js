@@ -1,10 +1,5 @@
 module.exports = {
-  purge: [
-    './resources/**/*.html',
-    './resources/**/*.vue',
-    './resources/**/*.js',
-    './resources/**/*.scss',
-  ],
+  purge: [],
   theme: {
     extend: {
       colors: {
