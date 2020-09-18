@@ -69,7 +69,7 @@
 
             <div class="tw-text-center tw-w-1/2 sm:tw-w-1/5 tw-px-4">
                 <a target="_blank" title="Click for the Business Review of TypeTrue Ltd, an Insurance - Life in North York ON" href="https://www.bbb.org/ca/on/north-york/profile/life-insurance/typetrue-ltd-0107-1376679#sealclick">
-                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo.png')  }}">
+                    <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="{{ url('images/bbb-logo-grayscale.png')  }}">
                 </a>
             </div>
 
