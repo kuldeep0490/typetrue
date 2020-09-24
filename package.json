@@ -25,10 +25,11 @@
     "dependencies": {
         "animate.css": "^3.6.1",
         "dinero.js": "^1.4.0",
-        "element-ui": "^2.8.2",
+        "element-ui": "^2.13.2",
         "gsap": "^2.0.1",
         "laravel-mix-tailwind": "^0.1.0",
         "materialize-css": "^1.0.0",
+        "moment": "^2.29.0",
         "scss-loader": "^0.0.1",
         "vue-analytics": "^5.16.4",
         "vue-burger-menu": "^2.0.5",

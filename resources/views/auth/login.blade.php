@@ -1,69 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card card-default">
-                <div class="card-header">Login</div>
+<div class="tw-container tw-mx-auto tw-pt-32 tw-flex tw-justify-center">
+    <div class="tw-border tw-border-solid tw-rounded tw-border-gray tw-p-10 md:tw-w-1/2">
+        <form method="POST" action="{{ route('login') }}">
+            @csrf
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
+            <div class="tw-flex tw-flex-col tw-mb-4">
+                <label for="email" class="tw-mb-2">E-Mail Address</label>
 
-                        <div class="form-group row">
-                            <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail Address</label>
+                <div class="tw-flex tw-flex-col">
+                    <div class="el-input tw-mb-2">
+                        <input id="email" type="email" class="el-input__inner {{ $errors->has('email') ? ' tw-border-red' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
+                    </div>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="invalid-feedback">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                    @if ($errors->has('email'))
+                        <span class="tw-text-xs tw-text-primary">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
             </div>
-        </div>
+
+            <div class="tw-flex tw-flex-col tw-mb-4">
+                <label for="password" class="tw-mb-2">Password</label>
+
+                <div class="tw-flex tw-flex-col">
+                    <div class="el-input tw-mb-2">
+                        <input id="password" type="password" class="el-input__inner {{ $errors->has('password') ? ' tw-border-red' : '' }}" name="password" value="{{ old('email') }}" required>
+                    </div>
+
+                    @if ($errors->has('password'))
+                        <span class="tw-text-xs tw-text-primary">
+                            <strong>{{ $errors->first('password') }}</strong>
+                        </span>
+                    @endif
+                </div>
+            </div>
+
+            <div class="tw-flex">
+                <button type="submit" class="el-button el-button--primary">
+                    Login
+                </button>
+
+                <a class="el-button el-button--text" href="{{ route('password.request') }}">
+                    Forgot Your Password?
+                </a>
+            </div>
+        </form>
     </div>
 </div>
 @endsection

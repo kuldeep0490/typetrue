@@ -72,3 +72,4 @@ Route::prefix('lead')->group(function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/leads', 'HomeController@getData')->name('leads');

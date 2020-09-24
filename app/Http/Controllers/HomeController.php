@@ -28,4 +28,11 @@ class HomeController extends Controller
 
         return view('home', ['leads' => $leads]);
     }
+
+    public function getData()
+    {
+        $leads = \App\Lead::orderBy('created_at', 'desc')->get();
+
+        return response()->json($leads);
+    }
 }
