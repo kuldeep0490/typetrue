@@ -88,7 +88,7 @@
             },
 
             formatHeight(heightInInches) {
-                return heightInInches * 2.54;
+                return parseInt(heightInInches) * 2.54;
             },
 
             formatBoolean(booleanAnswer) {
@@ -104,7 +104,7 @@
             },
 
             formatNum(num) {
-                if (typeof num === 'string') {
+                if (typeof num === 'string' || ! num) {
                     return num;
                 }
 
