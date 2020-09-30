@@ -6,7 +6,7 @@
 
         <p class="tw-mb-10 tw-text-gray-600 tw-font-thin md:tw-w-1/2">TypeTrue uses cutting edge technology to help type 2 diabetics buy insurance faster, easier and at a lower cost than any other alternative. You’ve already experienced how easy it is to get a quote. We optimized all of the next steps in a similar fashion.</p>
 
-        <p class="tw-mb-10 tw-text-gray-600 tw-font-thin md:tw-w-1/2">For more information no how to obtain the best price on life insurance for type 2 diabetics, contact us at</p>
+        <p class="tw-mb-10 tw-text-gray-600 tw-font-thin md:tw-w-1/2">For more information on how to obtain the best price on life insurance for type 2 diabetics, contact us at</p>
 
         <address class="md:tw-w-1/2 tw-text-lg text-blue tw-font-thin tw-font-bold">
             1-877-TYPE-TRU<br>
