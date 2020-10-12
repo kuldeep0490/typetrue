@@ -1,9 +1,13 @@
 @extends('layout.main')
 
 @section('banner')
-    <div class="tw-mb-10 banner sm:tw-bg-fixed tw-bg-center sm:tw-bg-left-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
+    <div class="tw-mb-10 banner sm:tw-bg-fixed tw-bg-center sm:tw-bg-right-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
         <div class="tw-h-screen tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white sm:tw-bg-transparent tw-flex tw-items-center">
-            <div class="tw-container tw-mx-auto tw-px-4">
+            <div class="tw-container tw-mx-auto tw-px-4 tw-relative">
+                <div class="tw-p-4 tw-mb-4 comment-box tw-absolute banner-comment tw-rounded">
+                    <p class="tw-text-xl tw-font-semibold">"I worked with TypeTrue and would highly recommend them for your diabetic life insurance needs!"</p>
+                </div>
+
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
 
                 <div class="tw-mb-4 tw-flex tw-flex-col md:tw-flex-row md:tw-items-center">

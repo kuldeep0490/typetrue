@@ -16,6 +16,8 @@
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
 
+    <meta name="google-site-verification" content="SosKMHmfVe2qzm2aLJDdf6-UvNAZ2OCnWAMNsHcZpso" />
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -58,8 +60,8 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MZBHRFP"
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div id="app" class="tw-min-h-screen tw-flex tw-flex-col">
-        <div class="tw-flex-1">
+    <div id="app" class="tw-min-h-screen tw-flex tw-flex-col tw-justify-between @yield('pageClass')">
+        <div class="tw-flex-grow">
             <div class="tw-w-full tw-absolute">
                 <div class="tw-container tw-mx-auto tw-flex tw-justify-between tw-items-center tw-p-4">
                     <a href="{{ url('/') }}" class="tw-w-1/4 tw-mb-4 sm:tw-mb-0 sm:tw-w-1/4">
@@ -120,25 +122,27 @@
         </div>
 
         <div>
-            <div class="footer bg-blue tw-py-6">
-                <div class="tw-container tw-mx-auto tw-px-4">
-                    <div class="tw-text-center">
-                        <h5 class="tw-text-center tw-text-white tw-text-2xl sm:tw-text-4xl tw-font-semibold tw-mb-4">
-                            <a href="{{ url('/contact-us') }}" class="hover:tw-underline">Contact Us</a>
-                        </h5>
+            @unless (Request::is('questions'))
+                <div class="footer bg-blue tw-py-6">
+                    <div class="tw-container tw-mx-auto tw-px-4">
+                        <div class="tw-text-center">
+                            <h5 class="tw-text-center tw-text-white tw-text-2xl sm:tw-text-4xl tw-font-semibold tw-mb-4">
+                                <a href="{{ url('/contact-us') }}" class="hover:tw-underline">Contact Us</a>
+                            </h5>
 
-                        <p class="tw-text-white tw-mb-4"><a href="tel:+18778973878" class="hover:tw-underline">Phone: 1-877-TYPE-TRU</a></p>
+                            <p class="tw-text-white tw-mb-4"><a href="tel:+18778973878" class="hover:tw-underline">Phone: 1-877-TYPE-TRU</a></p>
 
-                        <address class="tw-text-white tw-mb-4">
-                            Suite 706, 1 Concorde Gate<br>
-                            North York, ON<br>
-                            M3C3N6
-                        </address>
+                            <address class="tw-text-white tw-mb-4">
+                                Suite 706, 1 Concorde Gate<br>
+                                North York, ON<br>
+                                M3C3N6
+                            </address>
 
-                        <p class="tw-text-white"><a href="mailto:info@typetrue.ca" class="hover:tw-underline">info@typetrue.ca</a></p>
+                            <p class="tw-text-white"><a href="mailto:info@typetrue.ca" class="hover:tw-underline">info@typetrue.ca</a></p>
+                        </div>
                     </div>
                 </div>
-            </div>
+            @endunless
 
             <div class="footer bottom-footer bg-blue tw-py-6 tw-border-t ">
                 <div class="tw-container tw-mx-auto tw-px-4">

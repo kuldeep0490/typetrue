@@ -25,6 +25,16 @@ class LeadController extends Controller
     public function update(Request $request) {
         $lead = Lead::findOrFail($request->lead_id);
 
+        if ($request->filled('full_name')) {
+            $name = explode(' ', $request->full_name);
+            if (count($name) > 1) {
+                $lead->last_name = array_pop($name);
+                $lead->first_name = implode(' ', $name);
+            } else {
+                $lead->first_name = array_key_exists(0, $name) ? $name[0] : '';
+            }
+        }
+
         if ($request->filled('first_name')) {
             $lead->first_name = $request->first_name;
         }

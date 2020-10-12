@@ -229,3 +229,21 @@ button {
     max-width: 100px;
     height: auto;
 }
+
+.banner-comment {
+    top: -250px;
+    right: 15px;
+    width: 282px;
+    min-height: auto;
+    background: rgba(251,89,117,0.7);
+
+    p {
+        color: #FFF;
+    }
+
+    @media only screen and (max-width: 768px) {
+        position: relative;
+        top: 0px;
+        left: 0px;
+    }
+}

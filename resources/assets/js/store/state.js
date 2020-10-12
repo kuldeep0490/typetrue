@@ -2,6 +2,7 @@ export default {
     info: {
         first_name: null,
         last_name: null,
+        full_name: null,
         email: null,
         phone: null,
     },
