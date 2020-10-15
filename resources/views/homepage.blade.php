@@ -4,8 +4,12 @@
     <div class="tw-mb-10 banner sm:tw-bg-fixed tw-bg-center sm:tw-bg-right-top tw-bg-no-repeat tw-bg-cover tw-h-screen">
         <div class="tw-h-screen tw-bg-opacity-75 sm:tw-bg-opacity-0 tw-bg-white sm:tw-bg-transparent tw-flex tw-items-center">
             <div class="tw-container tw-mx-auto tw-px-4 tw-relative">
-                <div class="tw-p-4 tw-mb-4 comment-box tw-absolute banner-comment tw-rounded">
-                    <p class="tw-text-xl tw-font-semibold">"I worked with TypeTrue and would highly recommend them for your diabetic life insurance needs!"</p>
+                <div class="tw-flex md:tw-justify-end">
+                    <div class="tw-p-4 tw-mb-4 comment-box banner-comment tw-rounded">
+                        <p class="tw-text-sm md:tw-text-xl tw-font-semibold">"I worked with TypeTrue and would highly recommend them for your diabetic life insurance needs!"</p>
+
+                        <p class="tw-text-sm md:tw-text-xl tw-font-semibold tw-text-right"><span>- Tina</span></p>
+                    </div>
                 </div>
 
                 <h1 class="text-blue tw-text-2xl sm:tw-text-3xl tw-font-semibold tw-mb-4">Get the best price on life<br> insurance for type 2 diabetics</h1>
@@ -152,7 +156,7 @@
     <div class="gray-bg tw-py-6">
         <div class="tw-container tw-mx-auto tw-px-4">
             <h3 class="tw-mb-4 tw-text-white tw-text-2xl tw-text-center tw-font-semibold">We work with trusted Canadian insurers!</h3>
-            
+
             <div class="tw-flex tw-flex-wrap md:tw-flex-no-wrap tw-justify-between tw-items-center">
                 <div class="home-company-icons tw-text-center tw-mb-4 tw-px-2">
                     <img class="tw-inline-block" src="{{ url('images/canada-life-logo.svg') }}" alt="canada life">

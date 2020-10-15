@@ -3,9 +3,9 @@
         <h1 class="tw-mb-10 tw-text-2xl tw-text-gray-600 tw-font-thin tw-text-center">Enter your information and we will instantly email you a free quote.</h1>
 
         <div class="tw-flex tw-flex-col md:tw-flex-row tw-mb-5">
-            <div class="tw-flex tw-flex-col tw-items-center md:tw-w-2/3">
+            <div class="tw-flex tw-flex-col md:tw-w-2/3 tw-mb-5 md:tw-mb-0 md:tw-mr-4">
                 <div class="tw-mb-5 tw-w-full">
-                    <el-input placeholder="First Name" v-model="info.full_name"></el-input>
+                    <el-input placeholder="Name" v-model="info.full_name"></el-input>
                 </div>
 
                 <div class="tw-mb-5 tw-w-full">
@@ -15,14 +15,14 @@
                 </div>
 
                 <div class="tw-w-full">
-                    <el-input class="tw-mb-5" placeholder="Phone Number" v-model="info.phone" type="tel" v-mask="'+1 (###) ###-####'"></el-input>
+                    <el-input placeholder="Phone Number" v-model="info.phone" type="tel" v-mask="'+1 (###) ###-####'"></el-input>
                 </div>
             </div>
 
-            <div class="md:tw-w-1/3 tw-justify-center tw-flex tw-items-center tw-flex-col">
-                <img alt="30 day money-back guarantee" src="https://typetrue.ca/images/money-back-logo.png" class="tw-inline-block">
+            <div class="md:tw-w-1/3 tw-justify-start tw-flex tw-items-center tw-flex-col">
+                <img alt="30 day money-back guarantee" src="https://typetrue.ca/images/money-back-logo.png" class="tw-inline-block tw-mb-5">
 
-                <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="https://typetrue.ca/images/bbb-logo.png" class="tw-inline-block bbb-logo">
+                <img alt="Click for the BBB Business Review of this Insurance - Life in North York ON" src="http://typetrue.test/images/bbb-logo.png" class="tw-inline-block">
             </div>
         </div>
 
